@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+@@include('components/_head.html', {
+'lang': 'ru',
+'title': 'Барнаул',
+'description': 'Туристическая карта гостя города Барнаула',
+'url': '/'
+})
+
+<body>
+    @@include('components/header/_header.html')
+    @@include('components/menu/_menu.html')
+    <!-- layout -->
+    <div class="layout">
+        <div class="container">
+            <div class="layout__wrap">
+
+            </div>
+        </div>
+    </div>
+    <!-- end of layout -->
+    @@include('components/footer/_footer.html', {
+    'class': 'layout__footer'
+    })
+    @@include('components/_scripts.html')
+</body>
+
+</html>
