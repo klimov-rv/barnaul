@@ -1,6 +1,6 @@
 // VARIABLES & PATHS
 let preprocessor = 'sass', // Preprocessor
-    imageswatch = 'png|jpg|jpeg|gif|svg|ico', // List of images extensions for watching & compression (comma separated)
+    imageswatch = 'png|jpg|jpeg|gif|svg|ico|webp', // List of images extensions for watching & compression (comma separated)
     baseDir = 'src' // Base directory path without «/» at the end
     buildDir = 'build' // Build directory
 
@@ -71,7 +71,7 @@ const uglify = require('gulp-uglify-es').default;
 function browsersync() {
 	browserSync.init({
         server: { baseDir: buildDir + '/' },
-        browser: "google chrome",
+        browser: "chrome",
 		notify: false
 	})
 }
