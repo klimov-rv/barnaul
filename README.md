@@ -4,10 +4,14 @@
 	- Загрузка и настройка node.js, npm, gulp/webpack/pug
         1. должны работать команды node -v, npm -v, npm run start
 	    2. Выбор подходящего начального шаблона 
-        3. настройка файла сборщика ( browsersync, минификация файлов html, css, scss, js )
+        3. настройка файла сборщика (Gulp-задачи: browsersync, минификация файлов и т.д. )
 	- Установка необходимых модулей и плагинов для проекта
         1. Мастхев [gulp-file-include](https://www.npmjs.com/package/gulp-file-include), [sass](https://www.npmjs.com/package/sass)  
-	- Подключение и проверка файлов скриптов, стилей, шрифтов (желательно получить от дизайнера), картинок
+	- Структура папок и файлов:
+        1. Папка src - исходные файлы проекта (скрипты, стили, шрифты, картинки)
+        2. src/images/sprites - хранение (SVG) и растровых (PNG) иконок
+        3. src/images/sprites/png - предназначена для хранения растровых иконок. При сборке файлы из данной папки объединяются в два спрайта: build/images/sprites.png и build/images/sprites@2x.png.
+        4. src/images/sprites/svg - предназначена для хранения растровых иконок. При сборке файлы из данной папки объединяются в один спрайт: build/images/sprites.svg.
     - Добавить favicon, настроить meta (Title, Description, image), seo теги, язык страницы и так далее 
     - По желанию Js linter [eslint](https://eslint.org/), style-lint [gulp-stylelint](https://www.npmjs.com/package/gulp-stylelint)
 2. Импорт вёрстки клиента, если интеграция в существующий проект
