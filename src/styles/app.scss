@@ -3034,6 +3034,8 @@ article p {
 .hero__body {
     position: relative;
     z-index: 10;
+    padding-bottom: 57px;
+    color: #333333;
 }
 
 .hero__body h1 {
@@ -3042,7 +3044,6 @@ article p {
     font-weight: 700;
     font-size: 48px;
     line-height: 1.3em;
-    color: #333333;
 }
 
 .page-hero-description {
@@ -3053,7 +3054,6 @@ article p {
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.01em;
-    color: #333333;
 }
 
 .page-hero-fastfacts {
@@ -3062,6 +3062,7 @@ article p {
 
 .fastfacts__item_wrap {
     display: flex;
+    margin-bottom: 25px;
 }
 
 .fastfact-title {
@@ -3081,7 +3082,63 @@ article p {
     line-height: 22px;
     letter-spacing: 0.01em;
 
-    color: #333333;
+}
+
+.fastfacts__icon {
+    flex: 0 0 65px;
+}
+
+.fastfact-info {
+    padding-right: 25px;
+}
+
+.page-hero-description {
+    display: inline-block;
+    width: 97%;
+}
+
+.hero__body address {
+    font-style: normal;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+}
+
+.hero__body address svg {
+    margin-right: 9px;
+}
+
+.page-hero-block {
+    background: #FFFFFF;
+    border-radius: 20px 20px 20px 0px;
+    padding: 35px 50px 35px 30px;
+    font-family: 'PT Serif';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5em;
+    letter-spacing: 0.01em;
+    color: #B05700;
+    position: relative;
+    max-width: 343px;
+    margin: 45px auto;
+}
+
+.page-hero-block__legend {
+    position: absolute;
+    top: -11px;
+    left: 30px;
+    background: #B05700;
+    mix-blend-mode: normal;
+    border-radius: 15px 15px 0px 15px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.3em;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 5px 15px;
 }
 
 @media (max-width: 1460px) {
