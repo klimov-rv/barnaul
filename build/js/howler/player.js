@@ -275,7 +275,7 @@ Player.prototype = {
     }
 };
 
-pageHaveplayer = document.querySelector('.audio-player');
+pageHaveplayer = document.querySelector('.audio-player'); 
 
 if (pageHaveplayer) {
     // Setup our new audio player class and pass it the playlist.

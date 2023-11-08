@@ -89,5 +89,150 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
+    // TODO переписать на Vanilla JS фильтр isotope
+    function getHashFilter() {
+        var hash = location.hash;
+        // get filter=filterName
+        var matches = location.hash.match(/filter=([^&]+)/i);
+        var hashFilter = matches && matches[1];
+        return hashFilter && decodeURIComponent(hashFilter);
+    }
+    function removeHash() {
+        history.pushState("", document.title, window.location.pathname
+            + window.location.search);
+    }
+
+    $(function () {
+
+        var $grid = $('.event-list');
+
+        // bind filter button click
+        var $filters = $('.iso-filter').on('click', '.iso-filter__btn', function () {
+            var filterAttr = $(this).attr('data-filter');
+            location.hash = 'filter=' + encodeURIComponent(filterAttr);
+        });
+
+        var isIsotopeInit = true;
+
+        function onHashchange() {
+            var hashFilter = getHashFilter();
+            // TODO переписать повторяющуюся грязь
+            if (hashFilter === '*') {
+                $grid.isotope({
+                    itemSelector: '.event-list__item',
+                    filter: hashFilter
+                });
+                $filters.find('.is-checked').removeClass('is-checked');
+                $filters.find('[data-filter="*"]').addClass('is-checked');
+                removeHash()
+                return;
+            }
+            if (!hashFilter && isIsotopeInit) {
+                return;
+            }
+            isIsotopeInit = true;
+            // filter isotope
+            $grid.isotope({
+                itemSelector: '.event-list__item',
+                filter: '.' + hashFilter
+            });
+            // set selected class on button
+            if (hashFilter) {
+                $filters.find('.is-checked').removeClass('is-checked');
+                $filters.find('[data-filter="' + hashFilter + '"]').addClass('is-checked');
+            }
+        }
+
+        $(window).on('hashchange', onHashchange);
+        // trigger event handler to init Isotope
+        onHashchange();
+    });
+
+
+    moment.locale('ru');
+    var thisMonth = moment().format('YYYY-MM');
+    // Events to load into calendar
+    var eventArray = [
+        {
+            title: 'Multi-Day Event',
+            endDate: thisMonth + '-14',
+            startDate: thisMonth + '-10'
+        }, {
+            endDate: thisMonth + '-23',
+            startDate: thisMonth + '-21',
+            title: 'Another Multi-Day Event'
+        }, {
+            date: thisMonth + '-27',
+            title: 'Single Day Event'
+        }
+    ];
+
+
+    $('#calendar').clndr({
+        events: eventArray,
+        clickEvents: {
+            click: function (target) {
+                console.log('Calendar clicked: ', target);
+            },
+            today: function () {
+                console.log('Calendar today');
+            },
+            nextMonth: function () {
+                console.log('Calendar next month');
+            },
+            previousMonth: function () {
+                console.log('Calendar previous month');
+            },
+            onMonthChange: function () {
+                console.log('Calendar month changed');
+            },
+            nextYear: function () {
+                console.log('Calendar next year');
+            },
+            previousYear: function () {
+                console.log('Calendar previous year');
+            },
+            onYearChange: function () {
+                console.log('Calendar year changed');
+            },
+            nextInterval: function () {
+                console.log('Calendar next interval');
+            },
+            previousInterval: function () {
+                console.log('Calendar previous interval');
+            },
+            onIntervalChange: function () {
+                console.log('Calendar interval changed');
+            }
+        },
+        template: $('#template-calendar').html(),
+        // multiDayEvents: {
+        //     singleDay: 'date',
+        //     endDate: 'endDate',
+        //     startDate: 'startDate'
+        // },
+        // showAdjacentMonths: true,
+        // adjacentDaysChangeMonth: false
+    });
+
+
+
+    $('.popup-with-zoom-anim').magnificPopup({
+        type: 'inline',
+
+        fixedContentPos: false,
+        fixedBgPos: true,
+
+        overflowY: 'auto',
+
+        closeBtnInside: true,
+        preloader: false,
+
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-zoom-in'
+    });
+
+
 
 });

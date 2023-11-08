@@ -2,7 +2,7 @@
 let preprocessor = 'sass', // Preprocessor
     imageswatch = 'png|jpg|jpeg|gif|svg|ico|webp', // List of images extensions for watching & compression (comma separated)
     baseDir = 'src' // Base directory path without «/» at the end
-    buildDir = 'build' // Build directory
+buildDir = 'build' // Build directory
 
 let paths = {
     html: {
@@ -12,32 +12,38 @@ let paths = {
         ],
         dest: buildDir,
     },
-	styles: {
-		src: [
+    styles: {
+        src: [
             baseDir + '/styles/**/*.scss',
         ],
-		dest: buildDir + '/css',
+        dest: buildDir + '/css',
     },
     scripts: {
-		src: baseDir + '/js/app.js',
+        src: baseDir + '/js/app.js',
         dest: buildDir + '/js',
     },
     libs: {
-        src: [
+        src: [ 
+            'node_modules/magnific-popup/dist/jquery.magnific-popup.min.js',
+            'node_modules/underscore/underscore-umd-min.js',
+            'node_modules/underscore/underscore-umd-min.js',
+            'node_modules/moment/min/moment-with-locales.min.js',
             'node_modules/swiper/swiper-bundle.min.js',
+            'node_modules/isotope-layout/dist/isotope.pkgd.min.js',
+            'node_modules/clndr/src/clndr.js',
         ],
         dest: buildDir + '/js',
     },
-	images: {
-		src: [
+    images: {
+        src: [
             baseDir + '/img/**/*.+(' + imageswatch + ')',
             '!' + baseDir + '/img/sprite/*.svg',
         ],
-		dest: buildDir + '/img',
+        dest: buildDir + '/img',
     },
     sprites: {
-		src: baseDir + '/img/sprite/*.svg',
-		dest: buildDir + '/img',
+        src: baseDir + '/img/sprite/*.svg',
+        dest: buildDir + '/img',
     },
     deploy: {
         dest: './' + buildDir + '**/*',
@@ -69,15 +75,15 @@ const svgSprite = require('gulp-svg-sprite');
 const uglify = require('gulp-uglify-es').default;
 
 function browsersync() {
-	browserSync.init({
+    browserSync.init({
         server: { baseDir: buildDir + '/' },
         browser: "chrome",
-		notify: false
-	})
+        notify: false
+    })
 }
 
 function html() {
-	return src(paths.html.src)
+    return src(paths.html.src)
         .pipe(include())
         .pipe(htmlbeautify(options))
         .pipe(dest(paths.html.dest))
@@ -95,7 +101,7 @@ function styles() {
 }
 
 function scripts() {
-	return src(paths.scripts.src)
+    return src(paths.scripts.src)
         .pipe(babel({
             presets: ['@babel/env']
         }))
@@ -106,7 +112,7 @@ function scripts() {
 }
 
 function libs() {
-	return src(paths.libs.src, { allowEmpty: true })
+    return src(paths.libs.src, { allowEmpty: true })
         .pipe(concat(paths.libsOutputName))
         .pipe(uglify())
         .pipe(dest(paths.libs.dest))
@@ -114,7 +120,7 @@ function libs() {
 }
 
 function images() {
-	return src(paths.images.src)
+    return src(paths.images.src)
         .pipe(newer(paths.images.dest))
         .pipe(imagemin())
         .pipe(dest(paths.images.dest))
@@ -124,28 +130,28 @@ function images() {
 function sprites() {
     return src(paths.sprites.src)
         .pipe(svgSprite({
-                mode: {
-                    stack: {
-                        sprite: "../sprite.svg"
-                    }
-                },
-            }
+            mode: {
+                stack: {
+                    sprite: "../sprite.svg"
+                }
+            },
+        }
         ))
         .pipe(dest(paths.sprites.dest))
         .pipe(browserSync.stream())
 }
 
 function cleaningimages() {
-	return del('' + paths.images.dest + '/**/*', { force: true })
+    return del('' + paths.images.dest + '/**/*', { force: true })
 }
 
 function startwatch() {
-	watch(baseDir  + '/**/*.html', html);
-	watch(baseDir  + '/components/**/*.scss', styles);
-	watch(baseDir  + '/styles/**/*.scss', styles);
+    watch(baseDir + '/**/*.html', html);
+    watch(baseDir + '/components/**/*.scss', styles);
+    watch(baseDir + '/styles/**/*.scss', styles);
     watch(baseDir + '/js/**/*.js', scripts);
-    watch(baseDir  + '/img/**/*.+(' + imageswatch + ')', images);
-	watch(baseDir  + '/img/sprite/*.svg', sprites);
+    watch(baseDir + '/img/**/*.+(' + imageswatch + ')', images);
+    watch(baseDir + '/img/sprite/*.svg', sprites);
 }
 
 exports.cleaningimages = cleaningimages;

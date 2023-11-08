@@ -26,54 +26,37 @@
           </div>
 
           <div class="hero__headline">
-            <div class="hero__headline_btn btn_previous">
-              <svg aria-hidden="true" width="16" height="12">
-                <use xlink:href="#arrow-left"></use>
-              </svg>
-              <span>
-                Улица Мало-Тобольская
-              </span>
-            </div>
+            <a href="#" class="hero__headline_btn btn_previous">
+              <div class="hero__headline_btn__wrapper">
+                <svg aria-hidden="true" width="16" height="12">
+                  <use xlink:href="#arrow-left"></use>
+                </svg>
+                <span>
+                  Улица Мало-Тобольская
+                </span>
+              </div>
+            </a>
             <div class="container">
               <div class="row">
-                <div class="push-1 cell-10">
-                  <div class="player-slot">
-                    <div class="audio-player headline__player">
-                      <div class="audio-player__play">
-                        <svg aria-hidden="true" width="45" height="45">
-                          <use xlink:href="#player-play-btn"></use>
-                        </svg>
-                      </div>
-                      <div class="audio-player__info">
-                        Слушать аудиоэкскурсию
-                      </div>
-                      <div id="track"></div>
-                      <div id="timer"></div>
-                      <div id="duration"></div>
-                      <div id="playBtn"></div>
-                      <div id="pauseBtn"></div>
-                      <div id="prevBtn"></div>
-                      <div id="nextBtn"></div>
-                      <div id="progress"></div>
-                      <div id="loading"></div>
-
-                    </div>
-                  </div>
+                <div class="push-1 cell-10 push-2-s cell-8-s">
+                  @@include('components/player/_player.html')
                 </div>
               </div>
             </div>
-            <div class="hero__headline_btn btn_next">
-              <span>
-                Нагорный парк
-              </span>
-              <svg aria-hidden="true" width="16" height="12">
-                <use xlink:href="#arrow-right"></use>
-              </svg>
-            </div>
+            <a href="#" class="hero__headline_btn btn_next">
+              <div class="hero__headline_btn__wrapper">
+                <span>
+                  Нагорный парк
+                </span>
+                <svg aria-hidden="true" width="16" height="12">
+                  <use xlink:href="#arrow-right"></use>
+                </svg>
+              </div>
+            </a>
           </div>
           <div class="container">
             <div class="row hero__body ">
-              <div class="push-1 cell-5">
+              <div class="push-1 cell-5 cell-6-lg cell-7-md push-0-md cell-12-s">
                 <h1 class="page-title">
                   Универмаг торгового дома «Д.Н. Сухова сыновья»
                 </h1>
@@ -85,7 +68,7 @@
                 </span>
 
                 <div class="page-hero-fastfacts row">
-                  <div class="cell-5 fastfacts__item">
+                  <div class="cell-5 cell-11-md fastfacts__item">
                     <div class="fastfacts__item_wrap">
                       <span class="fastfacts__icon">
                         <svg aria-hidden="true" width="37" height="45">
@@ -102,7 +85,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="cell-5 fastfacts__item">
+                  <div class="cell-5 cell-11-md fastfacts__item">
                     <div class="fastfacts__item_wrap">
                       <span class="fastfacts__icon">
                         <svg aria-hidden="true" width="37" height="44">
@@ -118,7 +101,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="cell-5 fastfacts__item">
+                  <div class="cell-5 cell-11-md fastfacts__item">
                     <div class="fastfacts__item_wrap">
                       <span class="fastfacts__icon">
                         <svg aria-hidden="true" width="41" height="37">
@@ -134,7 +117,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="cell-5 fastfacts__item">
+                  <div class="cell-5 cell-11-md fastfacts__item">
                     <div class="fastfacts__item_wrap">
                       <span class="fastfacts__icon">
                         <svg aria-hidden="true" width="37" height="44">
@@ -161,10 +144,10 @@
                   </span><br />
                 </address>
               </div>
-              <div class="push-1 cell-4">
+              <div class="push-1 cell-4 push-0-lg cell-5-md cell-12-s">
                 <div class="page-hero-block">
-                  <div class="page-hero-block__legend">легенда</div>
-                  <span>
+                  <div class="page-hero-block__legend-title">легенда</div>
+                  <span class="page-hero-block__legend">
                     Над аркой между строениями установлены фигуры двух львов.
                     По легенде, если встать между ними
                     и загадать желание, то оно обязательно сбудется.
