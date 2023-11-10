@@ -162,60 +162,67 @@ document.addEventListener('DOMContentLoaded', () => {
             startDate: thisMonth + '-21',
             title: 'Another Multi-Day Event'
         }, {
-            date: thisMonth + '-27',
+            date: thisMonth + '-21',
+            title: 'Single Day Event'
+        }, {
+            date: thisMonth + '-07',
+            title: 'Single Day Event'
+        }, {
+            date: thisMonth + '-11',
             title: 'Single Day Event'
         }
     ];
 
+    if ($('#calendar').length > 0) {
 
-    $('#calendar').clndr({
-        events: eventArray,
-        clickEvents: {
-            click: function (target) {
-                console.log('Calendar clicked: ', target);
+        $('#calendar').clndr({
+            events: eventArray,
+            clickEvents: {
+                click: function (target) {
+                    console.log('Calendar clicked: ', target);
+                },
+                today: function () {
+                    console.log('Calendar today');
+                },
+                nextMonth: function () {
+                    console.log('Calendar next month');
+                },
+                previousMonth: function () {
+                    console.log('Calendar previous month');
+                },
+                onMonthChange: function () {
+                    console.log('Calendar month changed');
+                },
+                nextYear: function () {
+                    console.log('Calendar next year');
+                },
+                previousYear: function () {
+                    console.log('Calendar previous year');
+                },
+                onYearChange: function () {
+                    console.log('Calendar year changed');
+                },
+                nextInterval: function () {
+                    console.log('Calendar next interval');
+                },
+                previousInterval: function () {
+                    console.log('Calendar previous interval');
+                },
+                onIntervalChange: function () {
+                    console.log('Calendar interval changed');
+                }
             },
-            today: function () {
-                console.log('Calendar today');
-            },
-            nextMonth: function () {
-                console.log('Calendar next month');
-            },
-            previousMonth: function () {
-                console.log('Calendar previous month');
-            },
-            onMonthChange: function () {
-                console.log('Calendar month changed');
-            },
-            nextYear: function () {
-                console.log('Calendar next year');
-            },
-            previousYear: function () {
-                console.log('Calendar previous year');
-            },
-            onYearChange: function () {
-                console.log('Calendar year changed');
-            },
-            nextInterval: function () {
-                console.log('Calendar next interval');
-            },
-            previousInterval: function () {
-                console.log('Calendar previous interval');
-            },
-            onIntervalChange: function () {
-                console.log('Calendar interval changed');
-            }
-        },
-        template: $('#template-calendar').html(),
-        // multiDayEvents: {
-        //     singleDay: 'date',
-        //     endDate: 'endDate',
-        //     startDate: 'startDate'
-        // },
-        // showAdjacentMonths: true,
-        // adjacentDaysChangeMonth: false
-    });
+            template: $('#template-calendar').html(),
+            // multiDayEvents: {
+            //     singleDay: 'date',
+            //     endDate: 'endDate',
+            //     startDate: 'startDate'
+            // },
+            // showAdjacentMonths: true,
+            // adjacentDaysChangeMonth: false
+        });
 
-
+    }
 
     $('.popup-with-zoom-anim').magnificPopup({
         type: 'inline',
@@ -234,5 +241,72 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
+    const main_line = new Vivus(
+        'js-historical_line__animate',
+        {
+            type: 'scenario',
+            delay: 0,
+            duration: 300,
+            // animTimingFunction: Vivus.EASE
+            onReady: function (myVivus) {
+                console.log(myVivus);
+            }
+        },
+    );
+
+    console.log(main_line.getStatus());
+
+    function calIamgeSize(imageSelector, imageOriginWidth, imageOriginHeight, svgOrigW, svgOrigH) {
+        // make image as big as it can to start
+        // $(imageSelector).width($(".historical_line_map").width());
+        var newW = $(".historical_line_map").width();
+        var newH = $(".historical_line_map").height();
+
+        // Get the one percent of the image width and height
+        var widthOnePercent = imageOriginWidth / 100;
+        var heightOnePercent = imageOriginHeight / 100;
+
+        var newWidthOnePercent = newW / 100;
+        var newHeightOnePercent = newH / 100;
+
+        if (newW >= imageOriginWidth) {
+
+            // $(imageSelector).attr({
+            //     width: svgOrigW,
+            //     height: svgOrigH,
+            // });
+        } else {
+            var imageCurrentPercentW = svgOrigW / widthOnePercent;
+            var imageCurrentPercentH = svgOrigH / heightOnePercent;
+
+            console.log(imageCurrentPercentW);
+            console.log(imageCurrentPercentH);
+            var imageNewWidth = imageCurrentPercentW * newWidthOnePercent
+            var imageNewHeight = imageCurrentPercentH * newHeightOnePercent
+
+            $(imageSelector).attr({
+                width: imageNewWidth,
+                height: imageNewHeight,
+            });
+        }
+
+
+
+    }
+
+    // Resize image
+    var imageW = 1920;
+    var imageH = 762;
+    var svgW = 602;
+    var svgH = 448;
+
+    var imageClass = ".historical_line_resize";
+
+    $(window).on("resize", function () {
+
+        calIamgeSize(imageClass, imageW, imageH, svgW, svgH);
+
+    });
+    calIamgeSize(imageClass, imageW, imageH, svgW, svgH);
 
 });
