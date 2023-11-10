@@ -2,7 +2,7 @@
 let preprocessor = 'sass', // Preprocessor
     imageswatch = 'png|jpg|jpeg|gif|svg|ico|webp', // List of images extensions for watching & compression (comma separated)
     baseDir = 'src' // Base directory path without «/» at the end
-buildDir = 'build' // Build directory
+    buildDir = 'build' // Build directory
 
 let paths = {
     html: {
@@ -26,11 +26,11 @@ let paths = {
         src: [ 
             'node_modules/magnific-popup/dist/jquery.magnific-popup.min.js',
             'node_modules/underscore/underscore-umd-min.js',
-            'node_modules/underscore/underscore-umd-min.js',
             'node_modules/moment/min/moment-with-locales.min.js',
             'node_modules/swiper/swiper-bundle.min.js',
             'node_modules/isotope-layout/dist/isotope.pkgd.min.js',
             'node_modules/clndr/src/clndr.js',
+            'node_modules/vivus/dist/vivus.min.js',
         ],
         dest: buildDir + '/js',
     },
