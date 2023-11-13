@@ -246,23 +246,22 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             type: 'scenario',
             delay: 0,
-            duration: 300,
-            // animTimingFunction: Vivus.EASE
+            duration: 150,
+            animTimingFunction: Vivus.EASE,
             onReady: function (myVivus) {
-                console.log(myVivus);
+                // myVivus.el.classList.add('animation-started');
+                // myVivus.el.classList.add('svg-ready');
             }
         },
+        function (obj) {
+            obj.el.classList.add('animation-started');
+        }
     );
 
-    console.log(main_line.getStatus());
-
     function calIamgeSize(imageSelector, imageOriginWidth, imageOriginHeight, svgOrigW, svgOrigH) {
-        // make image as big as it can to start
-        // $(imageSelector).width($(".historical_line_map").width());
         var newW = $(".historical_line_map").width();
         var newH = $(".historical_line_map").height();
 
-        // Get the one percent of the image width and height
         var widthOnePercent = imageOriginWidth / 100;
         var heightOnePercent = imageOriginHeight / 100;
 
@@ -279,8 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
             var imageCurrentPercentW = svgOrigW / widthOnePercent;
             var imageCurrentPercentH = svgOrigH / heightOnePercent;
 
-            console.log(imageCurrentPercentW);
-            console.log(imageCurrentPercentH);
             var imageNewWidth = imageCurrentPercentW * newWidthOnePercent
             var imageNewHeight = imageCurrentPercentH * newHeightOnePercent
 
@@ -289,16 +286,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 height: imageNewHeight,
             });
         }
-
-
-
     }
 
-    // Resize image
+    // Исходные размеры что бы не потерять точное соотношение
     var imageW = 1920;
     var imageH = 762;
-    var svgW = 602;
-    var svgH = 448;
+    var svgW = 1026;
+    var svgH = 755;
+
+    // для дубликатов точек мест
+    var heightForDuplicateBox = (svgH / 100) * 4;
 
     var imageClass = ".historical_line_resize";
 
@@ -308,5 +305,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
     calIamgeSize(imageClass, imageW, imageH, svgW, svgH);
+
+    function getWindowRelativeOffset(elem) {
+        return {
+            left: elem.getBoundingClientRect().left,
+            top: elem.getBoundingClientRect().top
+        };
+    };
+
+    function createElemsTooltip(minusTop, minusLeft, elemToCopy) {
+        const copyElem = document.createElement("div");
+        copyElem.setAttribute("place_name", elemToCopy.getAttribute("place_name"));
+
+        var offset = getWindowRelativeOffset(elemToCopy);
+        copyElem.style.left = offset.left - minusLeft - 3 + "px";
+        copyElem.style.top = offset.top - minusTop - 3 + "px";
+        copyElem.classList.add('duplicate_point');
+        return copyElem;
+    }
+    let allPoints = document.querySelectorAll('.historical_line_point');
+    const map_container = document.querySelector('.svg_animate');
+    const parentTop = map_container.getBoundingClientRect().top;
+    const parentleft = map_container.getBoundingClientRect().left;
+    allPoints.forEach((elem) => map_container.appendChild(createElemsTooltip(parentTop, parentleft, elem)));
+
+
+    tippy(".duplicate_point", {
+        animation: 'scale-subtle',
+        placement: 'right',
+        interactive: true,
+        allowHTML: true,
+        content: (reference) => '<a href="#"><span class="ttip-text">' + reference.getAttribute('place_name') + '</span><svg aria-hidden="true" width="16" height="12"> <use xlink:href="#arrow-right2"></use> </svg></a>',
+    });
+
 
 });

@@ -2688,6 +2688,8 @@ body>.jcf-select-drop.jcf-drop-flipped {
 :root {
     --border-radius-standart: 10px;
     --filter-min-width: 218px;
+    --delay-base: .0s;
+    --delay-gap: 1.15s;
 }
 
 .is-container-fix .container {
@@ -3898,8 +3900,8 @@ article p {
 
 .svg_animate {
     position: absolute;
-    top: 9.1%;
-    left: 33.9%;
+    top: -1%;
+    left: 27.3%;
 }
 
 .svg_animate .path {
@@ -3911,7 +3913,200 @@ article p {
 }
 
 .historical_line_point:hover {
+    transform: scale(1.5);
+}
+
+.historical_place,
+.historical_line_point {
+    transform-box: fill-box;
+    transform-origin: center;
     opacity: 0;
+}
+
+.historical_place,
+.historical_line_point.instant_display .instant_hide {
+    opacity: 0;
+}
+
+.historical_line_point.instant_display,
+.animation-started .historical_line_point {
+    animation: popIn .3s ease-in-out forwards;
+    position: relative;
+}
+
+.animation-started .historical_place {
+    animation: reveal .3s ease-in-out forwards;
+}
+
+.animation-started .historical_line_point.instant_display .instant_hide {
+    animation: popIn .3s ease-in-out forwards;
+}
+
+.animation-started .historical_place.place_01,
+.animation-started .historical_line_point.point_01 {
+    animation-delay: var(--delay-base);
+}
+
+.animation-started .historical_place.place_02,
+.animation-started .historical_line_point.point_02 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap));
+}
+
+.animation-started .historical_place.place_03,
+.animation-started .historical_line_point.point_03 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 2);
+}
+
+.animation-started .historical_place.place_04,
+.animation-started .historical_line_point.point_04 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 3);
+}
+
+.animation-started .historical_place.place_05,
+.animation-started .historical_line_point.point_05 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 4);
+}
+
+.animation-started .historical_place.place_06,
+.animation-started .historical_line_point.point_06 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 5);
+}
+
+.animation-started .historical_place.place_07,
+.animation-started .historical_line_point.point_07 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 6);
+}
+
+.animation-started .historical_place.place_08,
+.animation-started .historical_line_point.point_08 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 7);
+}
+
+.animation-started .historical_place.place_09,
+.animation-started .historical_line_point.point_09 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 8);
+}
+
+.animation-started .historical_place.place_10,
+.animation-started .historical_line_point.point_10 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 9);
+}
+
+.animation-started .historical_place.place_11,
+.animation-started .historical_line_point.point_11 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 10);
+}
+
+.animation-started .historical_place.place_12,
+.animation-started .historical_line_point.point_12 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 11);
+}
+
+.animation-started .historical_place.place_13,
+.animation-started .historical_line_point.point_13 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 12);
+}
+
+.animation-started .historical_place.place_14,
+.animation-started .historical_line_point.point_14 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 13);
+}
+
+.animation-started .historical_place.place_15,
+.animation-started .historical_line_point.point_15 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 14);
+}
+
+.animation-started .historical_place.place_16,
+.animation-started .historical_line_point.point_16 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 15);
+}
+
+.animation-started .historical_place.place_17,
+.animation-started .historical_line_point.point_17 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 16);
+}
+
+.animation-started .historical_place.place_18,
+.animation-started .historical_line_point.point_18 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 17);
+}
+
+.animation-started .historical_place.place_19,
+.animation-started .historical_line_point.point_19 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 18);
+}
+
+.animation-started .historical_place.place_20,
+.animation-started .historical_line_point.point_20 {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 19);
+}
+
+.animation-started .historical_line_point:hover {
+    animation: popIn .3s ease-in-out forwards;
+    cursor: pointer;
+}
+
+.tippy-box {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    background: #E08F40;
+    box-shadow: 0px 5px 10px rgba(174, 97, 22, 0.3);
+    border-radius: 50px;
+}
+
+.ttip-text {
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #FFFFFF;
+}
+
+.tippy-box .tippy-content {
+    padding: 21px;
+}
+
+.tippy-box[data-placement^=top]>.tippy-arrow::before {
+    border-top-color: #E08F40;
+}
+
+.tippy-box[data-placement^=right]>.tippy-arrow::before {
+    border-right-color: #E08F40;
+}
+
+.tippy-box[data-placement^=bottom]>.tippy-arrow::before {
+    border-bottom-color: #E08F40;
+}
+
+.tippy-box[data-placement^=left]>.tippy-arrow::before {
+    border-left-color: #E08F40;
+}
+
+.tippy-box[data-placement^=right]>.tippy-arrow:before {
+    border-width: 14px 14px 14px 0;
+    left: -10px;
+    top: -6px;
+}
+
+.duplicate_point {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0;
+    z-index: 75;
+    background-color: transparent;
+}
+
+.duplicate_point:hover {
+    opacity: 1;
 }
 
 @keyframes lineforward {
@@ -3920,8 +4115,28 @@ article p {
     }
 }
 
+@keyframes popIn {
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
 
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
 
+@keyframes reveal {
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: .5;
+    }
+}
 
 @media (max-width: 1800px) {
     .hero__headline_btn {
