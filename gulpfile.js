@@ -46,10 +46,10 @@ let paths = {
         ],
         dest: buildDir + '/img',
     },
-    sprites: {
-        src: baseDir + '/img/sprite/*.svg',
-        dest: buildDir + '/img',
-    },
+    // sprites: {
+    //     src: baseDir + '/img/sprite/*.svg',
+    //     dest: buildDir + '/img',
+    // },
     deploy: {
         dest: './' + buildDir + '**/*',
     },
@@ -132,19 +132,19 @@ function images() {
         .pipe(browserSync.stream())
 }
 
-function sprites() {
-    return src(paths.sprites.src)
-        .pipe(svgSprite({
-            mode: {
-                stack: {
-                    sprite: "../sprite.svg"
-                }
-            },
-        }
-        ))
-        .pipe(dest(paths.sprites.dest))
-        .pipe(browserSync.stream())
-}
+// function sprites() {
+//     return src(paths.sprites.src)
+//         .pipe(svgSprite({
+//             mode: {
+//                 stack: {
+//                     sprite: "../sprite.svg"
+//                 }
+//             },
+//         }
+//         ))
+//         .pipe(dest(paths.sprites.dest))
+//         .pipe(browserSync.stream())
+// }
 
 function cleaningimages() {
     return del('' + paths.images.dest + '/**/*', { force: true })
@@ -156,11 +156,11 @@ function startwatch() {
     watch(baseDir + '/styles/**/*.scss', styles);
     watch(baseDir + '/js/**/*.js', scripts);
     watch(baseDir + '/img/**/*.+(' + imageswatch + ')', images);
-    watch(baseDir + '/img/sprite/*.svg', sprites);
+    // watch(baseDir + '/img/sprite/*.svg', sprites);
 }
 
 exports.cleaningimages = cleaningimages;
-exports.sprites = sprites;
+// exports.sprites = sprites;
 exports.images = images;
 exports.libs = libs;
 exports.scripts = scripts;
@@ -168,4 +168,5 @@ exports.styles = styles;
 exports.html = html;
 exports.browsersync = browsersync;
 
-exports.default = parallel(html, styles, scripts, libs, images, sprites, browsersync, startwatch);
+// exports.default = parallel(html, styles, scripts, libs, images, sprites, browsersync, startwatch);
+exports.default = parallel(html, styles, scripts, libs, images, browsersync, startwatch);
