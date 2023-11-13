@@ -1,0 +1,182 @@
+ .layout__filter {
+     display: flex;
+     position: relative;
+     z-index: 50;
+     gap: 30px;
+     flex-wrap: wrap;
+ }
+
+ .filter-toggle,
+ .filter-title-inner {
+     display: flex;
+ }
+
+ .filter-title.is-active .filter-toggle {
+     background-color: #f2f2f2;
+     font-weight: bold;
+ }
+
+ .filter-toggle.is-button-active svg {
+     transform: scaleY(-1);
+ }
+
+ .filter-title-inner {
+     flex: 1 1 100%;
+ }
+
+ .filter-toggle svg {
+     display: block;
+     height: auto;
+     width: auto;
+ }
+
+ .filter-count-selected {
+     padding: 0 0 0 15px;
+     font-style: normal;
+     font-weight: bold;
+     color: #E08F40;
+ }
+
+ .filter-checbox-item {
+     padding-bottom: 15px;
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
+     letter-spacing: 1px;
+ }
+
+ .filter-checbox-item label {
+     flex: 1 1 calc(100% - 125px);
+ }
+
+ .filter-toggle {
+     cursor: pointer;
+     background: #FFFFFF;
+     border: 1px solid #AFAFAF;
+     border-radius: 50px;
+     padding: 10px 20px;
+     flex: 1 1 30%;
+     min-width: var(--filter-min-width);
+     font-family: 'Roboto';
+     font-style: normal;
+     font-weight: 400;
+     font-size: 14px;
+     line-height: 1.3em;
+
+     color: #000000;
+
+
+ }
+
+ .filter-wrap {
+     position: relative;
+ }
+
+ .filter-popup {
+     position: absolute;
+     z-index: 55;
+     top: 100%;
+     left: 50%;
+     transform: translate(-50%, 23px);
+     min-width: var(--filter-min-width);
+     background: #FFFFFF;
+     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+     border-radius: var(--border-radius-standart);
+     padding: 14px;
+     padding-top: 20px;
+     color: #000000;
+ }
+
+ .filter-popup:before {
+     content: '';
+     display: block;
+     width: 0;
+     height: 0;
+     position: absolute;
+
+     border-top: 13px solid transparent;
+     border-right: 13px solid transparent;
+     border-bottom: 13px solid rgb(255, 255, 255);
+     border-left: 13px solid transparent;
+     left: 10%;
+     top: -25px;
+ }
+
+ .filter-toggle+.filter-popup {
+     display: none;
+ }
+
+ .filter-toggle.is-button-active+.filter-popup {
+     display: block;
+ }
+
+ .layout__iso-filter {
+     margin-bottom: 31px;
+ }
+
+ .iso-filter__btn {
+     background: #FFFFFF;
+     border: 1px solid #DEDEDE;
+     border-radius: 50px;
+     font-weight: 500;
+     font-size: 14px;
+     line-height: 1.3em;
+     text-align: center;
+     letter-spacing: 1px;
+     color: #000000;
+     padding: 13px 27px;
+     margin-right: 20px;
+     cursor: pointer;
+     margin-bottom: 10px;
+
+     &:not([data-filter="*"]) {
+         .iso-filter-title {
+             position: relative;
+             padding-left: 17px;
+
+             &::before {
+                 content: "";
+                 position: absolute;
+                 left: -9px;
+                 top: 1px;
+                 width: 14px;
+                 height: 14px;
+                 border: 0px solid #ddd;
+                 border-radius: 100%;
+                 background: #a9a9a9;
+             }
+         }
+     }
+
+     &.is-checked {
+         background: #EBEBEB;
+     }
+
+     &.iso-filter__btn_holidays .iso-filter-title:before {
+         background: #64E7C7;
+     }
+
+     &.iso-filter__btn_competitions .iso-filter-title:before {
+         background: #FF9C9C;
+     }
+
+     &.iso-filter__btn_performances .iso-filter-title:before {
+         background: #FFA800;
+     }
+
+     &.iso-filter__btn_exhibitions .iso-filter-title:before {
+         background: #6DE0E8;
+     }
+
+     &.iso-filter__btn_excursions .iso-filter-title:before {
+         background: #8F81E5;
+     }
+
+     &.iso-filter__btn_concerts .iso-filter-title:before {
+         background: #D9D348;
+     }
+
+     &.iso-filter__btn_sport .iso-filter-title:before {
+         background: #648BEE;
+     }
+ }

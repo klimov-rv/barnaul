@@ -1,0 +1,255 @@
+@media (max-width: 1800px) {
+    .hero__headline_btn {
+        width: 27px;
+        height: 19px;
+        overflow: hidden;
+    }
+
+    .hero__headline_btn__wrapper {
+        position: absolute;
+    }
+
+    .hero__headline_btn:hover {
+        width: auto;
+        z-index: 90;
+    }
+
+    .hero__headline_btn:hover .hero__headline_btn__wrapper {
+        position: relative;
+    }
+
+    .hero__headline_btn span {
+        display: none;
+        white-space: nowrap;
+    }
+
+    .hero__headline_btn:hover span {
+        display: inline;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 1610px) {
+    .is-page-historical-object .hero-bg {
+        background-size: 59%;
+    }
+
+    .hero__body h1 {
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 1460px) {
+    .is-container-fix .site-content>.container {
+
+        padding: 0 30px;
+    }
+
+    .is-container-fix .container {
+        padding: 0 30px;
+    }
+
+    .is-page-historical-object .hero-bg {
+        background-size: 50%;
+    }
+
+    .hero__body h1 {
+        font-size: 31px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .page-hero-block {
+        margin: 45px 0 0 25px;
+    }
+
+    .iso-filter__btn {
+        margin-right: 10px;
+        margin-bottom: 7px;
+    }
+}
+
+@media (max-width: 920px) {
+
+    .main-event__gallery-date {
+        padding: 7px 11px;
+    }
+
+    .main-event__gallery-title {
+        font-size: 18px;
+    }
+
+    .event-item__type {
+        font-size: 13px;
+    }
+
+    .event-item__title {
+        font-size: 21px;
+    }
+
+    .header-day,
+    .day {
+        min-width: 40px;
+        min-height: 39px;
+    }
+
+    .event-item__time {
+        margin-right: 15px;
+    }
+
+    .event-item__btn {
+        margin-top: 15px;
+    }
+
+    .event-item__date_wrap {
+        flex-direction: row;
+        height: auto;
+    }
+
+    .event-item__title_wrap {
+        margin-top: 15px;
+        padding-left: 0;
+    }
+
+    .event-list__item {
+        padding-bottom: 17px;
+    }
+
+    .welcome_grid {
+        flex-direction: column;
+    }
+
+    .welcome_grid-left {
+        margin-bottom: 35px;
+    }
+
+    .main-event__sidebar>.col {
+        flex-direction: row;
+        margin: -5px;
+    }
+
+    .main-event__img {
+        width: auto;
+        height: auto;
+        padding: 10px;
+    }
+
+    .main-event__img img {
+        border-radius: 20px;
+    }
+
+    article {
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width:769px) {
+    .widget__info {
+        padding: 10px 0;
+    }
+
+    .widget__img img {
+        width: 100%;
+    }
+
+    #calendar,
+    .widget__main-event {
+        max-width: 370px;
+        margin: 0 auto 20px;
+        box-sizing: border-box;
+    }
+
+    .hero__body h1 {
+        font-size: 27px;
+    }
+
+    .page-hero-block__legend {
+        font-size: 14px;
+        line-height: 1.3em;
+    }
+
+    .player-slot {
+        justify-content: center;
+    }
+}
+
+
+@media screen and (max-width:640px) {
+    .main-event__gallery-img {
+        margin-bottom: 10px;
+    }
+
+    .main-event__gallery-date {
+        font-size: 12px;
+    }
+
+    .main-event__gallery-title {
+        font-size: 16px;
+    }
+
+    .event-dialog__info_date {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    #event-dialog {
+        padding: 27px 21px;
+    }
+
+    .event-dialog__info {
+        flex-direction: column-reverse;
+    }
+
+    .mfp-close-btn-in .mfp-close {
+        top: 9px;
+        right: 9px;
+    }
+
+    .hero__headline {
+        margin: 27px 0 5px;
+    }
+
+    .welcome_text {
+        padding: 15px;
+        border-radius: 15px;
+        font-size: 14px;
+    }
+
+    .is-page-historical-object .hero-bg {
+        background-size: 100%;
+    }
+
+    .progress-track {
+
+        min-width: 25vw;
+    }
+
+    .audio-player__info {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width:380px) {
+    .iso-filter__btn {
+        padding: 10px 19px;
+    }
+
+    .hero__body h1 {
+        font-size: 25px;
+        margin-block-start: 19px;
+        margin-block-end: 19px;
+    }
+
+    .page-hero-description {
+        width: 100%;
+        font-size: 12px;
+    }
+
+    .fastfact-text {
+        font-size: 14px;
+    }
+
+    .page-hero-fastfacts {
+        padding: 25px 0;
+    }
+}

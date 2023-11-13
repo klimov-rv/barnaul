@@ -1,0 +1,798 @@
+:root {
+    --border-radius-standart: 10px;
+    --filter-min-width: 218px;
+    --delay-base: .1s;
+    --delay-gap: .3s;
+}
+
+.is-container-fix .container {
+    padding: 0;
+}
+
+.is-container-fix .site-content {
+    padding-top: 27px;
+}
+
+.is-container-fix .site-content>.container {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.dom-loaded .historical_line_svg {
+    display: block;
+}
+
+.btn-main {
+    cursor: pointer;
+    width: 100%;
+    min-width: 161px;
+    height: 59px;
+    background: #E08F40;
+    border: 0px solid;
+    border-radius: var(--border-radius-standart);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.3em;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
+.jcf-checkbox {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #ADADAD;
+    background-color: #EEEEEE;
+    margin-right: 25px;
+}
+
+.jcf-checkbox.jcf-checked {
+    background-color: #E08F40;
+}
+
+:root .jcf-checkbox span {
+    position: unset;
+    margin: -5px 0 0 0;
+}
+
+.jcf-checkbox.jcf-checked span {
+    border-color: white;
+}
+
+.range-slider-input {
+    margin-bottom: 20px;
+}
+
+
+.range-slider-input .input-range {
+    width: calc(100% - 40px);
+    background-color: #EEEEEE;
+    border: 1px solid #ADADAD;
+    height: 2em;
+    padding: 7px 13px;
+}
+
+.site-wrap.is-page-where-eat {
+    background-image: url('/img/page_bg/eat.webp')
+}
+
+// страница "Главное событие города"
+.site-wrap.is-page-main-event {
+    background-image: url('/img/page_bg/main_event.webp')
+}
+
+.site-wrap.is-page-calendar-events {
+    background-image: url('/img/page_bg/banner_barnaul-10_1.jpg');
+    background-position: top right;
+
+}
+
+.site-wrap.is-page-historical-object {
+    background-image: none;
+}
+
+article {
+    font-family: 'Roboto';
+    font-style: normal;
+    line-height: 1.3em;
+    color: #333333;
+    margin-bottom: 65px;
+}
+
+article p {
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    color: #000000;
+    margin-block-start: 0px;
+    margin-block-end: 30px;
+    margin-inline-start: 0px;
+    margin-inline-end: 30px;
+}
+
+.welcome_text {
+    display: inline-block;
+    background-color: #FAEEE3;
+    padding: 40px 75px;
+    border-radius: 30px;
+    font-size: 16px;
+    line-height: 22px;
+    color: #000000;
+}
+
+.section__title {
+    font-size: 24px;
+    // общие
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    // уникальные
+    margin-block-start: 43px;
+}
+
+
+.article_link {
+    display: inline-block;
+    background: #FAEEE3;
+    border-radius: 0 60px 60px 60px;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    color: #000000;
+    padding: 13px 23px;
+}
+
+.article_link a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.article_link-inner {
+
+    display: flex;
+    flex-direction: column;
+}
+
+.main-event__gallery {
+    background-color: #F7F7F7;
+    padding-bottom: 60px;
+}
+
+.main-event__gallery-item {
+
+    margin-bottom: 25px;
+}
+
+.main-event__gallery-img,
+.main-event__img {
+    overflow: hidden;
+    border-radius: 20px;
+    height: 0;
+    flex: 0 0 auto;
+    padding-bottom: 60%;
+    margin-bottom: 20px;
+    // width: 100%; 
+    // margin-bottom: 30px;
+    // height: 0;
+    // padding-bottom: 71%;
+}
+
+.main-event__gallery-img {
+
+    padding-bottom: 60%;
+}
+
+.main-event__gallery-img img,
+.main-event__img img {
+    // object-fit: contain;
+    // min-height: 100%;
+    // max-height: none;
+    // min-width: 100%;
+    // max-width: fit-content;
+}
+
+.main-event__gallery-img img {
+    width: 100%;
+}
+
+.main-event__gallery-title {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.3em;
+    letter-spacing: 0.01em;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.main-event__gallery-date {
+    display: inline-block;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.1em;
+    letter-spacing: 0.01em;
+    color: #E08F40;
+    background: #FAEEE3;
+    border-radius: 20px 0px 20px 20px;
+    padding: 10px 20px;
+}
+
+.gallery-more {
+    max-width: 188px;
+    margin: 0 auto;
+}
+
+// историческая линия объект
+.is-container-fix.is-page-historical-object .site-content {
+    padding-top: 0;
+}
+
+.historical-object__hero {
+    position: relative;
+    background-color: #F2F2F2;
+    overflow: hidden;
+}
+
+.hero-line {
+    top: 55px;
+    position: absolute;
+}
+
+.is-page-historical-object .hero-bg {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/img/page_bg/univermag.png') no-repeat right bottom / auto;
+}
+
+
+.hero__headline {
+    position: relative;
+    margin: 45px 0 17px;
+}
+
+.hero__headline_btn {
+    max-width: 250px;
+    height: 19px;
+    position: absolute;
+    top: 0;
+    box-shadow: 0px 0px 15px rgba(119, 119, 119, 0.15);
+    background: #FFFFFF;
+    padding: 20px;
+    color: #E08F40;
+    font-size: 16px;
+}
+
+.hero__headline_btn:hover {
+    background-color: #FAEEE3;
+}
+
+.hero__headline_btn__wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+}
+
+.hero__headline_btn.btn_previous {
+    left: 0;
+    border-radius: 0px 50px 50px 0px;
+}
+
+
+.hero__headline_btn.btn_next {
+    right: 0;
+    border-radius: 50px 0px 0px 50px;
+}
+
+.hero__headline_btn svg {
+    padding: 0 10px;
+}
+
+.hero__headline_btn span {
+    padding: 0 10px;
+}
+
+.hero__body {
+    position: relative;
+    z-index: 10;
+    padding-bottom: 57px;
+    color: #333333;
+}
+
+.hero__body h1 {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1.3em;
+}
+
+.page-hero-description {
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+}
+
+.page-hero-fastfacts {
+    padding: 30px 0;
+}
+
+.fastfacts__item_wrap {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.fastfact-title {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    color: #E08F40;
+}
+
+.fastfact-text {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.01em;
+
+}
+
+.fastfacts__icon {
+    flex: 0 0 65px;
+}
+
+.fastfact-info {
+    padding-right: 25px;
+}
+
+.page-hero-description {
+    display: inline-block;
+    width: 97%;
+}
+
+.hero__body address {
+    font-style: normal;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+}
+
+.hero__body address svg {
+    margin-right: 9px;
+}
+
+.page-hero-block {
+    background: #FFFFFF;
+    border-radius: 20px 20px 20px 0px;
+    padding: 35px 50px 35px 30px;
+    color: #B05700;
+    position: relative;
+    max-width: 343px;
+    margin: 45px auto;
+}
+
+.page-hero-block__legend-title {
+
+    position: absolute;
+    top: -11px;
+    left: 30px;
+    background: #B05700;
+    mix-blend-mode: normal;
+    border-radius: 15px 15px 0px 15px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.3em;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 5px 15px;
+}
+
+.page-hero-block__legend {
+    font-family: 'PT Serif';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5em;
+    letter-spacing: 0.01em;
+}
+
+.event-holidays .event-item__date_wrap::after {
+    background: #64E7C7;
+}
+
+
+.event-competitions .event-item__date_wrap::after {
+    background: #FF9C9C;
+}
+
+.event-performances .event-item__date_wrap::after {
+    background: #FFA800;
+}
+
+.event-exhibitions .event-item__date_wrap::after {
+    background: #6DE0E8;
+}
+
+.event-excursions .event-item__date_wrap::after {
+    background: #8F81E5;
+}
+
+.event-concerts .event-item__date_wrap::after {
+    background: #D9D348;
+}
+
+
+.event-sport .event-item__date_wrap::after {
+    background: #648BEE;
+}
+
+
+
+// widget 
+.widget {
+    background: #FFFFFF;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    margin-bottom: 21px;
+}
+
+.widget__main-event {
+    padding: 25px;
+    margin-bottom: 70px;
+}
+
+
+.widget__img {
+    position: relative;
+}
+
+.widget__img_text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #B05700;
+    border-radius: 15px 15px 0px 15px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    padding: 5px 11px;
+}
+
+.widget__info {
+    padding-left: 23px;
+}
+
+.widget__title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.5em;
+    letter-spacing: 0.01em;
+    color: #000000;
+    margin-bottom: 5px;
+    padding-right: 15px;
+}
+
+.widget__btn {
+    font-size: 14px;
+    height: 49px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+// event-list
+.event-list {
+    overflow: hidden;
+    margin-bottom: 70px;
+    width: 100%;
+}
+
+.event-list__item {
+    border-bottom: 1px solid #BCBCBC;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex: 1 1 100%;
+    padding: 25px 0;
+}
+
+.event-list__item:hover .event-item__title {
+    color: #E08F40;
+
+}
+
+.event-list__item:hover .event__btn_wrap {
+    filter: grayscale(0);
+}
+
+.event-list__item:first-child {
+    padding-top: 0;
+}
+
+.event-item__date_wrap {
+    display: flex;
+    flex-direction: column;
+    background-color: #E08F40;
+    color: white;
+    width: 100%;
+    height: 67px;
+    border-radius: 20px 0px 20px 20px;
+    padding: 13px 27px;
+    box-sizing: border-box;
+    position: relative;
+    justify-content: center;
+}
+
+.event-item__title_wrap {
+    display: flex;
+    flex-direction: column;
+    color: #333333;
+    line-height: 130%;
+    font-weight: 400;
+    padding-left: 30px;
+}
+
+.event-item__type {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.event-item__title {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0.01em;
+    transition: color .3s;
+}
+
+.event__btn_wrap {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    filter: grayscale(1);
+}
+
+.event-item__date_wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #64E7C7;
+    border-radius: 20px 0px 20px 0px;
+    height: 100%;
+    width: 19px;
+}
+
+// magnific-popup
+
+/* Styles for dialog window */
+#event-dialog {
+    background: white;
+    padding: 45px 55px;
+    max-width: 1270px;
+    margin: 40px auto;
+    position: relative;
+    border-radius: 20px;
+}
+
+.mfp-close-btn-in .mfp-close {
+    color: #E08F40;
+    top: 17px;
+    right: 17px;
+    font-size: 37px;
+}
+
+.event-dialog__info {
+    display: flex;
+    background: #E08F40;
+    border-radius: 15px 0px 15px 15px;
+    color: white;
+    justify-content: space-between;
+}
+
+.event-dialog__info_date {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.3em;
+    letter-spacing: 0.01em;
+    padding: 13px;
+}
+
+.event-dialog__info_type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #8B7DDE;
+    border-radius: 15px 0px 15px 15px;
+    padding: 10px 21px;
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.event-dialog__header {
+    color: #000000;
+    margin-block-start: .3em;
+    margin-block-end: .5em;
+}
+
+.event-dialog__text {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    color: #000000;
+}
+
+.event-dialog__img {
+    margin-bottom: 30px;
+}
+
+.event-dialog__ticket {
+    position: relative;
+    border-radius: 20px;
+    background: #FFE0C3;
+    overflow: hidden;
+    padding: 29px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.event-dialog__ticket::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: white;
+    transform: translate(-50%, -50%);
+}
+
+.dialog__ticket_tizer {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto';
+    line-height: 1.3em;
+    letter-spacing: 0.01em;
+    color: #000000;
+}
+
+.tizer_top {
+    font-size: 14px;
+}
+
+.dialog__ticket_price {
+    font-family: 'PT Serif';
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 1.3em;
+}
+
+.dialog__ticket_bage {
+    width: 66px;
+    height: 66px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 0.01em;
+    color: #E08F40;
+    border-radius: 50%;
+}
+
+
+// historical line
+
+.trip__stripe {
+    background-color: #FAEEE3;
+    padding: 25px;
+    margin-bottom: 40px;
+}
+
+.trip__stage {
+    display: flex;
+    position: relative;
+    padding-right: 0;
+    align-items: center;
+}
+
+.trip__stage:first-child {
+    padding-right: 55px;
+}
+
+.trip__stage:last-child {
+    padding-left: 55px;
+}
+
+.trip__stage:nth-child(2) .trip__stage-divider {
+    right: -30px;
+}
+
+
+.trip__stage-divider {
+    position: absolute;
+    height: auto;
+    width: 55px;
+    top: 50%;
+    right: 30px;
+    transform: translate(0, -50%);
+}
+
+.big_font {
+    font-family: 'PT Serif';
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 70px;
+    letter-spacing: 0.01em;
+    color: #E08F40;
+    white-space: nowrap;
+    position: relative;
+    padding-right: 20px;
+}
+
+.small_font {
+    flex: 1 1 50%;
+}
+
+.big_font_subtext,
+.small_font {
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.01em;
+    color: #000000;
+}
+
+.big_font_subtext {
+    position: absolute;
+    top: 0;
+    right: 29px;
+}
+
+.trip-stage-icon {
+    padding-right: 20px;
+}
