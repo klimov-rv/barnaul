@@ -38,16 +38,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // new js
+
+    document.querySelector('.site-wrap').classList.add('dom-loaded');
+
+    // фильтры
     jcf.replaceAll();
 
-    const toggleBtns = document.querySelectorAll('.filter-toggle');
+    var toggleBtns = document.querySelectorAll('.filter-toggle');
 
     window.addEventListener('click', e => {
         if (!e.target.closest('.filter-popup')) {
 
             toggleBtns.forEach((item, idx) => {
                 if (!item.contains(e.target)) {
-                    console.log(e.target.closest('.filter-popup'));
                     item.classList.remove("is-button-active");
                 }
             })
@@ -61,14 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    const clickedChbxs = document.querySelectorAll('.filter-checbox-item');
+    var clickedChbxs = document.querySelectorAll('.filter-checbox-item');
 
     clickedChbxs.forEach((item, idx) => {
         item.addEventListener('click', e => {
-            const thisEl = e.target.closest('.filter-popup');
-            const countChecked = thisEl.querySelectorAll('input[type="checkbox"]:checked').length;
-            const filterWraper = thisEl.closest('.filter-title');
-            const insertCount = filterWraper.querySelector('.filter-count-selected');
+            var thisEl = e.target.closest('.filter-popup');
+            var countChecked = thisEl.querySelectorAll('input[type="checkbox"]:checked').length;
+            var filterWraper = thisEl.closest('.filter-title');
+            var insertCount = filterWraper.querySelector('.filter-count-selected');
             if (countChecked > 0) {
                 insertCount.innerHTML = countChecked;
                 filterWraper.classList.add('is-active');
@@ -79,11 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const applyBtn = document.querySelectorAll('.filter-apply');
+    var applyBtn = document.querySelectorAll('.filter-apply');
 
     applyBtn.forEach((item, idx) => {
         item.addEventListener('click', e => {
-            const filterWraper = e.target.closest('.filter-title');
+            var filterWraper = e.target.closest('.filter-title');
             filterWraper.querySelector('.filter-toggle').classList.toggle("is-button-active");
         });
     });
@@ -241,10 +244,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    const main_line = new Vivus(
+    var main_line = new Vivus(
         'js-historical_line__animate',
         {
             type: 'scenario',
+            start: 'manual',
             delay: 0,
             duration: 150,
             animTimingFunction: Vivus.EASE,
@@ -254,14 +258,55 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         function (obj) {
-            obj.el.classList.add('animation-started');
+            // obj.el.classList.add('animation-started');
         }
     );
 
-    function calIamgeSize(imageSelector, imageOriginWidth, imageOriginHeight, svgOrigW, svgOrigH) {
-        var newW = $(".historical_line_map").width();
-        var newH = $(".historical_line_map").height();
+    gsap.to("#js-historical_line__animate", {
+        scrollTrigger: {
+            trigger: ".historical_line_svg",    
+            start: "10% bottom",
+            onToggle: (self) => {
+                self.trigger.parentNode.classList.add('animation-started');
+                main_line.play();
+                // let p = document.getElementById("para1");
+                // let p_prime = p.cloneNode(true);
 
+                function createElemsTooltip(minusTop, minusLeft, elemToCopy) {
+                    var copyElem = document.createElement("div");
+                    copyElem.setAttribute("place_name", elemToCopy.getAttribute("place_name"));
+
+                    var rect = elemToCopy.getBoundingClientRect();
+
+                    copyElem.style.width = rect.width + 10 + "px";
+                    copyElem.style.height = rect.height + 10 + "px";
+                    copyElem.style.left = rect.left - minusLeft - 5 + "px";
+                    copyElem.style.top = rect.top - minusTop - 5 + "px";
+                    copyElem.classList.add('duplicate_point');
+                    return copyElem;
+                }
+                var allPoints = document.querySelectorAll('.historical_line_point');
+                var map_container = document.querySelector('.svg_animate');
+                var parentTop = map_container.getBoundingClientRect().top;
+                var parentleft = map_container.getBoundingClientRect().left;
+                allPoints.forEach((elem) => map_container.appendChild(createElemsTooltip(parentTop, parentleft, elem)));
+
+
+                tippy(".duplicate_point", {
+                    animation: 'scale-subtle',
+                    placement: 'right',
+                    interactive: true,
+                    allowHTML: true,
+                    content: (reference) => '<a href="#"><span class="ttip-text">' + reference.getAttribute('place_name') + '</span><svg aria-hidden="true" width="16" height="12"> <use xlink:href="#arrow-right2"></use> </svg></a>',
+                });
+            },
+        }
+    });
+
+    function calIamgeSize(newW, newH, imageOriginWidth, imageOriginHeight, svgOrigW, svgOrigH) {
+
+
+        console.log("calIamgeSize")
         var widthOnePercent = imageOriginWidth / 100;
         var heightOnePercent = imageOriginHeight / 100;
 
@@ -270,7 +315,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (newW >= imageOriginWidth) {
 
-            // $(imageSelector).attr({
+            console.log('предполагается искажение координат')
+            // $(".historical_line_svg").attr({
             //     width: svgOrigW,
             //     height: svgOrigH,
             // });
@@ -278,65 +324,34 @@ document.addEventListener('DOMContentLoaded', () => {
             var imageCurrentPercentW = svgOrigW / widthOnePercent;
             var imageCurrentPercentH = svgOrigH / heightOnePercent;
 
-            var imageNewWidth = imageCurrentPercentW * newWidthOnePercent
-            var imageNewHeight = imageCurrentPercentH * newHeightOnePercent
+            var imageNewWidth = imageCurrentPercentW * newWidthOnePercent;
+            var imageNewHeight = imageCurrentPercentH * newHeightOnePercent;
 
-            $(imageSelector).attr({
+            $(".historical_line_svg").attr({
                 width: imageNewWidth,
                 height: imageNewHeight,
             });
         }
     }
 
-    // Исходные размеры что бы не потерять точное соотношение
-    var imageW = 1920;
-    var imageH = 762;
-    var svgW = 1026;
-    var svgH = 755;
 
-    // для дубликатов точек мест
-    var heightForDuplicateBox = (svgH / 100) * 4;
+    $(".historical_line_map").on("load", function () {
+        // Исходные размеры что бы не потерять точное соотношение
+        var imageW = 1920;
+        var imageH = 762;
+        var svgW = 1026;
+        var svgH = 755;
 
-    var imageClass = ".historical_line_resize";
-
-    $(window).on("resize", function () {
-
-        calIamgeSize(imageClass, imageW, imageH, svgW, svgH);
-
+        var newW = $(".historical_line_map").width();
+        var newH = $(".historical_line_map").height();
+        calIamgeSize(newW, newH, imageW, imageH, svgW, svgH);
+        $(window).on("resize", function () {
+            calIamgeSize(newW, newH, imageW, imageH, svgW, svgH);
+        });
     });
-    calIamgeSize(imageClass, imageW, imageH, svgW, svgH);
-
-    function getWindowRelativeOffset(elem) {
-        return {
-            left: elem.getBoundingClientRect().left,
-            top: elem.getBoundingClientRect().top
-        };
-    };
-
-    function createElemsTooltip(minusTop, minusLeft, elemToCopy) {
-        const copyElem = document.createElement("div");
-        copyElem.setAttribute("place_name", elemToCopy.getAttribute("place_name"));
-
-        var offset = getWindowRelativeOffset(elemToCopy);
-        copyElem.style.left = offset.left - minusLeft - 3 + "px";
-        copyElem.style.top = offset.top - minusTop - 3 + "px";
-        copyElem.classList.add('duplicate_point');
-        return copyElem;
-    }
-    let allPoints = document.querySelectorAll('.historical_line_point');
-    const map_container = document.querySelector('.svg_animate');
-    const parentTop = map_container.getBoundingClientRect().top;
-    const parentleft = map_container.getBoundingClientRect().left;
-    allPoints.forEach((elem) => map_container.appendChild(createElemsTooltip(parentTop, parentleft, elem)));
 
 
-    tippy(".duplicate_point", {
-        animation: 'scale-subtle',
-        placement: 'right',
-        interactive: true,
-        allowHTML: true,
-        content: (reference) => '<a href="#"><span class="ttip-text">' + reference.getAttribute('place_name') + '</span><svg aria-hidden="true" width="16" height="12"> <use xlink:href="#arrow-right2"></use> </svg></a>',
-    });
+
 
 
 });

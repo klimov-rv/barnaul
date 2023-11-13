@@ -2689,7 +2689,7 @@ body>.jcf-select-drop.jcf-drop-flipped {
     --border-radius-standart: 10px;
     --filter-min-width: 218px;
     --delay-base: .0s;
-    --delay-gap: 1.15s;
+    --delay-gap: .5s;
 }
 
 .is-container-fix .container {
@@ -3912,6 +3912,14 @@ article p {
     // animation-fill-mode: forwards;
 }
 
+.historical_line_svg {
+    display: none;
+}
+
+.dom-loaded .historical_line_svg {
+    display: block;
+}
+
 .historical_line_point:hover {
     transform: scale(1.5);
 }
@@ -4096,13 +4104,16 @@ article p {
     position: absolute;
     top: 10px;
     left: 10px;
-    height: 30px;
-    width: 30px;
     cursor: pointer;
     border-radius: 50%;
     opacity: 0;
-    z-index: 75;
+    z-index: -50;
     background-color: transparent;
+}
+
+.animation-started .duplicate_point {
+    z-index: 75;
+
 }
 
 .duplicate_point:hover {

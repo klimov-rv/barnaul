@@ -1,7 +1,7 @@
 // VARIABLES & PATHS
 let preprocessor = 'sass', // Preprocessor
     imageswatch = 'png|jpg|jpeg|gif|svg|ico|webp', // List of images extensions for watching & compression (comma separated)
-    baseDir = 'src' // Base directory path without «/» at the end
+    baseDir = 'src', // Base directory path without «/» at the end
     buildDir = 'build' // Build directory
 
 let paths = {
@@ -31,6 +31,11 @@ let paths = {
             'node_modules/isotope-layout/dist/isotope.pkgd.min.js',
             'node_modules/clndr/src/clndr.js',
             'node_modules/vivus/dist/vivus.min.js',
+            'node_modules/@popperjs/core/dist/umd/popper.min.js',
+            'node_modules/tippy.js/dist/tippy.umd.js',
+            'node_modules/gsap/dist/gsap.min.js',
+            'node_modules/gsap/dist/ScrollTrigger.min.js',
+            'node_modules/gsap/dist/ScrollToPlugin.min.js',
         ],
         dest: buildDir + '/js',
     },
