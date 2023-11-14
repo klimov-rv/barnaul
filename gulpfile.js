@@ -1,6 +1,7 @@
 // VARIABLES & PATHS
 let preprocessor = 'sass', // Preprocessor
     imageswatch = 'png|jpg|jpeg|gif|svg|ico|webp', // List of images extensions for watching & compression (comma separated)
+    fontswatch = 'ttf|woff|woff2|eot',
     baseDir = 'src', // Base directory path without «/» at the end
     buildDir = 'build' // Build directory
 
@@ -14,16 +15,31 @@ let paths = {
     },
     styles: {
         src: [
-            baseDir + '/styles/**/*.scss',
+            baseDir + '/styles/app.scss',
+            baseDir + '/styles/vendor.scss',
         ],
         dest: buildDir + '/css',
     },
     scripts: {
-        src: baseDir + '/js/app.js',
+        src: [
+            baseDir + '/js/app.js',
+
+        ],
         dest: buildDir + '/js',
     },
     libs: {
-        src: [ 
+        src: [
+            'node_modules/jquery/dist/jquery.min.js',
+            'node_modules/jcf/dist/js/jcf.js',
+            'node_modules/jcf/dist/js/jcf.select.js',
+            'node_modules/jcf/dist/js/jcf.radio.js',
+            'node_modules/jcf/dist/js/jcf.checkbox.js',
+            'node_modules/jcf/dist/js/jcf.range.js',
+            'node_modules/jcf/dist/js/jcf.range.js',
+
+            'node_modules/howler/dist/howler.core.min.js',
+            baseDir + '/js/_vendor/howler/player.js',
+
             'node_modules/magnific-popup/dist/jquery.magnific-popup.min.js',
             'node_modules/underscore/underscore-umd-min.js',
             'node_modules/moment/min/moment-with-locales.min.js',
@@ -50,6 +66,13 @@ let paths = {
     //     src: baseDir + '/img/sprite/*.svg',
     //     dest: buildDir + '/img',
     // },
+
+    fonts: {
+        src: [
+            baseDir + '/fonts/**/*.+(' + fontswatch + ')',
+        ],
+        dest: buildDir + '/fonts',
+    },
     deploy: {
         dest: './' + buildDir + '**/*',
     },
@@ -105,11 +128,36 @@ function styles() {
         .pipe(browserSync.stream())
 }
 
+// function modulesjs() {
+//     // fs.readdir(paths.bundles.js, (err, list) => {
+//     //     if (err || !list) return;
+
+//     //     list.forEach((item) => {
+//     //       let path = upath.normalize(paths.bundles.js + '/' + item + '/**.js');
+//     //       let pathInner = upath.normalize(paths.bundles.js + '/' + item + '/*/**.js');
+//     //       let name = item + '.js';
+
+//     //       gulp.src([pathInner, path])
+//     //         .pipe(concat(name))
+//     //         .pipe(gulp.dest(paths.theme.dest));
+//     //     });
+//     // });
+
+//     return src(paths.vendorjs.src)
+//         .pipe(babel({
+//             presets: ['@babel/env']
+//         }))
+//         .pipe(concat('modules.js'))
+//         .pipe(dest(paths.scripts.dest))
+// }
+
 function scripts() {
+
     return src(paths.scripts.src)
         .pipe(babel({
             presets: ['@babel/env']
         }))
+        .pipe(concat('app.js'))
         .pipe(uglify())
         .pipe(rename({ suffix: '.min' }))
         .pipe(dest(paths.scripts.dest))
@@ -131,6 +179,16 @@ function images() {
         .pipe(dest(paths.images.dest))
         .pipe(browserSync.stream())
 }
+
+
+function fonts() {
+
+    return src(paths.fonts.src)
+        .pipe(newer(paths.fonts.dest))
+        .pipe(dest(paths.fonts.dest))
+        .pipe(browserSync.stream())
+}
+
 
 // function sprites() {
 //     return src(paths.sprites.src)
@@ -156,12 +214,14 @@ function startwatch() {
     watch(baseDir + '/styles/**/*.scss', styles);
     watch(baseDir + '/js/**/*.js', scripts);
     watch(baseDir + '/img/**/*.+(' + imageswatch + ')', images);
+    watch(baseDir + '/fonts/**/*.+(' + fontswatch + ')', fonts);
     // watch(baseDir + '/img/sprite/*.svg', sprites);
 }
 
 exports.cleaningimages = cleaningimages;
 // exports.sprites = sprites;
 exports.images = images;
+exports.fonts = fonts;
 exports.libs = libs;
 exports.scripts = scripts;
 exports.styles = styles;
@@ -169,4 +229,4 @@ exports.html = html;
 exports.browsersync = browsersync;
 
 // exports.default = parallel(html, styles, scripts, libs, images, sprites, browsersync, startwatch);
-exports.default = parallel(html, styles, scripts, libs, images, browsersync, startwatch);
+exports.default = parallel(html, styles, scripts, libs, images, fonts, browsersync, startwatch);

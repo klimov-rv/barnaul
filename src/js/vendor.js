@@ -1,22 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // legacy js
 
-
-
-    /*  { 
-     <script src="js/jcf/jquery.js"></script>
- <script src="js/jcf/jcf.js"></script>
- <script src="js/jcf/jcf.select.js"></script>
- <script src="js/jcf/jcf.radio.js"></script>
- <script src="js/jcf/jcf.checkbox.js"></script>
- <script src="js/jcf/jcf.range.js"></script>
- 
- <script src="js/dataTabs.js"></script>
- 
- <script src="js/howler/howler.core.js"></script> 
- <script src="js/howler/player.js"></script> 
- }*/
-
     // мобильное меню 
     $(function () {
         $(".x3-tmenu__icon").click(function () {
@@ -259,122 +243,122 @@ document.addEventListener('DOMContentLoaded', () => {
         mainClass: 'my-mfp-zoom-in'
     });
 
-    if ($('#js-historical__line').length > 0) {
-        var main_line = new Vivus(
-            'js-historical__line',
-            {
-                type: 'scenario',
-                start: 'manual',
-                delay: 0,
-                duration: 150,
-                // animTimingFunction: Vivus.EASE,
-                onReady: function (myVivus) {
-                    // myVivus.el.classList.add('animation-started');
-                    // myVivus.el.classList.add('svg-ready');
+
+    var main_line = new Vivus(
+        'js-historical__line',
+        {
+            type: 'scenario',
+            start: 'manual',
+            delay: 0,
+            duration: 150,
+            // animTimingFunction: Vivus.EASE,
+            onReady: function (myVivus) {
+                // myVivus.el.classList.add('animation-started');
+                // myVivus.el.classList.add('svg-ready');
+            }
+        },
+        function (obj) {
+            // obj.el.classList.add('animation-started');
+        }
+    );
+
+    gsap.to("#js-historical__line", {
+        scrollTrigger: {
+            trigger: ".historical_line_svg",
+            start: "10% bottom",
+            once: true,
+            onToggle: (self) => {
+                self.trigger.parentNode.classList.add('animation-started');
+                main_line.play();
+
+                function createElemsTooltip(minusTop, minusLeft, elemToCopy) {
+                    var copyElem = document.createElement("div");
+                    var copyForTippy = copyElem.cloneNode();
+                    let p_prime = copyElem.cloneNode(true);
+                    var innerElem = document.createElement("div");
+                    copyElem.setAttribute("place_name", elemToCopy.getAttribute("place_name"));
+                    innerElem.appendChild(document.createTextNode(elemToCopy.getAttribute("place_number")))
+                    copyElem.appendChild(innerElem);
+                    copyForTippy.appendChild(copyElem);
+
+                    var rect = elemToCopy.getBoundingClientRect();
+
+                    copyForTippy.style.width = rect.width + 10 + "px";
+                    copyForTippy.style.height = rect.height + 10 + "px";
+                    copyForTippy.style.left = rect.left - minusLeft - 5 + "px";
+                    copyForTippy.style.top = rect.top - minusTop - 5 + "px";
+
+                    innerElem.classList.add('duplicate_point');
+                    copyElem.classList.add('duplicate_point_wrapp');
+                    copyForTippy.classList.add('duplicate_point_el', 'historical_line_point', 'point_' + elemToCopy.getAttribute("place_number"));
+
+                    return copyForTippy;
                 }
+                var allPoints = document.querySelectorAll('.svg_line_point');
+                var map_container = document.querySelector('.svg_animate');
+                var parentTop = map_container.getBoundingClientRect().top;
+                var parentleft = map_container.getBoundingClientRect().left;
+                allPoints.forEach((elem) => map_container.appendChild(createElemsTooltip(parentTop, parentleft, elem)));
+
+                tippy(".duplicate_point_wrapp", {
+                    animation: 'scale-subtle',
+                    placement: 'right',
+                    hideOnClick: false,
+                    interactive: true,
+                    allowHTML: true,
+                    maxWidth: '',
+                    content: (reference) => '<a href="#"><span class="ttip-text">' + reference.getAttribute('place_name') + '</span><svg aria-hidden="true" width="20" height="16"> <use xlink:href="#arrow-right4"></use> </svg></a>',
+                });
+
             },
-            function (obj) {
-                // obj.el.classList.add('animation-started');
-            }
-        );
-        gsap.to("#js-historical__line", {
-            scrollTrigger: {
-                trigger: ".historical_line_svg",
-                start: "10% bottom",
-                once: true,
-                onToggle: (self) => {
-                    self.trigger.parentNode.classList.add('animation-started');
-                    main_line.play();
-
-                    function createElemsTooltip(minusTop, minusLeft, elemToCopy) {
-                        var copyElem = document.createElement("div");
-                        var copyForTippy = copyElem.cloneNode();
-                        let p_prime = copyElem.cloneNode(true);
-                        var innerElem = document.createElement("div");
-                        copyElem.setAttribute("place_name", elemToCopy.getAttribute("place_name"));
-                        innerElem.appendChild(document.createTextNode(elemToCopy.getAttribute("place_number")))
-                        copyElem.appendChild(innerElem);
-                        copyForTippy.appendChild(copyElem);
-
-                        var rect = elemToCopy.getBoundingClientRect();
-
-                        copyForTippy.style.width = rect.width + 10 + "px";
-                        copyForTippy.style.height = rect.height + 10 + "px";
-                        copyForTippy.style.left = rect.left - minusLeft - 5 + "px";
-                        copyForTippy.style.top = rect.top - minusTop - 5 + "px";
-
-                        innerElem.classList.add('duplicate_point');
-                        copyElem.classList.add('duplicate_point_wrapp');
-                        copyForTippy.classList.add('duplicate_point_el', 'historical_line_point', 'point_' + elemToCopy.getAttribute("place_number"));
-
-                        return copyForTippy;
-                    }
-                    var allPoints = document.querySelectorAll('.svg_line_point');
-                    var map_container = document.querySelector('.svg_animate');
-                    var parentTop = map_container.getBoundingClientRect().top;
-                    var parentleft = map_container.getBoundingClientRect().left;
-                    allPoints.forEach((elem) => map_container.appendChild(createElemsTooltip(parentTop, parentleft, elem)));
-
-                    tippy(".duplicate_point_wrapp", {
-                        animation: 'scale-subtle',
-                        placement: 'right',
-                        hideOnClick: false,
-                        interactive: true,
-                        allowHTML: true,
-                        maxWidth: '',
-                        content: (reference) => '<a href="#"><span class="ttip-text">' + reference.getAttribute('place_name') + '</span><svg aria-hidden="true" width="20" height="16"> <use xlink:href="#arrow-right4"></use> </svg></a>',
-                    });
-
-                },
-            }
-        });
-        $(".historical_line_map").on("load", function () {
-            // Исходные размеры что бы не потерять точное соотношение
-            var imageW = 1920;
-            var imageH = 762;
-            var svgW = 1026;
-            var svgH = 755;
-
-            function calIamgeSize(newW, newH, imageOriginWidth, imageOriginHeight, svgOrigW, svgOrigH) {
-                if (!newW) {
-                    var newW = $(".historical_line_map").width();
-                    var newH = $(".historical_line_map").height();
-                }
-                var widthOnePercent = imageOriginWidth / 100;
-                var heightOnePercent = imageOriginHeight / 100;
-
-                var newWidthOnePercent = newW / 100;
-                var newHeightOnePercent = newH / 100;
-
-                if (newW >= imageOriginWidth) {
-
-                    $(".historical_line_svg").attr({
-                        width: imageNewWidth,
-                        height: imageNewHeight,
-                    });
-
-                } else {
-
-                    var imageCurrentPercentW = svgOrigW / widthOnePercent;
-                    var imageCurrentPercentH = svgOrigH / heightOnePercent;
-
-                    var imageNewWidth = imageCurrentPercentW * newWidthOnePercent;
-                    var imageNewHeight = imageCurrentPercentH * newHeightOnePercent;
-
-                    $(".historical_line_svg").attr({
-                        width: imageNewWidth,
-                        height: imageNewHeight,
-                    });
-                }
-            }
-
-            calIamgeSize(newW, newH, imageW, imageH, svgW, svgH);
-            $(window).on("resize", function () {
+        }
+    });
+    $(".historical_line_map").on("load", function () {
+        // Исходные размеры что бы не потерять точное соотношение
+        var imageW = 1920;
+        var imageH = 762;
+        var svgW = 1026;
+        var svgH = 755; 
+        
+        function calIamgeSize(newW, newH, imageOriginWidth, imageOriginHeight, svgOrigW, svgOrigH) {
+            if (!newW) {
                 var newW = $(".historical_line_map").width();
                 var newH = $(".historical_line_map").height();
-                calIamgeSize(newW, newH, imageW, imageH, svgW, svgH);
-            });
+            }
+            var widthOnePercent = imageOriginWidth / 100;
+            var heightOnePercent = imageOriginHeight / 100;
+
+            var newWidthOnePercent = newW / 100;
+            var newHeightOnePercent = newH / 100;
+
+            if (newW >= imageOriginWidth) {
+
+                $(".historical_line_svg").attr({
+                    width: imageNewWidth,
+                    height: imageNewHeight,
+                });
+
+            } else {
+
+                var imageCurrentPercentW = svgOrigW / widthOnePercent;
+                var imageCurrentPercentH = svgOrigH / heightOnePercent;
+
+                var imageNewWidth = imageCurrentPercentW * newWidthOnePercent;
+                var imageNewHeight = imageCurrentPercentH * newHeightOnePercent;
+
+                $(".historical_line_svg").attr({
+                    width: imageNewWidth,
+                    height: imageNewHeight,
+                });
+            }
+        }
+
+        calIamgeSize(newW, newH, imageW, imageH, svgW, svgH);
+        $(window).on("resize", function () {
+            var newW = $(".historical_line_map").width();
+            var newH = $(".historical_line_map").height();
+            calIamgeSize(newW, newH, imageW, imageH, svgW, svgH);
         });
-    }
+    });
 
 });

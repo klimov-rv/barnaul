@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "gulp"
 	},
-	"author": "Sviatoslav Andreiev <acrysense@gmail.com>",
+	"author": "Klimov Roman <klimov.rv@ya.ru>",
 	"license": "ISC",
 	"devDependencies": {
 		"@babel/core": "^7.18.2",
@@ -19,6 +19,7 @@
 		"dragscroll": "^0.0.8",
 		"express": "^4.18.1",
 		"flatpickr": "^4.6.13",
+		"gsap": "^3.12.2",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
 		"gulp-babel": "^8.0.0",
@@ -41,7 +42,9 @@
 		"swiper": "^9.2.4",
 		"tippy.js": "^6.3.7",
 		"underscore": "^1.13.6",
-		"vivus": "^0.4.6",
-		"gsap": "^3.12.2"
+		"vivus": "^0.4.6"
+	},
+	"dependencies": {
+		"howler": "^2.2.4"
 	}
 }
