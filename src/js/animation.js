@@ -17,14 +17,16 @@ var place_common = (pointEl, previewEl) => {
 function createElemsTooltip(minusTop, minusLeft, elemToCopy) {
     var copyElem = document.createElement("div");
     var copyForTippy = copyElem.cloneNode();
-    let p_prime = copyElem.cloneNode(true);
     var innerElem = document.createElement("div");
-    copyElem.setAttribute("place_name", elemToCopy.getAttribute("place_name"));
+    var rect = elemToCopy.getBoundingClientRect();
+    var attrAdd = 'point_' + elemToCopy.getAttribute("place_number");
+
     innerElem.appendChild(document.createTextNode(elemToCopy.getAttribute("place_number")))
     copyElem.appendChild(innerElem);
     copyForTippy.appendChild(copyElem);
 
-    var rect = elemToCopy.getBoundingClientRect();
+    console.log(minusTop);
+    console.log(minusLeft);
 
     copyForTippy.style.width = rect.width + 10 + "px";
     copyForTippy.style.height = rect.height + 10 + "px";
@@ -33,14 +35,23 @@ function createElemsTooltip(minusTop, minusLeft, elemToCopy) {
 
     innerElem.classList.add('duplicate_point');
     copyElem.classList.add('duplicate_point_wrapp');
-    var attrAdd = 'point_' + elemToCopy.getAttribute("place_number");
+    copyElem.setAttribute("place_name", elemToCopy.getAttribute("place_name"));
     copyForTippy.classList.add('duplicate_point_el', 'historical_line_point', attrAdd);
     copyForTippy.setAttribute('data-point-id', elemToCopy.getAttribute("place_number"));
 
     return copyForTippy;
 }
 
-
+function recalcElemsTooltip(minusTop, minusLeft, originalPoint) {
+    var rect = originalPoint.getBoundingClientRect();
+    // находим дубликат-точку (TODO найти по дата-атрибутам с помощью Vanilla JS)
+    var duplicate_point_el = $('[data-point-id=' + originalPoint.getAttribute("place_number") + ']');
+    console.log(duplicate_point_el);
+    duplicate_point_el.css("left", rect.left - minusLeft - 5);
+    duplicate_point_el.css("top", rect.top - minusTop - 5);
+    // duplicate_point_el.style.left = rect.left - minusLeft - 5 + "px";
+    // duplicate_point_el.style.top = rect.top - minusTop - 5 + "px";
+}
 
 function calIamgeSize(newW = undefined, newH = undefined, imageOriginWidth, imageOriginHeight, svgOrigW, svgOrigH) {
     if (!newW) {
@@ -90,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     var map_container = document.querySelector('.svg_animate');
                     var parentTop = map_container.getBoundingClientRect().top;
                     var parentleft = map_container.getBoundingClientRect().left;
+
                     allPoints.forEach((elem) => map_container.appendChild(createElemsTooltip(parentTop, parentleft, elem)));
 
                     tippy(".duplicate_point_wrapp", {
@@ -195,6 +207,14 @@ document.addEventListener('DOMContentLoaded', () => {
             var newW = $(".historical_line_map").width();
             var newH = $(".historical_line_map").height();
             calIamgeSize(newW, newH, imageW, imageH, svgW, svgH);
+
+            var allPoints = document.querySelectorAll('.svg_line_point');
+            var map_container = document.querySelector('.svg_animate');
+            var parentTop = map_container.getBoundingClientRect().top;
+            var parentleft = map_container.getBoundingClientRect().left;
+
+            allPoints.forEach((elem) => recalcElemsTooltip(parentTop, parentleft, elem));
+
         });
     }
 });
