@@ -64,7 +64,7 @@
 }
 
 .animation-started .all_places {
-    animation: hideall .3s linear forwards;
+    // animation: hideall .3s linear forwards;
 }
 
 .animation-started .place_01,
@@ -167,9 +167,9 @@
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 19);
 }
 
-.animation-started .all_places {
-    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 20);
-}
+// .animation-started .all_places {
+//     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 20);
+// }
 
 .animation-started .historical_line_point:hover {
     animation: popIn .3s ease-in-out forwards;

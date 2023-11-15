@@ -797,8 +797,29 @@ article p {
 }
 
 .audio-list-cell {
+    position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 35px;
+    padding: 0 25px;
+}
+
+.audio-list-cell::after {
+    content: '';
+    position: absolute;
+    width: 100500%;
+    height: 1px;
+    background-color: #000;
+    top: 155px;
+    z-index: 1;
+}
+
+.point__number_wrap {
+    position: relative;
+    width: 100%;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -813,7 +834,8 @@ article p {
     justify-content: center;
     align-items: center;
     color: #FFFFFF;
-    margin: 15px auto;
+    margin: 15px 0;
+    z-index: 20;
 }
 
 .point__number_current {}
@@ -821,9 +843,10 @@ article p {
 .point__audio {
     position: absolute;
     top: 50%;
-    right: -81px;
+    right: 25px;
     transform: translate(0, -50%);
     cursor: pointer;
+    z-index: 30;
 }
 
 .trip__points {
@@ -847,4 +870,17 @@ article p {
     text-align: center;
 }
 
-.audio-list-cell .point__img {}
+.audio-list-cell:first-child .point__number_wrap::after {
+    content: "";
+    position: absolute;
+    width: 9950%;
+    height: 30px;
+    top: calc(50% - 15px);
+    right: 50%;
+    background-color: white;
+    z-index: 15;
+}
+
+.audio-list-cell .point__img {
+    height: 125px;
+}

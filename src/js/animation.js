@@ -14,6 +14,69 @@ var place_common = (pointEl, previewEl) => {
 }
 
 
+function createElemsTooltip(minusTop, minusLeft, elemToCopy) {
+    var copyElem = document.createElement("div");
+    var copyForTippy = copyElem.cloneNode();
+    let p_prime = copyElem.cloneNode(true);
+    var innerElem = document.createElement("div");
+    copyElem.setAttribute("place_name", elemToCopy.getAttribute("place_name"));
+    innerElem.appendChild(document.createTextNode(elemToCopy.getAttribute("place_number")))
+    copyElem.appendChild(innerElem);
+    copyForTippy.appendChild(copyElem);
+
+    var rect = elemToCopy.getBoundingClientRect();
+
+    copyForTippy.style.width = rect.width + 10 + "px";
+    copyForTippy.style.height = rect.height + 10 + "px";
+    copyForTippy.style.left = rect.left - minusLeft - 5 + "px";
+    copyForTippy.style.top = rect.top - minusTop - 5 + "px";
+
+    innerElem.classList.add('duplicate_point');
+    copyElem.classList.add('duplicate_point_wrapp');
+    var attrAdd = 'point_' + elemToCopy.getAttribute("place_number");
+    copyForTippy.classList.add('duplicate_point_el', 'historical_line_point', attrAdd);
+    copyForTippy.setAttribute('data-point-id', elemToCopy.getAttribute("place_number"));
+
+    return copyForTippy;
+}
+
+
+
+function calIamgeSize(newW = undefined, newH = undefined, imageOriginWidth, imageOriginHeight, svgOrigW, svgOrigH) {
+    if (!newW) {
+        var newW = $(".historical_line_map").width();
+        var newH = $(".historical_line_map").height();
+    }
+    console.log(newH);
+    var widthOnePercent = imageOriginWidth / 100;
+    var heightOnePercent = imageOriginHeight / 100;
+
+    var newWidthOnePercent = newW / 100;
+    var newHeightOnePercent = newH / 100;
+
+    if (newW >= imageOriginWidth) {
+
+        $(".historical_line_svg").attr({
+            width: imageNewWidth,
+            height: imageNewHeight,
+        });
+
+    } else {
+
+        var imageCurrentPercentW = svgOrigW / widthOnePercent;
+        var imageCurrentPercentH = svgOrigH / heightOnePercent;
+
+        var imageNewWidth = imageCurrentPercentW * newWidthOnePercent;
+        var imageNewHeight = imageCurrentPercentH * newHeightOnePercent;
+
+        $(".historical_line_svg").attr({
+            width: imageNewWidth,
+            height: imageNewHeight,
+        });
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     if ($('#js-historical__line').length > 0) {
         var main_line = new Vivus('js-historical__line',
@@ -22,31 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 delay: 0,
                 duration: 150,
                 onReady: function (myVivus) {
-                    function createElemsTooltip(minusTop, minusLeft, elemToCopy) {
-                        var copyElem = document.createElement("div");
-                        var copyForTippy = copyElem.cloneNode();
-                        let p_prime = copyElem.cloneNode(true);
-                        var innerElem = document.createElement("div");
-                        copyElem.setAttribute("place_name", elemToCopy.getAttribute("place_name"));
-                        innerElem.appendChild(document.createTextNode(elemToCopy.getAttribute("place_number")))
-                        copyElem.appendChild(innerElem);
-                        copyForTippy.appendChild(copyElem);
-
-                        var rect = elemToCopy.getBoundingClientRect();
-
-                        copyForTippy.style.width = rect.width + 10 + "px";
-                        copyForTippy.style.height = rect.height + 10 + "px";
-                        copyForTippy.style.left = rect.left - minusLeft - 5 + "px";
-                        copyForTippy.style.top = rect.top - minusTop - 5 + "px";
-
-                        innerElem.classList.add('duplicate_point');
-                        copyElem.classList.add('duplicate_point_wrapp');
-                        var attrAdd = 'point_' + elemToCopy.getAttribute("place_number");
-                        copyForTippy.classList.add('duplicate_point_el', 'historical_line_point', attrAdd);
-                        copyForTippy.setAttribute('data-point-id', elemToCopy.getAttribute("place_number"));
-
-                        return copyForTippy;
-                    }
 
                     var allPoints = document.querySelectorAll('.svg_line_point');
                     var map_container = document.querySelector('.svg_animate');
@@ -87,8 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         historical_place__points.forEach((point) => {
             const svg_id = point.preview.place_group.getAttribute('data-place-id');
-            if (svg_id === "2") {
-                console.log(point.preview.place_group);
+            if (svg_id === "2") { // место для второй точки закрепляем внутри специального контейнера
                 const map_container = document.querySelector('.zoom_viewBox');
                 map_container.prepend(point.preview.place_group);
                 gsap.to(point.preview.place_group, {
@@ -97,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     scale: 0,
                     transformOrigin: "50% 50%"
                 });
-            }
+            } // закрепляем места с анимацией
             else if (point.preview.place_group.viewportElement === null) {
                 const svg_container = document.getElementById('js-historical__line');
                 svg_container.prepend(point.preview.place_group);
@@ -145,53 +182,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // размеры SVG относительно фоновой карты
-        $(".historical_line_map").on("load", function () {
-            // Исходные размеры что бы не потерять точное соотношение
-            var imageW = 1920;
-            var imageH = 762;
-            var svgW = 1026;
-            var svgH = 755;
+        // Исходные размеры что бы не потерять точное соотношение
 
-            function calIamgeSize(newW = undefined, newH = undefined, imageOriginWidth, imageOriginHeight, svgOrigW, svgOrigH) {
-                if (!newW) {
-                    var newW = $(".historical_line_map").width();
-                    var newH = $(".historical_line_map").height();
-                }
-                var widthOnePercent = imageOriginWidth / 100;
-                var heightOnePercent = imageOriginHeight / 100;
+        var imageW = 1920;
+        var imageH = 762;
+        var svgW = 1026;
+        var svgH = 762;
+        // TODO переписать undefined
+        calIamgeSize(undefined, undefined, imageW, imageH, svgW, svgH);
 
-                var newWidthOnePercent = newW / 100;
-                var newHeightOnePercent = newH / 100;
-
-                if (newW >= imageOriginWidth) {
-
-                    $(".historical_line_svg").attr({
-                        width: imageNewWidth,
-                        height: imageNewHeight,
-                    });
-
-                } else {
-
-                    var imageCurrentPercentW = svgOrigW / widthOnePercent;
-                    var imageCurrentPercentH = svgOrigH / heightOnePercent;
-
-                    var imageNewWidth = imageCurrentPercentW * newWidthOnePercent;
-                    var imageNewHeight = imageCurrentPercentH * newHeightOnePercent;
-
-                    $(".historical_line_svg").attr({
-                        width: imageNewWidth,
-                        height: imageNewHeight,
-                    });
-                }
-            }
-            // TODO переписать undefined
-            calIamgeSize(undefined, undefined, imageW, imageH, svgW, svgH);
-            $(window).on("resize", function () {
-                var newW = $(".historical_line_map").width();
-                var newH = $(".historical_line_map").height();
-                calIamgeSize(newW, newH, imageW, imageH, svgW, svgH);
-            });
+        $(window).on("resize", function () {
+            var newW = $(".historical_line_map").width();
+            var newH = $(".historical_line_map").height();
+            calIamgeSize(newW, newH, imageW, imageH, svgW, svgH);
         });
     }
 });
