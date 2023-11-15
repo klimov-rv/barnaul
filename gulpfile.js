@@ -23,7 +23,7 @@ let paths = {
     scripts: {
         src: [
             baseDir + '/js/app.js',
-
+            baseDir + '/js/animation.js',
         ],
         dest: buildDir + '/js',
     },
@@ -34,7 +34,6 @@ let paths = {
             'node_modules/jcf/dist/js/jcf.select.js',
             'node_modules/jcf/dist/js/jcf.radio.js',
             'node_modules/jcf/dist/js/jcf.checkbox.js',
-            'node_modules/jcf/dist/js/jcf.range.js',
             'node_modules/jcf/dist/js/jcf.range.js',
 
             'node_modules/howler/dist/howler.core.min.js',

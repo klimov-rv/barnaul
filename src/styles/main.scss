@@ -2,7 +2,7 @@
     --border-radius-standart: 10px;
     --filter-min-width: 218px;
     --delay-base: .1s;
-    --delay-gap: .3s;
+    --delay-gap: .1s;
 }
 
 .is-container-fix .container {
@@ -39,7 +39,6 @@
     text-align: center;
     color: #FFFFFF;
 }
-
 
 .jcf-checkbox {
     cursor: pointer;
@@ -796,3 +795,56 @@ article p {
 .trip-stage-icon {
     padding-right: 20px;
 }
+
+.audio-list-cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.point__number {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background: #060606;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    margin: 15px auto;
+}
+
+.point__number_current {}
+
+.point__audio {
+    position: absolute;
+    top: 50%;
+    right: -81px;
+    transform: translate(0, -50%);
+    cursor: pointer;
+}
+
+.trip__points {
+    position: relative;
+    z-index: 30;
+    margin-top: -70px;
+}
+
+.point__place-name {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    color: #E08F40;
+    margin-bottom: 19px;
+}
+
+.point__place-info {
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+}
+
+.audio-list-cell .point__img {}

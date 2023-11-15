@@ -6,6 +6,7 @@
     position: absolute;
     top: -1%;
     left: 27.3%;
+    overflow: visible;
 }
 
 .svg_animate .path {
@@ -16,10 +17,19 @@
     // animation-fill-mode: forwards;
 }
 
+.zoom_viewBox {
+    position: absolute;
+    top: -350px;
+    right: 50px;
+}
+
+.group_02 {
+    opacity: 0;
+}
+
 .historical_line_svg {
     display: none;
 }
-
 
 .svg_line_point {
     opacity: 0;
@@ -35,7 +45,7 @@
 .historical_place,
 .historical_line_point.instant_display .instant_hide {
     opacity: 0;
-    transform: scale(0);
+    transform: scale(1);
 }
 
 .historical_line_point.instant_display,
@@ -45,117 +55,152 @@
 }
 
 
-.animation-started .historical_place {
-    animation: reveal .3s linear forwards;
-}
-
 .animation-started .historical_line_point.instant_display .instant_hide {
     animation: popIn .3s ease-in-out forwards;
 }
 
-.animation-started .historical_place.place_01,
+.animation-started .historical_place {
+    animation: reveal .3s linear forwards;
+}
+
+.animation-started .all_places {
+    animation: hideall .3s linear forwards;
+}
+
+.animation-started .place_01,
 .animation-started .historical_line_point.point_1 {
     animation-delay: var(--delay-base);
 }
 
-.animation-started .historical_place.place_02,
+.animation-started .place_02,
 .animation-started .historical_line_point.point_2 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap));
 }
 
-.animation-started .historical_place.place_03,
+.animation-started .place_03,
 .animation-started .historical_line_point.point_3 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 2);
 }
 
-.animation-started .historical_place.place_04,
+.animation-started .place_04,
 .animation-started .historical_line_point.point_4 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 3);
 }
 
-.animation-started .historical_place.place_05,
+.animation-started .place_05,
 .animation-started .historical_line_point.point_5 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 4);
 }
 
-.animation-started .historical_place.place_06,
+.animation-started .place_06,
 .animation-started .historical_line_point.point_6 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 5);
 }
 
-.animation-started .historical_place.place_07,
+.animation-started .place_07,
 .animation-started .historical_line_point.point_7 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 6);
 }
 
-.animation-started .historical_place.place_08,
+.animation-started .place_08,
 .animation-started .historical_line_point.point_8 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 7);
 }
 
-.animation-started .historical_place.place_09,
+.animation-started .place_09,
 .animation-started .historical_line_point.point_9 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 8);
 }
 
-.animation-started .historical_place.place_10,
+.animation-started .place_10,
 .animation-started .historical_line_point.point_10 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 9);
 }
 
-.animation-started .historical_place.place_11,
+.animation-started .place_11,
 .animation-started .historical_line_point.point_11 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 10);
 }
 
-.animation-started .historical_place.place_12,
+.animation-started .place_12,
 .animation-started .historical_line_point.point_12 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 11);
 }
 
-.animation-started .historical_place.place_13,
+.animation-started .place_13,
 .animation-started .historical_line_point.point_13 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 12);
 }
 
-.animation-started .historical_place.place_14,
+.animation-started .place_14,
 .animation-started .historical_line_point.point_14 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 13);
 }
 
-.animation-started .historical_place.place_15,
+.animation-started .place_15,
 .animation-started .historical_line_point.point_15 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 14);
 }
 
-.animation-started .historical_place.place_16,
+.animation-started .place_16,
 .animation-started .historical_line_point.point_16 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 15);
 }
 
-.animation-started .historical_place.place_17,
+.animation-started .place_17,
 .animation-started .historical_line_point.point_17 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 16);
 }
 
-.animation-started .historical_place.place_18,
+.animation-started .place_18,
 .animation-started .historical_line_point.point_18 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 17);
 }
 
-.animation-started .historical_place.place_19,
+.animation-started .place_19,
 .animation-started .historical_line_point.point_19 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 18);
 }
 
-.animation-started .historical_place.place_20,
+.animation-started .place_20,
 .animation-started .historical_line_point.point_20 {
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 19);
+}
+
+.animation-started .all_places {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 20);
 }
 
 .animation-started .historical_line_point:hover {
     animation: popIn .3s ease-in-out forwards;
     cursor: pointer;
+}
+
+.animation-started .place_hovered .historical_place {
+
+    &.place_01,
+    &.place_02,
+    &.place_03,
+    &.place_04,
+    &.place_06,
+    &.place_07,
+    &.place_08,
+    &.place_09,
+    &.place_10,
+    &.place_11,
+    &.place_12,
+    &.place_13,
+    &.place_14,
+    &.place_15,
+    &.place_16,
+    &.place_17,
+    &.place_18,
+    &.place_19,
+    &.place_20 {
+        transform-origin: center;
+        animation-delay: unset;
+        animation-play-state: unset;
+    }
 }
 
 .tippy-box {
@@ -231,12 +276,11 @@
 }
 
 .animation-started .duplicate_point_el {
-    z-index: 75;
-
+    z-index: 55;
 }
 
 .historical_line_point,
-.duplicate_point_wrapp { 
+.duplicate_point_wrapp {
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -280,7 +324,7 @@
 }
 
 .duplicate_point_el:hover {
-    opacity: 1;
+    z-index: 70;
 }
 
 // @keyframes lineforward {
@@ -310,5 +354,17 @@
     100% {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+
+
+@keyframes hideall {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
     }
 }
