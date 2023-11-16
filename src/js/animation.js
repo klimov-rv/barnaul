@@ -118,9 +118,10 @@ if ($('#js-historical__line').length > 0) {
         if ($('#js-historical__line').length > 0) {
             var main_line = new Vivus('js-historical__line',
                 {
+                    type: 'scenario',
                     start: 'manual',
                     delay: 0,
-                    duration: 150,
+                    duration: 130,
                     onReady: function (myVivus) {
 
                         var allPoints = document.querySelectorAll('.svg_line_point');
@@ -185,14 +186,28 @@ if ($('#js-historical__line').length > 0) {
                             ease: 'expo',
                             scale: 0,
                             transformOrigin: "50% 50%"
-                        }); F
+                        });
                     }
 
                 }
+                point.point.addEventListener('click', (e) => {
+                    console.log(point.point.getAttribute("data-point-id"));
+                    // const topY = $('[data-audio-id="' + point.point.getAttribute("data-point-id") + '"]').offset().top;
+                    // if (topY > 0) {
+                    //     gsap.to(window, 1, {
+                    //         scrollTo: {
+                    //             y: topY,
+                    //             autoKill: true
+                    //         },
+                    //         ease: Power3.easeOut
+                    //     });
+                    // }
+                })
+
                 point.point.addEventListener('mouseenter', (e) => {
+                    point.point.classList.add('active-play');
                     point.preview.place_group.classList.add('place_hovered');
                     if (svg_id === "2") {
-                        console.log("mouseenter");
                         const zoom_container = document.querySelector('.zoom_container');
                         zoom_container.classList.add('zoom-active');
                     }
@@ -206,9 +221,8 @@ if ($('#js-historical__line').length > 0) {
                     });
                 });
                 point.point.addEventListener('mouseleave', (e) => {
+                    point.point.classList.remove('active-play');
                     point.preview.place_group.classList.remove('place_hovered')
-                    console.log("mouseleave");
-                    console.log(e.fromElement.classList.contains('point_2'))
                     if (svg_id === "2") {
                         const zoom_container = document.querySelector('.zoom_container');
                         zoom_container.classList.remove('zoom-active')

@@ -38,6 +38,7 @@ let paths = {
 
             'node_modules/howler/dist/howler.core.min.js',
             baseDir + '/js/_vendor/howler/player.js',
+            baseDir + '/js/_vendor/dataTabs/dist/dataTabs.js',
 
             'node_modules/magnific-popup/dist/jquery.magnific-popup.min.js',
             'node_modules/underscore/underscore-umd-min.js',

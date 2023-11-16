@@ -5,6 +5,13 @@
 'description': 'аудиоэкскурсии, город Барнаул',
 'url': '/audio_tours.html'
 })
+
+<script>
+      window.barnaul_data = {
+        player_data: {"playlist":[{"title":"Rave Digger","file":"rave_digger","howl":null},{"title":"80s Vibe","file":"80s_vibe","howl":null},{"title":"Random podcast 1","file":"3d45128e-9197-4abe-8f10-b49464379ad4","howl":null} ] },
+    }; 
+
+</script>
 <html lang="ru-RU">
 
   <body>
@@ -31,14 +38,134 @@
           <h1 class="page-title">Обзорная экскурсия по городу Барнаулу</h1>
 
         </div>
-        <section class="audio-obzor container row">
-          <div class="cell-6">
-            <div class="text1">Барнаул в конце 19 века стал крупным купеческим центром Сибири. История города того
+        <section class="audio-tours__obzor container row">
+          <div class="cell-5">
+
+            @@include('components/player/_player.html')
+
+            <div class="audio-tours__text">
+              Барнаул в конце 19 века стал крупным купеческим центром Сибири. История
+              города того
               времени связана с фамилиями наиболее успешных купцов и предпринимателей. К их числу можно отнести династию
               Суховых. Суховы владели большой частью городской недвижимости, им принадлежали кирпичный, кожевенный и
-              свечной заводы.</div>
+              свечной заводы.
+            </div>
+
+            <div class="audio-tours__tabs">
+              <div class="tabs-controls js-tabs-controls" data-tabs-container>
+                <div class="tabs-item">
+                  <button data-tab-anchor="1" type="button" name="button" class="js-accordion-item tabs-trigger">
+                    <span class="accordion-title">Точка 1. Стелла трудовой доблести</span>
+                    <span class="accordion-icon">
+                      <svg aria-hidden="true" width="100%" height="100%">
+                        <use xlink:href="#media-audio"></use>
+                      </svg>
+                    </span>
+                  </button>
+                  <div data-tab-target="1" class="tabs-target">
+
+                    <div class="tab-media tab-media_hide" id="tab-media-1">
+                      <audio src="https://html5book.ru/examples/media/track.mp3" controls loop>
+                    </div>
+                    <p>
+                      Как парк эта территория возникла в Барнауле относительно недавно –
+                      в тридцатые годы прошлого века. А уже в 1950-ых годах в парке была открыта сельскохозяйственная
+                      выставка – Алтайская ВДНХ. Помимо выставочных павильонов здесь были созданы пруд, летний кинотеатр
+                      и
+                      кафе. После развала СССР выставка закрылась.
+                    </p>
+                    <p>
+                      Сегодня Нагорный парк – одна из главных достопримечательностей города, наиболее популярное и
+                      благоустроенное место для прогулок.
+                      Но большую часть своей истории он провёл в совсем другом статусе…
+                    </p>
+                    <p>
+                      После эпидемии чумы, разразившейся в России в 1771 году, указом Сената были запрещены похороны при
+                      городских церквях. Местные власти приняли решение о создании нового, Нагорного кладбища, именно
+                      здесь. Рядом разместились Татарское и Протестантское кладбища. Умерших хоронили как бесплатно,
+                      так и за деньги. Плату взимали с тех. кто хотел похоронить родственника поближе к церкви. Храм,
+                      который сегодня находится в парке, – это копия кирпичного, построенного вместо сгоревшей
+                      деревянной
+                      церкви в середине XIX века. Среди похороненных есть самоубийца, атеисты и даже женщина – сотрудник
+                      ВЧК.
+                    </p>
+                    <p>
+                      А еще раньше, в первые годы строительства города и до создания кладбища, здесь собирались строить
+                      кремль для защиты от ДжунгАрского ханства. В итоге крепость построили на другом берегу Оби, в
+                      Белоярске.
+                    </p>
+                    <p>
+                      …Придя в Нагорный парк обязательно обратите внимание на большие буквы «БАРНАУЛ». К ним можно
+                      подойти
+                      и сфотографироваться! А если сделать на их фоне селфи, то надпись не исказится.
+                    </p>
+
+                    <div class="tabs-close-btn" data-tab-anchor="1">
+                      <span>Свернуть</span>
+                      <svg aria-hidden="true" width="11" height="7">
+                        <use xlink:href="#arrow-down-svg"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tabs-item">
+
+                  <button data-tab-anchor="2" type="button" name="button" class="js-accordion-item tabs-trigger">
+                    <span class="accordion-title">Точка 2. Объект такой</span>
+                    <span class="accordion-icon">
+                      <svg aria-hidden="true" width="100%" height="100%">
+                        <use xlink:href="#media-audio"></use>
+                      </svg>
+                    </span>
+                  </button>
+
+                  <div data-tab-target="2" class="tabs-target">
+                    <div class="tab-media tab-media_hide" id="tab-media-2">
+                      <audio src="https://html5book.ru/examples/media/track.mp3" controls loop>
+                        <p>Your browser does not support the audio element.</p>
+                      </audio>
+                    </div>
+                    <p>
+                      Содержимое второй вкладки
+                    </p>
+
+                    <div class="tabs-close-btn" data-tab-anchor="2">
+                      <span>Свернуть</span>
+                      <svg aria-hidden="true" width="11" height="7">
+                        <use xlink:href="#arrow-down-svg"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tabs-item">
+                  <button data-tab-anchor="3" type="button" name="button" class="js-accordion-item tabs-trigger">
+                    <span class="accordion-title">Точка 3. Объект такой</span>
+                    <span class="accordion-icon">
+                      <svg aria-hidden="true" width="100%" height="100%">
+                        <use xlink:href="#media-audio"></use>
+                      </svg>
+                    </span>
+                  </button>
+                  <div data-tab-target="3" class="tabs-target">
+                    Содержимое третьей вкладки
+
+                    <div class="tabs-close-btn" data-tab-anchor="3">
+                      <span>Свернуть</span>
+                      <svg aria-hidden="true" width="11" height="7">
+                        <use xlink:href="#arrow-down-svg"></use>
+                      </svg>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
-          <div class="cell-6">
+          <div class="cell-6 push-1">
+            <img src="/img/slider.jpg" alt="">
           </div>
         </section>
       </div>

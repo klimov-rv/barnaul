@@ -56,13 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         }
     });
+
     toggleBtns.forEach((item, idx) => {
         item.addEventListener('click', e => {
             e.preventDefault();
             e.target.closest('.filter-toggle').classList.toggle("is-button-active");
         });
     });
-
 
     var clickedChbxs = document.querySelectorAll('.filter-checbox-item');
 
@@ -90,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
             filterWraper.querySelector('.filter-toggle').classList.toggle("is-button-active");
         });
     });
-
 
     // TODO переписать на Vanilla JS фильтр isotope
     function getHashFilter() {
@@ -150,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // trigger event handler to init Isotope
         onHashchange();
     });
-
 
     moment.locale('ru');
     var thisMonth = moment().format('YYYY-MM');
@@ -242,6 +240,160 @@ document.addEventListener('DOMContentLoaded', () => {
         removalDelay: 300,
         mainClass: 'my-mfp-zoom-in'
     });
+
+    $('.js-tabs-controls').dataTabs({
+        event: 'click',
+        hideOnClosest: true,
+        initOpenTab: false,
+        state: 'accordion',
+        jqMethodOpen: 'slideDown',
+        jqMethodClose: 'slideUp',
+
+        onTab: (self, $anchor, $target) => {
+            console.log(self, $anchor, $target)
+        },
+    });
+
+
+
+    const pageHaveplayer = document.querySelector('.audio-player');
+
+    if (pageHaveplayer) {
+
+        // по умолчанию
+        var playlists = [
+            {
+                title: '80s Vibe',
+                file: '80s_vibe',
+                howl: null
+            }
+        ]
+        // так будем брать плейлист на кастомных страницах
+        // const playlist = window.barnaul_data.player_data.playlist
+
+
+        // плейлист со страницы "Аудиоэкскурсий"
+        var tabItems = document.querySelectorAll('.tabs-item');
+
+        if (tabItems.length > 0) {
+            tabItems.forEach((item, idx) => {
+                console.log(item, idx)
+                var tabPlaylist = [];
+                var tabAudio = item.getElementsByTagName('audio');
+                for (let item of tabAudio) {
+                    console.log(item.currentSrc)
+                    tabPlaylist.push({
+                        title: "audio in tab" + idx,
+                        file: item.currentSrc,
+                        howl: null
+                    })
+                    console.log(playlist)
+                }
+                playlists[idx] = tabPlaylist;
+            });
+        }
+
+        var mainPlayList = []
+
+        if (playlists[1]) {
+            mainPlayList = playlists[1];
+        } else {
+            mainPlayList = playlists[0];
+        }
+        var player = new Player(playlist);
+
+        // Bind our player controls.
+        playBtn.addEventListener('click', function () {
+            player.play();
+        });
+        startbar.addEventListener('click', function () {
+            player.play();
+        });
+        pauseBtn.addEventListener('click', function () {
+            player.pause();
+        });
+        prevBtn.addEventListener('click', function () {
+            player.skip('prev');
+        });
+        nextBtn.addEventListener('click', function () {
+            player.skip('next');
+        });
+
+        // waveform.addEventListener('click', function (event) {
+        //     player.seek(event.clientX / window.innerWidth);
+        // });
+        // playlistBtn.addEventListener('click', function () {
+        //     player.togglePlaylist();
+        // });
+        // playlist.addEventListener('click', function () {
+        //     player.togglePlaylist();
+        // });
+        // volumeBtn.addEventListener('click', function () {
+        //     player.toggleVolume();
+        // });
+        // volume.addEventListener('click', function () {
+        //     player.toggleVolume();
+        // });
+
+        // Setup the event listeners to enable dragging of volume slider.
+        // barEmpty.addEventListener('click', function (event) {
+        //     var per = event.layerX / parseFloat(barEmpty.scrollWidth);
+        //     player.volume(per);
+        // });
+        // sliderBtn.addEventListener('mousedown', function () {
+        //     window.sliderDown = true;
+        // });
+        // sliderBtn.addEventListener('touchstart', function () {
+        //     window.sliderDown = true;
+        // });
+        // volume.addEventListener('mouseup', function () {
+        //     window.sliderDown = false;
+        // });
+        // volume.addEventListener('touchend', function () {
+        //     window.sliderDown = false;
+        // });
+
+        var move = function (event) {
+            if (window.sliderDown) {
+                var x = event.clientX || event.touches[0].clientX;
+                var startX = window.innerWidth * 0.05;
+                var layerX = x - startX;
+                var per = Math.min(1, Math.max(0, layerX / parseFloat(barEmpty.scrollWidth)));
+                player.volume(per);
+            }
+        };
+
+        // volume.addEventListener('mousemove', move);
+        // volume.addEventListener('touchmove', move); 
+
+        // Update the height of the wave animation.
+        // These are basically some hacks to get SiriWave.js to do what we want.
+        var resize = function () {
+            var height = window.innerHeight * 0.3;
+            var width = window.innerWidth;
+            // wave.height = height;
+            // wave.height_2 = height / 2;
+            // wave.MAX = wave.height_2 - 4;
+            // wave.width = width;
+            // wave.width_2 = width / 2;
+            // wave.width_4 = width / 4;
+            // wave.canvas.height = height;
+            // wave.canvas.width = width;
+            // wave.container.style.margin = -(height / 2) + 'px auto';
+
+            // Update the position of the slider.
+            var sound = player.playlist[player.index].howl;
+            if (sound) {
+                var vol = sound.volume();
+                var barWidth = (vol * 0.9);
+                sliderBtn.style.left = (window.innerWidth * barWidth + window.innerWidth * 0.05 - 25) + 'px';
+            }
+        };
+        window.addEventListener('resize', resize);
+        resize();
+    }
+
+
 
 
 });
