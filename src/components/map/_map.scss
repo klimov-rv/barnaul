@@ -4,9 +4,8 @@
 
 .svg_animate {
     position: absolute;
-    top: -1%;
+    top: -1.5%;
     left: 27.3%;
-    overflow: visible;
 }
 
 .svg_animate .path {
@@ -17,10 +16,27 @@
     // animation-fill-mode: forwards;
 }
 
-.zoom_viewBox {
+.zoom_container {
     position: absolute;
-    top: -350px;
+    top: 145px;
     right: 50px;
+    z-index: 50;
+    display: none;
+    width: 500px;
+    height: 1px;
+}
+
+.zoom_limiter {
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translate(50%, 0);
+    width: 27vw;
+    height: 27vw;
+}
+
+.zoom_container.zoom-active {
+    display: block;
 }
 
 .group_02 {
@@ -64,7 +80,7 @@
 }
 
 .animation-started .all_places {
-    // animation: hideall .3s linear forwards;
+    animation: hideall .3s linear forwards;
 }
 
 .animation-started .place_01,
@@ -167,9 +183,10 @@
     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 19);
 }
 
-// .animation-started .all_places {
-//     animation-delay: calc(var(--delay-base) + var(--delay-gap) * 20);
-// }
+// исчезновение мест
+.animation-started .all_places {
+    animation-delay: calc(var(--delay-base) + var(--delay-gap) * 20);
+}
 
 .animation-started .historical_line_point:hover {
     animation: popIn .3s ease-in-out forwards;
@@ -214,6 +231,8 @@
 }
 
 .ttip-text {
+    display: flex;
+    flex: 1 0 180px;
     padding-right: 40px;
     font-family: 'Roboto';
     font-style: normal;
@@ -319,8 +338,9 @@
     height: 30px;
     width: 30px;
     border: 4px solid white;
-    background-color: #E08F40;
+    background-color: rgb(195, 41, 39);
     color: white;
+    flex: 0 0 30px;
 }
 
 .duplicate_point_el:hover {

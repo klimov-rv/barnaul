@@ -1,7 +1,7 @@
 :root {
     --border-radius-standart: 10px;
     --filter-min-width: 218px;
-    --delay-base: .1s;
+    --delay-base: 0s;
     --delay-gap: .1s;
 }
 
@@ -11,6 +11,7 @@
 
 .is-container-fix .site-content {
     padding-top: 27px;
+    overflow: hidden;
 }
 
 .is-container-fix .site-content>.container {
@@ -18,6 +19,10 @@
     padding-bottom: 0;
     padding-left: 0;
     padding-right: 0;
+}
+
+.container_relative {
+    position: relative;
 }
 
 .dom-loaded .historical_line_svg {
@@ -727,8 +732,9 @@ article p {
 
 .trip__stripe {
     background-color: #FAEEE3;
-    padding: 25px;
+    padding: 25px 0;
     margin-bottom: 40px;
+    overflow: hidden;
 }
 
 .trip__stage {
@@ -736,6 +742,7 @@ article p {
     position: relative;
     padding-right: 0;
     align-items: center;
+    justify-content: space-between;
 }
 
 .trip__stage:first-child {
@@ -744,6 +751,10 @@ article p {
 
 .trip__stage:last-child {
     padding-left: 55px;
+
+    .trip-stage-icon {
+        padding-right: 0;
+    }
 }
 
 .trip__stage:nth-child(2) .trip__stage-divider {
@@ -774,6 +785,7 @@ article p {
 
 .small_font {
     flex: 1 1 50%;
+    padding-right: 10px;
 }
 
 .big_font_subtext,
@@ -794,6 +806,9 @@ article p {
 
 .trip-stage-icon {
     padding-right: 20px;
+    height: 49px;
+    width: 49px;
+    flex: 0 0 49px;
 }
 
 .audio-list-cell {
@@ -870,10 +885,11 @@ article p {
     text-align: center;
 }
 
+.audio-list-cell:last-child .point__number_wrap::after,
 .audio-list-cell:first-child .point__number_wrap::after {
     content: "";
     position: absolute;
-    width: 9950%;
+    width: 10000%;
     height: 30px;
     top: calc(50% - 15px);
     right: 50%;
@@ -881,6 +897,19 @@ article p {
     z-index: 15;
 }
 
+.audio-list-cell:last-child .point__number_wrap::after {
+    left: 50%;
+}
+
 .audio-list-cell .point__img {
     height: 125px;
 }
+
+.is-page-audio-tours .site-content {
+
+    background-color: #F2F2F2;
+}
+
+// .audio-obzor {
+//     background-color: #F2F2F2;
+// }
