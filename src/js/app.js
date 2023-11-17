@@ -354,15 +354,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     var setPagination = function (e) {
         var activeSlide = e.realIndex + 1;
-        var totlaSlides = document.querySelector('.mySwiper .swiper-pagination-total').innerText;
+        var totlaSlides = e.el.querySelectorAll('.swiper-slide').length;
         console.log(totlaSlides);
         $(".swiper-active-slide").text(activeSlide);
         $(".swiper-count-slides").text(totlaSlides);
         $(".swiper-count-total").text(totlaSlides);
     }
-    if ($('.mySwiper').length > 0) {
 
-        var mainSwiper = new Swiper(".mySwiper", {
+    if ($('.image-slider').length > 0) {
+
+        var mainSwiper = new Swiper(".image-slider", {
             speed: 1000,
             effect: "fade",
             lazy: true,
@@ -372,15 +373,15 @@ document.addEventListener('DOMContentLoaded', () => {
             slidesPerGroupSkip: 1,
 
             scrollbar: {
-                el: '.mySwiper .swiper-scrollbar',
+                el: '.image-slider .swiper-scrollbar',
             },
             pagination: {
-                el: '.mySwiper .swiper-fractions',
+                el: '.image-slider .swiper-fractions',
                 type: 'fraction',
             },
             navigation: {
-                nextEl: '.mySwiper .swiper-button-next',
-                prevEl: '.mySwiper .swiper-button-prev',
+                nextEl: '.image-slider .swiper-button-next',
+                prevEl: '.image-slider .swiper-button-prev',
             },
             on: {
                 init: function () {
@@ -407,6 +408,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         mainSwiper.on('slideChange', function () {
+            $(".swiper-active-slide").text(this.realIndex + 1);
+            $(".swiper-count-slides").text(this.el.childElementCount + 1);
+            $(".swiper-count-total").text(this.el.childElementCount + 1);
+        });
+    }
+
+    if ($('.gallery-slider').length > 0) {
+
+        var gallerySwiper = new Swiper(".gallery-slider", {
+            speed: 1000,
+            lazy: true,
+            slidesPerView: "auto",
+            spaceBetween: 30,
+            loop: false,
+            scrollbar: {
+                el: '.gallery-slider .swiper-scrollbar',
+            },
+            pagination: {
+                el: '.gallery-slider .swiper-fractions',
+                type: 'fraction',
+            },
+            navigation: {
+                nextEl: '.gallery-slider .swiper-button-next',
+                prevEl: '.gallery-slider .swiper-button-prev',
+            },
+            on: {
+                init: function () {
+                    setPagination(this);
+                },
+            },
+            // breakpoints: {
+            //     0: {
+            //         slidesPerView: 1,
+            //         spaceBetween: 10,
+            //         loop: false,
+            //     },
+            //     420: {
+            //         slidesPerView: 1,
+            //         spaceBetween: 10,
+            //         loop: false,
+            //     },
+            //     1024: {
+            //         slidesPerView: 1,
+            //         spaceBetween: 10,
+            //         loop: false,
+            //     }
+            // }
+        });
+
+        gallerySwiper.on('slideChange', function () {
             $(".swiper-active-slide").text(this.realIndex + 1);
             $(".swiper-count-slides").text(this.el.childElementCount + 1);
             $(".swiper-count-total").text(this.el.childElementCount + 1);

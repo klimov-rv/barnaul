@@ -465,6 +465,16 @@ article p {
     }
 }
 
+.gallery-title {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.5em;
+    color: #333333;
+}
+
+
 .event-holidays .event-item__date_wrap::after {
     background: #64E7C7;
 }
@@ -569,6 +579,7 @@ article p {
     width: 100%;
     flex: 1 1 100%;
     padding: 25px 0;
+    position: relative;
 }
 
 .event-list__item:hover .event-item__title {
@@ -642,16 +653,58 @@ article p {
     width: 19px;
 }
 
+.starred-event {
+    position: absolute;
+    top: 0;
+    right: 9%;
+    padding: 11px 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    background-color: #DF5D40;
+    border-radius: 0 0 20px 20px;
+
+    &__star {
+        width: 17px;
+        height: 17px;
+        padding-right: 15px;
+    }
+
+    &__text {
+
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 1.3em;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+
+        color: #FFFFFF;
+
+
+    }
+}
+
 // magnific-popup
 
 /* Styles for dialog window */
-#event-dialog {
+.zoom-anim-dialog {
     background: white;
     padding: 45px 55px;
-    max-width: 1270px;
     margin: 40px auto;
     position: relative;
     border-radius: 20px;
+}
+
+#event-dialog {
+    max-width: 1270px;
+}
+
+#hero-gallery {
+    max-width: 1460px;
 }
 
 .mfp-close-btn-in .mfp-close {
@@ -1125,7 +1178,8 @@ article p {
     margin-bottom: 50px;
 }
 
-.mySwiper {
+.swiper {
+
     --swiper-scrollbar-border-radius: 10px;
     --swiper-scrollbar-top: auto;
     --swiper-scrollbar-bottom: 4px;
@@ -1137,114 +1191,239 @@ article p {
     --swiper-scrollbar-size: 2px;
     --swiper-navigation-size: 30px;
 
-    width: 100%;
-    background-color: white;
-    box-sizing: border-box;
-    padding: 30px;
-    border-radius: 30px;
-
-    .swiper-wrapper {
-        overflow: hidden;
-        max-height: 390px;
-        border-radius: 30px;
-    }
-
-    .swiper-fade .swiper-slide {
-        background-color: white;
-        max-height: 390px;
-    }
-
-    .swiper-controls {
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        padding-top: 30px;
+        border-radius: 20px;
 
-        .swiper-fractions {
-            padding-left: 30px;
-            padding-right: 20px;
+        img {
+            display: block;
+            object-fit: cover;
+        }
+    }
+
+    &.image-slider {
+        width: 100%;
+        background-color: white;
+        box-sizing: border-box;
+        padding: 30px;
+        border-radius: 30px;
+
+        .swiper-wrapper {
+            overflow: hidden;
+            max-height: 390px;
+            border-radius: 30px;
+        }
+
+        .swiper-fade .swiper-slide {
+            background-color: white;
+            max-height: 390px;
+        }
+
+        .swiper-controls {
             display: flex;
-            flex: 1 1 10%;
+            justify-content: space-between;
             align-items: center;
-            color: #737373;
-            font-size: 14px;
-            line-height: 18px;
-            font-weight: bold;
+            padding-top: 30px;
 
-            .swiper-pagination-current {
-                display: inline-block;
-                width: 18px;
+            .swiper-fractions {
+                padding-left: 30px;
+                padding-right: 20px;
+                display: flex;
+                flex: 1 1 10%;
+                align-items: center;
+                color: #737373;
+                font-size: 14px;
+                line-height: 18px;
+                font-weight: bold;
+
+                .swiper-pagination-current {
+                    display: inline-block;
+                    width: 18px;
+
+                    &:before {
+                        content: '0';
+                    }
+                }
+
+                .swiper-pagination-total {
+
+                    font-weight: 400;
+
+                    &:before {
+                        content: '0';
+                    }
+                }
+            }
+
+            .swiper-scrollbar-holder {
+
+                position: relative;
+                display: flex;
+                flex: 1 1 30%;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+
+                .swiper-scrollbar-horizontal {
+                    height: 2px;
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                }
+            }
+
+            .swiper-count-total {
+                display: flex;
+                flex: 1 1 20%;
+                justify-content: center;
+
+                font-size: 14px;
+                line-height: 18px;
+                font-weight: bold;
 
                 &:before {
                     content: '0';
                 }
             }
 
-            .swiper-pagination-total {
+            .swiper-arrows {
+                flex: 1 1 60%;
+                position: relative;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                padding-right: 30px;
 
-                font-weight: 400;
+                .swiper-button-prev,
+                .swiper-button-next {
+                    position: relative;
+                    height: auto;
+                    left: auto;
+                    right: auto;
+                    width: calc(var(--swiper-navigation-size) * 2);
+
+                    font-weight: 300;
+                    font-size: 30px;
+                    color: black;
+
+                    &:hover {
+                        font-weight: 800;
+                    }
+                }
+            }
+        }
+    }
+
+    &.gallery-slider {
+        .swiper-slide {
+            width: auto;
+            max-width: 75%;
+            justify-content: flex-start;
+        }
+
+        .swiper-controls {
+            width: 40%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+
+            .swiper-fractions {
+                padding-left: 30px;
+                padding-right: 20px;
+                display: flex;
+                flex: 1 1 10%;
+                align-items: center;
+                color: #737373;
+                font-size: 14px;
+                line-height: 18px;
+                font-weight: bold;
+
+                .swiper-pagination-current {
+                    display: inline-block;
+                    width: 18px;
+
+                    &:before {
+                        content: '0';
+                    }
+                }
+
+                .swiper-pagination-total {
+
+                    font-weight: 400;
+
+                    &:before {
+                        content: '0';
+                    }
+                }
+            }
+
+            .swiper-scrollbar-holder {
+
+                position: relative;
+                display: flex;
+                flex: 1 1 50%;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+
+                .swiper-scrollbar-horizontal {
+                    height: 2px;
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                }
+            }
+
+            .swiper-count-total {
+                display: flex;
+                flex: 1 1 10%;
+                justify-content: center;
+
+                font-size: 14px;
+                line-height: 18px;
+                font-weight: bold;
 
                 &:before {
                     content: '0';
                 }
             }
-        }
 
-        .swiper-scrollbar-holder {
-
-            position: relative;
-            display: flex;
-            flex: 1 1 30%;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-
-            .swiper-scrollbar-horizontal {
-                height: 2px;
+            .swiper-arrows {
+                flex: 1 1 30%;
                 position: relative;
-                top: 0;
-                left: 0;
-            }
-        }
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                padding-right: 30px;
 
-        .swiper-count-total {
-            display: flex;
-            flex: 1 1 20%;
-            justify-content: center;
+                .swiper-button-prev,
+                .swiper-button-next {
+                    position: relative;
+                    height: auto;
+                    left: auto;
+                    right: auto;
+                    width: calc(var(--swiper-navigation-size) * 2);
 
-            font-size: 14px;
-            line-height: 18px;
-            font-weight: bold;
+                    font-weight: 300;
+                    font-size: 30px;
+                    color: black;
 
-            &:before {
-                content: '0';
-            }
-        }
-
-        .swiper-arrows {
-            flex: 1 1 60%;
-            position: relative;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding-right: 30px;
-
-            .swiper-button-prev,
-            .swiper-button-next {
-                position: relative;
-                height: auto;
-                left: auto;
-                right: auto;
-                width: calc(var(--swiper-navigation-size) * 2);
-
-                font-weight: 300;
-                font-size: 30px;
-                color: black;
-
-                &:hover {
-                    font-weight: 800;
+                    &:hover {
+                        font-weight: 800;
+                    }
                 }
             }
         }
+
+
     }
 }
+
+
+.hero-gallery__popup {}
