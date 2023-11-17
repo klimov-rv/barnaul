@@ -241,159 +241,250 @@ document.addEventListener('DOMContentLoaded', () => {
         mainClass: 'my-mfp-zoom-in'
     });
 
-    $('.js-tabs-controls').dataTabs({
-        event: 'click',
-        hideOnClosest: true,
-        initOpenTab: false,
-        state: 'accordion',
-        jqMethodOpen: 'slideDown',
-        jqMethodClose: 'slideUp',
 
-        onTab: (self, $anchor, $target) => {
-            console.log(self, $anchor, $target)
-        },
-    });
+    // подготовка плейлистов
 
+    const pageHavePlayer = document.querySelector('.audio-player');
 
-
-    const pageHaveplayer = document.querySelector('.audio-player');
-
-    if (pageHaveplayer) {
+    if (pageHavePlayer) {
 
         // по умолчанию
-        var playlists = [
-            {
-                title: '80s Vibe',
-                file: '80s_vibe',
-                howl: null
-            }
-        ]
+        var playlist = [{
+            title: '80s Vibe',
+            file: '80s_vibe',
+            howl: null
+        }]
+        var skip = []
         // так будем брать плейлист на кастомных страницах
         // const playlist = window.barnaul_data.player_data.playlist
-
 
         // плейлист со страницы "Аудиоэкскурсий"
         var tabItems = document.querySelectorAll('.tabs-item');
 
         if (tabItems.length > 0) {
-            tabItems.forEach((item, idx) => {
-                console.log(item, idx)
-                var tabPlaylist = [];
-                var tabAudio = item.getElementsByTagName('audio');
-                for (let item of tabAudio) {
-                    console.log(item.currentSrc)
-                    tabPlaylist.push({
-                        title: "audio in tab" + idx,
-                        file: item.currentSrc,
-                        howl: null
-                    })
-                    console.log(playlist)
+            tabItems.forEach((tabItem, id) => {
+                var idx = id + 1;
+                var tabMedia = document.getElementById('tab-media-' + idx);
+                if (tabMedia) {
+
+                    for (var item of tabMedia.children) {
+                        if (item.tagName === 'AUDIO') {
+                            playlist.push({
+                                title: "audio in tab " + idx,
+                                file: item.currentSrc,
+                                howl: null
+                            })
+                        } else {
+                            tabItem.classList.add('is-youtube-tab');
+                            skip.push(idx)
+                        }
+                    }
                 }
-                playlists[idx] = tabPlaylist;
             });
         }
 
-        var mainPlayList = []
-
-        if (playlists[1]) {
-            mainPlayList = playlists[1];
-        } else {
-            mainPlayList = playlists[0];
-        }
         var player = new Player(playlist);
 
-        // Bind our player controls.
-        playBtn.addEventListener('click', function () {
-            player.play();
+        $('.js-tabs-controls').dataTabs({
+            event: 'click',
+            initOpenTab: false,
+            state: 'accordion',
+            jqMethodOpen: 'slideDown',
+            jqMethodClose: 'slideUp',
+
+            onTab: (self, $anchor, $target) => {
+                var isTabActive = self.$targets[self.states.activeIndex].classList.contains('is-tab-active')
+                var isAudio = skip.find((i) => i === self.states.activeIndex + 1 /* +1 потому что в индексе 0 - аудио по умолчанию */) === undefined;
+
+
+                if (isAudio) {
+                    player.pause();
+                    if (isTabActive) {
+                        player.play(self.states.activeIndex + 1); // +1 потому что в индексе 0 - аудио по умолчанию
+                    }
+                    var playBtns = document.querySelectorAll('.accordion-icon_pause');
+
+                    if (playBtns.length > 0) {
+                        playBtns.forEach((playBtn, id) => {
+                            console.log(playBtn);
+                        });
+                    }
+                    // Bind our player controls.
+                    playBtn.addEventListener('click', function () {
+                        player.play();
+                    });
+                    startbar.addEventListener('click', function () {
+                        player.play();
+                    });
+                    pauseBtn.addEventListener('click', function () {
+                        player.pause();
+                    });
+                    prevBtn.addEventListener('click', function () {
+                        player.skip('prev');
+                    });
+                    nextBtn.addEventListener('click', function () {
+                        player.skip('next');
+                    });
+
+                    // waveform.addEventListener('click', function (event) {
+                    //     player.seek(event.clientX / window.innerWidth);
+                    // });
+                    // playlistBtn.addEventListener('click', function () {
+                    //     player.togglePlaylist();
+                    // });
+                    // playlist.addEventListener('click', function () {
+                    //     player.togglePlaylist();
+                    // });
+                    // volumeBtn.addEventListener('click', function () {
+                    //     player.toggleVolume();
+                    // });
+                    // volume.addEventListener('click', function () {
+                    //     player.toggleVolume();
+                    // });
+
+                    // Setup the event listeners to enable dragging of volume slider.
+                    // barEmpty.addEventListener('click', function (event) {
+                    //     var per = event.layerX / parseFloat(barEmpty.scrollWidth);
+                    //     player.volume(per);
+                    // });
+                    // sliderBtn.addEventListener('mousedown', function () {
+                    //     window.sliderDown = true;
+                    // });
+                    // sliderBtn.addEventListener('touchstart', function () {
+                    //     window.sliderDown = true;
+                    // });
+                    // volume.addEventListener('mouseup', function () {
+                    //     window.sliderDown = false;
+                    // });
+                    // volume.addEventListener('touchend', function () {
+                    //     window.sliderDown = false;
+                    // });
+
+                    var move = function (event) {
+                        if (window.sliderDown) {
+                            var x = event.clientX || event.touches[0].clientX;
+                            var startX = window.innerWidth * 0.05;
+                            var layerX = x - startX;
+                            var per = Math.min(1, Math.max(0, layerX / parseFloat(barEmpty.scrollWidth)));
+                            player.volume(per);
+                        }
+                    };
+
+                    // volume.addEventListener('mousemove', move);
+                    // volume.addEventListener('touchmove', move); 
+
+                    // Update the height of the wave animation.
+                    // These are basically some hacks to get SiriWave.js to do what we want.
+                    var resize = function () {
+                        var height = window.innerHeight * 0.3;
+                        var width = window.innerWidth;
+                        // wave.height = height;
+                        // wave.height_2 = height / 2;
+                        // wave.MAX = wave.height_2 - 4;
+                        // wave.width = width;
+                        // wave.width_2 = width / 2;
+                        // wave.width_4 = width / 4;
+                        // wave.canvas.height = height;
+                        // wave.canvas.width = width;
+                        // wave.container.style.margin = -(height / 2) + 'px auto';
+
+                        // Update the position of the slider.
+                        var sound = player.playlist[player.index].howl;
+                        if (sound) {
+                            var vol = sound.volume();
+                            var barWidth = (vol * 0.9);
+                            // sliderBtn.style.left = (window.innerWidth * barWidth + window.innerWidth * 0.05 - 25) + 'px';
+                        }
+                    };
+                    window.addEventListener('resize', resize);
+                    resize();
+                } else {
+
+                    // TODO обработать адрес
+                    // https://www.youtube.com/embed/PR4EHK4P544?controls=0&autoplay=1&rel=0&fs=1&showinfo=0&modestbranding=0
+                    player.pause();
+                    var iframe1 = $target.find('IFRAME');
+                    if (isTabActive) {
+                        iframe1[0].setAttribute("src", "https://www.youtube.com/embed/PR4EHK4P544?si=fDHed4vNyCrfZOGD&amp;autoplay=1")
+                    } else {
+                        iframe1[0].setAttribute("src", "https://www.youtube.com/embed/PR4EHK4P544?si=fDHed4vNyCrfZOGD&amp;autoplay=0")
+                    }
+
+                }
+
+
+            },
         });
-        startbar.addEventListener('click', function () {
-            player.play();
-        });
-        pauseBtn.addEventListener('click', function () {
-            player.pause();
-        });
-        prevBtn.addEventListener('click', function () {
-            player.skip('prev');
-        });
-        nextBtn.addEventListener('click', function () {
-            player.skip('next');
-        });
 
-        // waveform.addEventListener('click', function (event) {
-        //     player.seek(event.clientX / window.innerWidth);
-        // });
-        // playlistBtn.addEventListener('click', function () {
-        //     player.togglePlaylist();
-        // });
-        // playlist.addEventListener('click', function () {
-        //     player.togglePlaylist();
-        // });
-        // volumeBtn.addEventListener('click', function () {
-        //     player.toggleVolume();
-        // });
-        // volume.addEventListener('click', function () {
-        //     player.toggleVolume();
-        // });
 
-        // Setup the event listeners to enable dragging of volume slider.
-        // barEmpty.addEventListener('click', function (event) {
-        //     var per = event.layerX / parseFloat(barEmpty.scrollWidth);
-        //     player.volume(per);
-        // });
-        // sliderBtn.addEventListener('mousedown', function () {
-        //     window.sliderDown = true;
-        // });
-        // sliderBtn.addEventListener('touchstart', function () {
-        //     window.sliderDown = true;
-        // });
-        // volume.addEventListener('mouseup', function () {
-        //     window.sliderDown = false;
-        // });
-        // volume.addEventListener('touchend', function () {
-        //     window.sliderDown = false;
-        // });
-
-        var move = function (event) {
-            if (window.sliderDown) {
-                var x = event.clientX || event.touches[0].clientX;
-                var startX = window.innerWidth * 0.05;
-                var layerX = x - startX;
-                var per = Math.min(1, Math.max(0, layerX / parseFloat(barEmpty.scrollWidth)));
-                player.volume(per);
-            }
-        };
-
-        // volume.addEventListener('mousemove', move);
-        // volume.addEventListener('touchmove', move); 
-
-        // Update the height of the wave animation.
-        // These are basically some hacks to get SiriWave.js to do what we want.
-        var resize = function () {
-            var height = window.innerHeight * 0.3;
-            var width = window.innerWidth;
-            // wave.height = height;
-            // wave.height_2 = height / 2;
-            // wave.MAX = wave.height_2 - 4;
-            // wave.width = width;
-            // wave.width_2 = width / 2;
-            // wave.width_4 = width / 4;
-            // wave.canvas.height = height;
-            // wave.canvas.width = width;
-            // wave.container.style.margin = -(height / 2) + 'px auto';
-
-            // Update the position of the slider.
-            var sound = player.playlist[player.index].howl;
-            if (sound) {
-                var vol = sound.volume();
-                var barWidth = (vol * 0.9);
-                sliderBtn.style.left = (window.innerWidth * barWidth + window.innerWidth * 0.05 - 25) + 'px';
-            }
-        };
-        window.addEventListener('resize', resize);
-        resize();
     }
 
+    var closeTabs = document.querySelectorAll('.tabs-close-btn');
 
+    closeTabs.forEach((item, idx) => {
+        item.addEventListener('click', e => {
+            e.target.closest('.tabs-item').querySelector('.js-accordion-item').click();
+        })
+    });
+    var setPagination = function (e) {
+        var activeSlide = e.realIndex + 1;
+        var totlaSlides = document.querySelector('.mySwiper .swiper-pagination-total').innerText;
+        console.log(totlaSlides);
+        $(".swiper-active-slide").text(activeSlide);
+        $(".swiper-count-slides").text(totlaSlides);
+        $(".swiper-count-total").text(totlaSlides);
+    }
+    if ($('.mySwiper').length > 0) {
 
+        var mainSwiper = new Swiper(".mySwiper", {
+            speed: 1000,
+            effect: "fade",
+            lazy: true,
+            slidesPerView: 1,
+            spaceBetween: 100,
+            loop: true,
+            slidesPerGroupSkip: 1,
+
+            scrollbar: {
+                el: '.mySwiper .swiper-scrollbar',
+            },
+            pagination: {
+                el: '.mySwiper .swiper-fractions',
+                type: 'fraction',
+            },
+            navigation: {
+                nextEl: '.mySwiper .swiper-button-next',
+                prevEl: '.mySwiper .swiper-button-prev',
+            },
+            on: {
+                init: function () {
+                    setPagination(this);
+                },
+            },
+            // breakpoints: {
+            //     0: {
+            //         slidesPerView: 1,
+            //         spaceBetween: 10,
+            //         loop: false,
+            //     },
+            //     420: {
+            //         slidesPerView: 1,
+            //         spaceBetween: 10,
+            //         loop: false,
+            //     },
+            //     1024: {
+            //         slidesPerView: 1,
+            //         spaceBetween: 10,
+            //         loop: false,
+            //     }
+            // }
+        });
+
+        mainSwiper.on('slideChange', function () {
+            $(".swiper-active-slide").text(this.realIndex + 1);
+            $(".swiper-count-slides").text(this.el.childElementCount + 1);
+            $(".swiper-count-total").text(this.el.childElementCount + 1);
+        });
+    }
 
 });

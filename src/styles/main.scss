@@ -16,6 +16,7 @@
 .is-container-fix .site-content {
     padding-top: 27px;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
 .is-container-fix .site-content>.container {
@@ -951,6 +952,22 @@ article p {
         border-radius: 40px 40px 40px 0px;
         background-color: var(--color_1);
         margin-bottom: 15px;
+
+        &.is-youtube-tab {
+            .tabs-trigger {
+                .accordion-icon_youtube {
+                    display: block;
+                }
+
+                .accordion-icon_pause {
+                    display: none;
+                }
+
+                .accordion-icon_play {
+                    display: none;
+                }
+            }
+        }
     }
 
     &-trigger {
@@ -969,6 +986,32 @@ article p {
         outline: none;
         width: 100%;
 
+        .accordion-icon_pause {
+            display: none;
+        }
+
+        .accordion-icon_play {
+            display: block;
+        }
+
+        .accordion-icon_youtube {
+            display: none;
+        }
+
+        &.is-button-active {
+            .accordion-icon_pause {
+                display: block;
+            }
+
+            .accordion-icon_play {
+                display: none;
+            }
+
+            .accordion-icon_youtube {
+                display: none;
+            }
+        }
+
         &::before {
             content: attr(data-tab-anchor);
             display: flex;
@@ -984,6 +1027,8 @@ article p {
             margin: 10px;
         }
     }
+
+
 
     &-target {
         padding: 0 25px;
@@ -1028,7 +1073,141 @@ article p {
 // }
 
 .tab-media {
+    padding: 15px 0;
+
     &_hide {
         display: none;
+    }
+}
+
+.audio-tours__player {
+    display: none;
+}
+
+.slider__block {
+    margin-bottom: 50px;
+}
+
+.mySwiper {
+    --swiper-scrollbar-border-radius: 10px;
+    --swiper-scrollbar-top: auto;
+    --swiper-scrollbar-bottom: 4px;
+    --swiper-scrollbar-left: auto;
+    --swiper-scrollbar-right: 4px;
+    --swiper-scrollbar-sides-offset: 1%;
+    --swiper-scrollbar-bg-color: rgb(245, 245, 245);
+    --swiper-scrollbar-drag-bg-color: #FAE4CF;
+    --swiper-scrollbar-size: 2px;
+    --swiper-navigation-size: 30px;
+
+    width: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 30px;
+    border-radius: 30px;
+
+    .swiper-wrapper {
+        overflow: hidden;
+        max-height: 390px;
+        border-radius: 30px;
+    }
+
+    .swiper-fade .swiper-slide {
+        background-color: white;
+        max-height: 390px;
+    }
+
+    .swiper-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 30px;
+
+        .swiper-fractions {
+            padding-left: 30px;
+            padding-right: 20px;
+            display: flex;
+            flex: 1 1 10%;
+            align-items: center;
+            color: #737373;
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: bold;
+
+            .swiper-pagination-current {
+                display: inline-block;
+                width: 18px;
+
+                &:before {
+                    content: '0';
+                }
+            }
+
+            .swiper-pagination-total {
+
+                font-weight: 400;
+
+                &:before {
+                    content: '0';
+                }
+            }
+        }
+
+        .swiper-scrollbar-holder {
+
+            position: relative;
+            display: flex;
+            flex: 1 1 30%;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+
+            .swiper-scrollbar-horizontal {
+                height: 2px;
+                position: relative;
+                top: 0;
+                left: 0;
+            }
+        }
+
+        .swiper-count-total {
+            display: flex;
+            flex: 1 1 20%;
+            justify-content: center;
+
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: bold;
+
+            &:before {
+                content: '0';
+            }
+        }
+
+        .swiper-arrows {
+            flex: 1 1 60%;
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-right: 30px;
+
+            .swiper-button-prev,
+            .swiper-button-next {
+                position: relative;
+                height: auto;
+                left: auto;
+                right: auto;
+                width: calc(var(--swiper-navigation-size) * 2);
+
+                font-weight: 300;
+                font-size: 30px;
+                color: black;
+
+                &:hover {
+                    font-weight: 800;
+                }
+            }
+        }
     }
 }

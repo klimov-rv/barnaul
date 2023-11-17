@@ -7,9 +7,9 @@
 })
 
 <script>
-      window.barnaul_data = {
-        player_data: {"playlist":[{"title":"Rave Digger","file":"rave_digger","howl":null},{"title":"80s Vibe","file":"80s_vibe","howl":null},{"title":"Random podcast 1","file":"3d45128e-9197-4abe-8f10-b49464379ad4","howl":null} ] },
-    }; 
+  window.barnaul_data = {
+    player_data: { "playlist": [{ "title": "Rave Digger", "file": "rave_digger", "howl": null }, { "title": "80s Vibe", "file": "80s_vibe", "howl": null }, { "title": "Random podcast 1", "file": "3d45128e-9197-4abe-8f10-b49464379ad4", "howl": null }] },
+  };
 
 </script>
 <html lang="ru-RU">
@@ -40,8 +40,9 @@
         </div>
         <section class="audio-tours__obzor container row">
           <div class="cell-5">
-
-            @@include('components/player/_player.html')
+            <div class="audio-tours__player">
+              @@include('components/player/_player.html')
+            </div>
 
             <div class="audio-tours__text">
               Барнаул в конце 19 века стал крупным купеческим центром Сибири. История
@@ -56,9 +57,19 @@
                 <div class="tabs-item">
                   <button data-tab-anchor="1" type="button" name="button" class="js-accordion-item tabs-trigger">
                     <span class="accordion-title">Точка 1. Стелла трудовой доблести</span>
-                    <span class="accordion-icon">
+                    <span class="accordion-icon accordion-icon_play">
                       <svg aria-hidden="true" width="100%" height="100%">
-                        <use xlink:href="#media-audio"></use>
+                        <use xlink:href="#media-audio-play"></use>
+                      </svg>
+                    </span>
+                    <span class="accordion-icon accordion-icon_pause">
+                      <svg aria-hidden="true" width="100%" height="100%">
+                        <use xlink:href="#media-audio-pause"></use>
+                      </svg>
+                    </span>
+                    <span class="accordion-icon accordion-icon_youtube">
+                      <svg aria-hidden="true" width="100%" height="100%">
+                        <use xlink:href="#media-youtube"></use>
                       </svg>
                     </span>
                   </button>
@@ -100,7 +111,7 @@
                       и сфотографироваться! А если сделать на их фоне селфи, то надпись не исказится.
                     </p>
 
-                    <div class="tabs-close-btn" data-tab-anchor="1">
+                    <div class="tabs-close-btn">
                       <span>Свернуть</span>
                       <svg aria-hidden="true" width="11" height="7">
                         <use xlink:href="#arrow-down-svg"></use>
@@ -113,16 +124,26 @@
 
                   <button data-tab-anchor="2" type="button" name="button" class="js-accordion-item tabs-trigger">
                     <span class="accordion-title">Точка 2. Объект такой</span>
-                    <span class="accordion-icon">
+                    <span class="accordion-icon accordion-icon_play">
                       <svg aria-hidden="true" width="100%" height="100%">
-                        <use xlink:href="#media-audio"></use>
+                        <use xlink:href="#media-audio-play"></use>
+                      </svg>
+                    </span>
+                    <span class="accordion-icon accordion-icon_pause">
+                      <svg aria-hidden="true" width="100%" height="100%">
+                        <use xlink:href="#media-audio-pause"></use>
+                      </svg>
+                    </span>
+                    <span class="accordion-icon accordion-icon_youtube">
+                      <svg aria-hidden="true" width="100%" height="100%">
+                        <use xlink:href="#media-youtube"></use>
                       </svg>
                     </span>
                   </button>
 
                   <div data-tab-target="2" class="tabs-target">
                     <div class="tab-media tab-media_hide" id="tab-media-2">
-                      <audio src="https://html5book.ru/examples/media/track.mp3" controls loop>
+                      <audio src="/resources/audio/80s_vibe.mp3" controls loop>
                         <p>Your browser does not support the audio element.</p>
                       </audio>
                     </div>
@@ -130,7 +151,7 @@
                       Содержимое второй вкладки
                     </p>
 
-                    <div class="tabs-close-btn" data-tab-anchor="2">
+                    <div class="tabs-close-btn">
                       <span>Свернуть</span>
                       <svg aria-hidden="true" width="11" height="7">
                         <use xlink:href="#arrow-down-svg"></use>
@@ -142,16 +163,31 @@
                 <div class="tabs-item">
                   <button data-tab-anchor="3" type="button" name="button" class="js-accordion-item tabs-trigger">
                     <span class="accordion-title">Точка 3. Объект такой</span>
-                    <span class="accordion-icon">
+                    <span class="accordion-icon accordion-icon_play">
                       <svg aria-hidden="true" width="100%" height="100%">
-                        <use xlink:href="#media-audio"></use>
+                        <use xlink:href="#media-audio-play"></use>
+                      </svg>
+                    </span>
+                    <span class="accordion-icon accordion-icon_pause">
+                      <svg aria-hidden="true" width="100%" height="100%">
+                        <use xlink:href="#media-audio-pause"></use>
+                      </svg>
+                    </span>
+                    <span class="accordion-icon accordion-icon_youtube">
+                      <svg aria-hidden="true" width="100%" height="100%">
+                        <use xlink:href="#media-youtube"></use>
                       </svg>
                     </span>
                   </button>
                   <div data-tab-target="3" class="tabs-target">
                     Содержимое третьей вкладки
 
-                    <div class="tabs-close-btn" data-tab-anchor="3">
+                    <div class="tab-media " id="tab-media-3">
+                      <iframe width="560" height="315"
+                        src="https://www.youtube.com/embed/PR4EHK4P544?si=fDHed4vNyCrfZOGD" title="YouTube video player"
+                        frameborder="0" allow="autoplay"></iframe>
+                    </div>
+                    <div class="tabs-close-btn">
                       <span>Свернуть</span>
                       <svg aria-hidden="true" width="11" height="7">
                         <use xlink:href="#arrow-down-svg"></use>
@@ -160,12 +196,60 @@
 
                   </div>
                 </div>
+
               </div>
             </div>
 
           </div>
           <div class="cell-6 push-1">
-            <img src="/img/slider.jpg" alt="">
+            <div class="slider__block">
+              <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <a href="#">
+                      <img loading="lazy" src="/img/slider/slide0.png" alt="">
+                    </a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a href="#">
+                      <img loading="lazy" src="/img/slider/slide1.png" alt="">
+                    </a>
+                  </div>
+                  <div class="swiper-slide">
+                    <a href="#">
+                      <img loading="lazy" src="/img/slider/slide2.png" alt="">
+                    </a>
+                  </div> 
+                  <div class="swiper-slide">
+                    <a href="#">
+                      <img loading="lazy" src="/img/slider/slide3.png" alt="">
+                    </a>
+                  </div> 
+                </div>
+                <div class="swiper-controls">
+                  <div class="swiper-fractions">
+                    <div class="swiper-active-slide"></div>
+                    <div class="swiper-count-slides"></div>
+                  </div>
+                  <div class="swiper-scrollbar-holder">
+                    <div class="swiper-scrollbar"></div>
+                  </div>
+                  <div class="swiper-count-total"></div>
+                  <div class="swiper-arrows">
+                    <div class="swiper-button-prev">
+                      <svg aria-hidden="true" width="15" height="26">
+                        <use xlink:href="#slider-prev-svg"></use>
+                      </svg>
+                    </div>
+                    <div class="swiper-button-next">
+                      <svg aria-hidden="true" width="15" height="26">
+                        <use xlink:href="#slider-next-svg"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> 
           </div>
         </section>
       </div>

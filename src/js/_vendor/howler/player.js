@@ -54,9 +54,26 @@ Player.prototype = {
         if (data.howl) {
             sound = data.howl;
         } else {
+            var fileSrc;
+
+            const isValidUrl = urlString => {
+                var urlPattern = new RegExp('^(https?:\\/\\/)?' + // validate protocol
+                    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // validate domain name
+                    '((\\d{1,3}\\.){3}\\d{1,3}))' + // validate OR ip (v4) address
+                    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // validate port and path
+                    '(\\?[;&a-z\\d%_.~+=-]*)?' + // validate query string
+                    '(\\#[-a-z\\d_]*)?$', 'i'); // validate fragment locator
+                return !!urlPattern.test(urlString);
+            }
+            if (isValidUrl(data.file)) {
+                fileSrc = data.file;
+            } else {
+                fileSrc = ['./resources/audio/' + data.file + '.mp3']
+            }
+
             sound = data.howl = new Howl({
                 // src: ['./audio/' + data.file + '.webm', './audio/' + data.file + '.mp3'],
-                src: ['./resources/audio/' + data.file + '.mp3'],
+                src: fileSrc,
                 html5: true, // Force to HTML5 so that the audio can stream in (best for large files).
                 onplay: function () {
                     // Display the duration.
@@ -133,8 +150,10 @@ Player.prototype = {
         // Get the Howl we want to manipulate.
         var sound = self.playlist[self.index].howl;
 
+        if (sound) {
+            sound.pause();
+        }
         // Puase the sound.
-        sound.pause();
 
         // Show the play button.
         playBtn.style.display = 'block';
@@ -197,7 +216,8 @@ Player.prototype = {
         // Update the display on the slider.
         var barWidth = (val * 90) / 100;
         barFull.style.width = (barWidth * 100) + '%';
-        sliderBtn.style.left = (window.innerWidth * barWidth + window.innerWidth * 0.05 - 25) + 'px';
+
+        // sliderBtn.style.left = (window.innerWidth * barWidth + window.innerWidth * 0.05 - 25) + 'px';
     },
 
     /**
