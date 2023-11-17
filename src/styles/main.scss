@@ -329,6 +329,23 @@ article p {
     line-height: 1.3em;
 }
 
+
+.hero__body address {
+    font-style: normal;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+}
+
+.hero__body address svg {
+    margin-right: 9px;
+}
+
+.hero__body_left {}
+
+.hero__body_right {
+    position: relative;
+}
+
 .page-hero-description {
 
     font-family: var(--font-family_1);
@@ -380,24 +397,15 @@ article p {
     width: 97%;
 }
 
-.hero__body address {
-    font-style: normal;
-    font-size: 14px;
-    letter-spacing: 0.01em;
-}
-
-.hero__body address svg {
-    margin-right: 9px;
-}
-
 .page-hero-block {
     background: #FFFFFF;
     border-radius: 20px 20px 20px 0px;
-    padding: 35px 50px 35px 30px;
+    padding: 35px 40px 35px 30px;
     color: #B05700;
     position: relative;
-    max-width: 343px;
-    margin: 45px auto;
+    max-width: 73%;
+    margin: 45px 0;
+    box-sizing: border-box;
 }
 
 .page-hero-block__legend-title {
@@ -426,6 +434,35 @@ article p {
     font-size: 16px;
     line-height: 1.5em;
     letter-spacing: 0.01em;
+}
+
+.page-hero__btn-gallery {
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 45%;
+    margin-bottom: 51px;
+
+    .white-btn {
+        cursor: pointer;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 10px;
+        background-color: #FFFFFF;
+        padding: 20px;
+        color: #E08F40;
+        position: absolute;
+        top: 0;
+        right: 0;
+        box-sizing: border-box;
+
+        &:hover {
+            background-color: #FAEEE3;
+        }
+    }
 }
 
 .event-holidays .event-item__date_wrap::after {
