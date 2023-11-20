@@ -8,7 +8,7 @@
 <html lang="ru-RU">
 
   <body>
-    <div class="site-wrap is-container-fix is-page-where-eat">
+    <div class="site-wrap is-container-fix is-page-where-eat" id="page">
       @@include('components/header/_header.html')
       @@include('components/menu/_menu.html')
       <!-- layout -->
@@ -30,9 +30,8 @@
           </div>
           <h1 class="page-title">Рестораны</h1>
 
-          @@include('components/filter/_filter-classic.html', {
-          'class': 'layout__filter'
-          })
+          @@include('components/filter/_filter-classic.html', { 'class': 'layout__filter hide-m' })
+          @@include('components/menu/_mmenu.html', { 'class': 'menu__filter hide show-m' })
 
           <div class="objects-list items-list">
             <div class="objects-list__item item" id="bx_3218110189_199">

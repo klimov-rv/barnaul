@@ -67,6 +67,14 @@
 }
 
 @media (max-width: 1200px) {
+    .event-list .starred-event__text {
+        display: none;
+    }
+
+    .event-list .starred-event__star {
+        padding-right: 0;
+    }
+
     .tippy-box .tippy-content {
         padding: 15px;
         white-space-collapse: preserve-breaks;
@@ -98,6 +106,106 @@
 }
 
 @media (max-width: 920px) {
+    .mm-spn.mm-spn--navbar .mm-filter__target ul:before {
+        border-top: 0px solid;
+    }
+
+    .mm-filter__target {
+        padding-bottom: 10px;
+
+        .jcf-range {
+            width: 100%;
+
+            span {
+                padding: 0;
+
+                .jcf-range-wrapper {
+                    width: 100%;
+                }
+            }
+
+        }
+
+        .range-slider-input {
+            padding: 0 15px;
+        }
+
+        .filter-checbox-item {
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            flex: 0 0 auto;
+
+            label {
+
+                padding: 7px 15px;
+                border: 1px solid #DEDEDE;
+                background: #FFFFFF;
+                border-radius: 50px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 130%;
+                color: #333333;
+
+                &.jcf-label-active {
+                    background-color: #DEDEDE;
+                    font-weight: 900;
+                }
+            }
+        }
+
+        .jcf-checkbox {
+            display: none;
+        }
+
+        .curr_filter_values {
+            padding: 0 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+    }
+
+    .filter-title-chevron {
+        transform: rotate(0);
+        transition: transform .3s;
+        height: 13px;
+        width: 13px;
+    }
+
+    .mm-spn ul.curr_filter_values {
+        position: relative;
+        top: auto;
+        left: auto;
+    }
+
+    .mm-filter__toggle {
+        font-family: 'Roboto';
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 1.3em;
+        color: #333333;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 20px;
+
+        .is-button-close .filter-title-chevron {
+            transform: rotate(180);
+        }
+    }
+
     .tippy-box .tippy-content {
         padding: 15px 30px;
         display: block;
@@ -167,6 +275,7 @@
     .event-item__date_wrap {
         flex-direction: row;
         height: auto;
+        max-width: 300px;
     }
 
     .event-item__title_wrap {
@@ -207,6 +316,17 @@
 }
 
 @media screen and (max-width:769px) {
+    .event-modal .starred-event__text {
+        display: none;
+    }
+
+    .widget__main-event {
+
+        margin: 0 auto;
+        padding: 0;
+        box-shadow: none;
+    }
+
     .trip-stage-icon {
         height: 30px;
         width: 30px;
@@ -214,7 +334,7 @@
     }
 
     .widget__info {
-        padding: 10px 0;
+        padding: 0 0 30px;
     }
 
     .widget__img img {
@@ -243,6 +363,19 @@
 }
 
 @media screen and (max-width:640px) {
+    .event-modal .starred-event {
+        right: 0;
+        border-radius: 60px;
+        position: relative;
+        display: inline;
+        padding: 0 9px;
+        margin: 10px 0;
+    }
+
+    .event-modal .starred-event__star {
+        padding-right: 0;
+    }
+
     .big_font_subtext {
         font-size: 12px;
         top: -4px;
@@ -318,6 +451,24 @@
 }
 
 @media screen and (max-width:480px) {
+    .event-item__date_wrap {
+        width: 75%;
+        padding: 13px 20px;
+    }
+
+    .event-list .starred-event {
+        top: 25px;
+        right: 0;
+        border-radius: 20px 0 0 20px;
+        padding: 13px 20px;
+    }
+
+    .header-day,
+    .day {
+        min-width: 35px;
+        min-height: 37px;
+    }
+
     .zoom_limiter {
         width: 33vw;
         height: 33vw;
