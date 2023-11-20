@@ -42,7 +42,7 @@ if ($('#js-historical__line').length > 0) {
     function recalcElemsTooltip(minusTop, minusLeft, originalPoint) {
         var rect = originalPoint.getBoundingClientRect();
 
-        // находим дубликат-точку (TODO найти по дата-атрибутам с помощью Vanilla JS)
+        // находим дубликат-точку
         var duplicate_point_el = $('[data-point-id=' + originalPoint.getAttribute("place_number") + ']');
 
         duplicate_point_el.css("left", rect.left - minusLeft - 5);

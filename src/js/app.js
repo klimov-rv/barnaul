@@ -42,139 +42,149 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.site-wrap').classList.add('dom-loaded');
 
     // фильтры
-    jcf.replaceAll();
 
-    var toggleBtns = document.querySelectorAll('.filter-toggle');
+    // filter-classic
+    if ($('.filter-toggle').length > 0) {
+        jcf.replaceAll();
 
-    window.addEventListener('click', e => {
-        if (!e.target.closest('.filter-popup')) {
+        var toggleBtns = document.querySelectorAll('.filter-toggle');
 
-            toggleBtns.forEach((item, idx) => {
-                if (!item.contains(e.target)) {
-                    item.classList.remove("is-button-active");
-                }
-            })
-        }
-    });
+        window.addEventListener('click', e => {
+            if (!e.target.closest('.filter-popup')) {
 
-    toggleBtns.forEach((item, idx) => {
-        item.addEventListener('click', e => {
-            e.preventDefault();
-            e.target.closest('.filter-toggle').classList.toggle("is-button-active");
-        });
-    });
-
-    var clickedChbxs = document.querySelectorAll('.filter-checbox-item');
-
-    clickedChbxs.forEach((item, idx) => {
-        item.addEventListener('click', e => {
-            var thisEl = e.target.closest('.filter-popup');
-            var countChecked = thisEl.querySelectorAll('input[type="checkbox"]:checked').length;
-            var filterWraper = thisEl.closest('.filter-title');
-            var insertCount = filterWraper.querySelector('.filter-count-selected');
-            if (countChecked > 0) {
-                insertCount.innerHTML = countChecked;
-                filterWraper.classList.add('is-active');
-            } else {
-                insertCount.innerHTML = '';
-                filterWraper.classList.remove('is-active');
+                toggleBtns.forEach((item, idx) => {
+                    if (!item.contains(e.target)) {
+                        item.classList.remove("is-button-active");
+                    }
+                })
             }
         });
-    });
 
-    var applyBtn = document.querySelectorAll('.filter-apply');
-
-    applyBtn.forEach((item, idx) => {
-        item.addEventListener('click', e => {
-            var filterWraper = e.target.closest('.filter-title');
-            filterWraper.querySelector('.filter-toggle').classList.toggle("is-button-active");
-        });
-    });
-
-    // TODO переписать на Vanilla JS фильтр isotope
-    function getHashFilter() {
-        var hash = location.hash;
-        // get filter=filterName
-        var matches = location.hash.match(/filter=([^&]+)/i);
-        var hashFilter = matches && matches[1];
-        return hashFilter && decodeURIComponent(hashFilter);
-    }
-    function removeHash() {
-        history.pushState("", document.title, window.location.pathname
-            + window.location.search);
-    }
-
-    $(function () {
-
-        var $grid = $('.event-list');
-
-        // bind filter button click
-        var $filters = $('.iso-filter').on('click', '.iso-filter__btn', function () {
-            var filterAttr = $(this).attr('data-filter');
-            location.hash = 'filter=' + encodeURIComponent(filterAttr);
+        toggleBtns.forEach((item, idx) => {
+            item.addEventListener('click', e => {
+                e.preventDefault();
+                e.target.closest('.filter-toggle').classList.toggle("is-button-active");
+            });
         });
 
-        var isIsotopeInit = true;
+        var clickedChbxs = document.querySelectorAll('.filter-checbox-item');
 
-        function onHashchange() {
-            var hashFilter = getHashFilter();
-            // TODO переписать повторяющуюся грязь
-            if (hashFilter === '*') {
+        clickedChbxs.forEach((item, idx) => {
+            item.addEventListener('click', e => {
+                var thisEl = e.target.closest('.filter-popup');
+                var countChecked = thisEl.querySelectorAll('input[type="checkbox"]:checked').length;
+                var filterWraper = thisEl.closest('.filter-title');
+                var insertCount = filterWraper.querySelector('.filter-count-selected');
+                if (countChecked > 0) {
+                    insertCount.innerHTML = countChecked;
+                    filterWraper.classList.add('is-active');
+                } else {
+                    insertCount.innerHTML = '';
+                    filterWraper.classList.remove('is-active');
+                }
+            });
+        });
+
+        var applyBtn = document.querySelectorAll('.filter-apply');
+
+        applyBtn.forEach((item, idx) => {
+            item.addEventListener('click', e => {
+                var filterWraper = e.target.closest('.filter-title');
+                filterWraper.querySelector('.filter-toggle').classList.toggle("is-button-active");
+            });
+        });
+    }
+
+    // filter-isotope 
+    if ($('.iso-filter').length > 0) {
+        function getHashFilter() {
+            var hash = location.hash;
+            // get filter=filterName
+            var matches = location.hash.match(/filter=([^&]+)/i);
+            var hashFilter = matches && matches[1];
+            return hashFilter && decodeURIComponent(hashFilter);
+        }
+
+        function removeHash() {
+            history.pushState("", document.title, window.location.pathname
+                + window.location.search);
+        }
+
+        $(function () {
+
+            var $grid = $('.event-list');
+
+            // bind filter button click
+            var $filters = $('.iso-filter').on('click', '.iso-filter__btn', function () {
+                var filterAttr = $(this).attr('data-filter');
+                location.hash = 'filter=' + encodeURIComponent(filterAttr);
+            });
+
+            var isIsotopeInit = true;
+
+            function onHashchange() {
+                var hashFilter = getHashFilter();
+                // TODO переписать повторяющуюся грязь
+                if (hashFilter === '*') {
+                    $grid.isotope({
+                        itemSelector: '.event-list__item',
+                        filter: hashFilter
+                    });
+                    $filters.find('.is-checked').removeClass('is-checked');
+                    $filters.find('[data-filter="*"]').addClass('is-checked');
+                    removeHash()
+                    return;
+                }
+                if (!hashFilter && isIsotopeInit) {
+                    return;
+                }
+                isIsotopeInit = true;
+                // filter isotope
                 $grid.isotope({
                     itemSelector: '.event-list__item',
-                    filter: hashFilter
+                    filter: '.' + hashFilter
                 });
-                $filters.find('.is-checked').removeClass('is-checked');
-                $filters.find('[data-filter="*"]').addClass('is-checked');
-                removeHash()
-                return;
+                // set selected class on button
+                if (hashFilter) {
+                    $filters.find('.is-checked').removeClass('is-checked');
+                    $filters.find('[data-filter="' + hashFilter + '"]').addClass('is-checked');
+                }
             }
-            if (!hashFilter && isIsotopeInit) {
-                return;
-            }
-            isIsotopeInit = true;
-            // filter isotope
-            $grid.isotope({
-                itemSelector: '.event-list__item',
-                filter: '.' + hashFilter
-            });
-            // set selected class on button
-            if (hashFilter) {
-                $filters.find('.is-checked').removeClass('is-checked');
-                $filters.find('[data-filter="' + hashFilter + '"]').addClass('is-checked');
-            }
-        }
 
-        $(window).on('hashchange', onHashchange);
-        // trigger event handler to init Isotope
-        onHashchange();
-    });
+            $(window).on('hashchange', onHashchange);
+            // trigger event handler to init Isotope
+            onHashchange();
+        });
+    }
 
-    moment.locale('ru');
-    var thisMonth = moment().format('YYYY-MM');
-    // Events to load into calendar
-    var eventArray = [
-        {
-            title: 'Multi-Day Event',
-            endDate: thisMonth + '-14',
-            startDate: thisMonth + '-10'
-        }, {
-            endDate: thisMonth + '-23',
-            startDate: thisMonth + '-21',
-            title: 'Another Multi-Day Event'
-        }, {
-            date: thisMonth + '-21',
-            title: 'Single Day Event'
-        }, {
-            date: thisMonth + '-07',
-            title: 'Single Day Event'
-        }, {
-            date: thisMonth + '-11',
-            title: 'Single Day Event'
-        }
-    ];
-
+    // календарь
     if ($('#calendar').length > 0) {
+
+        moment.locale('ru');
+        var thisMonth = moment().format('YYYY-MM');
+
+        // Events to load into calendar
+
+        var eventArray = [
+            {
+                title: 'Multi-Day Event',
+                endDate: thisMonth + '-14',
+                startDate: thisMonth + '-10'
+            }, {
+                endDate: thisMonth + '-23',
+                startDate: thisMonth + '-21',
+                title: 'Another Multi-Day Event'
+            }, {
+                date: thisMonth + '-21',
+                title: 'Single Day Event'
+            }, {
+                date: thisMonth + '-07',
+                title: 'Single Day Event'
+            }, {
+                date: thisMonth + '-11',
+                title: 'Single Day Event'
+            }
+        ];
 
         $('#calendar').clndr({
             events: eventArray,
@@ -222,9 +232,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // showAdjacentMonths: true,
             // adjacentDaysChangeMonth: false
         });
-
     }
 
+    // magnificPopup 
     $('.popup-with-zoom-anim').magnificPopup({
         type: 'inline',
 
@@ -242,6 +252,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
+    // Табы 
+
+    if ($('.js-tabs-controls').length > 0) {
+        var closeTabs = document.querySelectorAll('.tabs-close-btn');
+        closeTabs.forEach((item, idx) => {
+            item.addEventListener('click', e => {
+                e.target.closest('.tabs-item').querySelector('.js-accordion-item').click();
+            })
+        });
+
+        var setPagination = function (e) {
+            var activeSlide = e.realIndex + 1;
+            var totlaSlides = e.el.querySelectorAll('.swiper-slide').length;
+            $(".swiper-active-slide").text(activeSlide);
+            $(".swiper-count-slides").text(totlaSlides);
+            $(".swiper-count-total").text(totlaSlides);
+        }
+    }
+
+    // Audio Player
     // подготовка плейлистов
 
     const pageHavePlayer = document.querySelector('.audio-player');
@@ -345,21 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    var closeTabs = document.querySelectorAll('.tabs-close-btn');
-
-    closeTabs.forEach((item, idx) => {
-        item.addEventListener('click', e => {
-            e.target.closest('.tabs-item').querySelector('.js-accordion-item').click();
-        })
-    });
-    var setPagination = function (e) {
-        var activeSlide = e.realIndex + 1;
-        var totlaSlides = e.el.querySelectorAll('.swiper-slide').length;
-        console.log(totlaSlides);
-        $(".swiper-active-slide").text(activeSlide);
-        $(".swiper-count-slides").text(totlaSlides);
-        $(".swiper-count-total").text(totlaSlides);
-    }
+    // Слайдеры
 
     if ($('.image-slider').length > 0) {
 
@@ -461,6 +477,45 @@ document.addEventListener('DOMContentLoaded', () => {
             $(".swiper-active-slide").text(this.realIndex + 1);
             $(".swiper-count-slides").text(this.el.childElementCount + 1);
             $(".swiper-count-total").text(this.el.childElementCount + 1);
+        });
+    }
+
+    // mmenu (пока используется для мобильной версии фильтров)
+
+    if ($('#mmenu').length > 0) {
+
+        const menu = new MmenuLight(
+            document.querySelector("#mmenu"),
+            "(max-width: 900px)"
+        );
+        const navigator = menu.navigation({
+            // options
+        });
+        const drawer = menu.offcanvas({
+            // options
+        });
+        document.querySelector("a[href='#mmenu']").addEventListener("click", (event) => {
+            event.preventDefault();
+            drawer.open();
+        });
+        document.querySelector(".btn-close").addEventListener("click", (event) => {
+            event.preventDefault();
+            drawer.close();
+        });
+        menu.menu.setAttribute('data-mm-spn-title', 'Фильтр');
+
+
+        $('.js-mm-filter').dataTabs({
+            event: 'click',
+            initOpenTab: false,
+            state: 'accordion',
+            jqMethodOpen: 'slideDown',
+            jqMethodClose: 'slideUp',
+
+            onTab: (self, $anchor, $target) => {
+
+
+            },
         });
     }
 
