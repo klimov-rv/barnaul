@@ -261,14 +261,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.target.closest('.tabs-item').querySelector('.js-accordion-item').click();
             })
         });
-
-        var setPagination = function (e) {
-            var activeSlide = e.realIndex + 1;
-            var totlaSlides = e.el.querySelectorAll('.swiper-slide').length;
-            $(".swiper-active-slide").text(activeSlide);
-            $(".swiper-count-slides").text(totlaSlides);
-            $(".swiper-count-total").text(totlaSlides);
-        }
     }
 
     // Audio Player
@@ -296,7 +288,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 var idx = id + 1;
                 var tabMedia = document.getElementById('tab-media-' + idx);
                 if (tabMedia) {
-
                     for (var item of tabMedia.children) {
                         if (item.tagName === 'AUDIO') {
                             playlist.push({
@@ -305,7 +296,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 howl: null
                             })
                         } else {
-                            tabItem.classList.add('is-youtube-tab');
+                            var src = item.getAttribute('src');
+                            var srcdomain = item.getAttribute('srcdomain');
+                            console.log(src);
+                            tabItem.classList.add('is-' + srcdomain + '-tab');
                             skip.push(idx)
                         }
                     }
@@ -351,6 +345,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (isAudio) {
                     player.pause();
                     if (isTabActive) {
+
+                        // TODO универсальное отключение открытых плееров
+                        var iframes1 = $('.audio-tours__tabs iframe');
+                        var fullSrc = iframes1[0].getAttribute('src');
+                        console.log(iframes1);
+                        var SrcWithoutQuery = fullSrc.split('?')[0]
+                        console.log(SrcWithoutQuery);
+                        iframes1[0].setAttribute("src", SrcWithoutQuery + "?&amp;autoplay=0");
                         player.play(self.states.activeIndex + 1); // +1 потому что в индексе 0 - аудио по умолчанию
                     }
 
@@ -360,10 +362,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     // https://www.youtube.com/embed/PR4EHK4P544?controls=0&autoplay=1&rel=0&fs=1&showinfo=0&modestbranding=0
                     player.pause();
                     var iframe1 = $target.find('IFRAME');
+                    var fullSrc = iframe1[0].getAttribute('src');
+                    console.log(fullSrc);
+                    var SrcWithoutQuery = fullSrc.split('?')[0]
+                    console.log(SrcWithoutQuery);
                     if (isTabActive) {
-                        iframe1[0].setAttribute("src", "https://www.youtube.com/embed/PR4EHK4P544?si=fDHed4vNyCrfZOGD&amp;autoplay=1")
+                        iframe1[0].setAttribute("src", SrcWithoutQuery + "?si=fDHed4vNyCrfZOGD&amp;autoplay=1");
                     } else {
-                        iframe1[0].setAttribute("src", "https://www.youtube.com/embed/PR4EHK4P544?si=fDHed4vNyCrfZOGD&amp;autoplay=0")
+                        iframe1[0].setAttribute("src", SrcWithoutQuery + "?&amp;autoplay=0");
                     }
 
                 }
@@ -379,8 +385,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if ($('.image-slider').length > 0) {
 
+
+        var setPagination = function (e) {
+            var activeSlide = e.realIndex + 1;
+            var totlaSlides = e.el.querySelectorAll('.swiper-slide').length;
+            $(".swiper-active-slide").text(activeSlide);
+            $(".swiper-count-slides").text(totlaSlides);
+            $(".swiper-count-total").text(totlaSlides);
+        }
         var mainSwiper = new Swiper(".image-slider", {
             speed: 1000,
+            autoplay: true,
+            pauseOnMouseEnter: true,
             effect: "fade",
             lazy: true,
             slidesPerView: 1,
@@ -424,13 +440,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         mainSwiper.on('slideChange', function () {
-            $(".swiper-active-slide").text(this.realIndex + 1);
-            $(".swiper-count-slides").text(this.el.childElementCount + 1);
-            $(".swiper-count-total").text(this.el.childElementCount + 1);
+            setPagination(this);
         });
     }
 
     if ($('.gallery-slider').length > 0) {
+
+        var setPagination = function (e) {
+            var activeSlide = e.realIndex + 1;
+            var totlaSlides = e.el.querySelectorAll('.swiper-slide').length;
+            $(".swiper-active-slide").text(activeSlide);
+            $(".swiper-count-slides").text(totlaSlides);
+            $(".swiper-count-total").text(totlaSlides);
+        }
 
         var gallerySwiper = new Swiper(".gallery-slider", {
             speed: 1000,
@@ -474,9 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         gallerySwiper.on('slideChange', function () {
-            $(".swiper-active-slide").text(this.realIndex + 1);
-            $(".swiper-count-slides").text(this.el.childElementCount + 1);
-            $(".swiper-count-total").text(this.el.childElementCount + 1);
+            setPagination(this);
         });
     }
 

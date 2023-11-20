@@ -1094,10 +1094,41 @@ article p {
         background-color: var(--color_1);
         margin-bottom: 15px;
 
+        .tabs-trigger {
+            .accordion-icon {
+                border-radius: 50%;
+                overflow: hidden;
+            }
+        }
+
         &.is-youtube-tab {
             .tabs-trigger {
+                .accordion-icon_rutube {
+                    display: none;
+                }
+
                 .accordion-icon_youtube {
                     display: block;
+                }
+
+                .accordion-icon_pause {
+                    display: none;
+                }
+
+                .accordion-icon_play {
+                    display: none;
+                }
+            }
+        }
+
+        &.is-rutube-tab {
+            .tabs-trigger {
+                .accordion-icon_rutube {
+                    display: block;
+                }
+
+                .accordion-icon_youtube {
+                    display: none;
                 }
 
                 .accordion-icon_pause {
@@ -1139,6 +1170,10 @@ article p {
             display: none;
         }
 
+        .accordion-icon_rutube {
+            display: none;
+        }
+
         &.is-button-active {
             .accordion-icon_pause {
                 display: block;
@@ -1148,9 +1183,6 @@ article p {
                 display: none;
             }
 
-            .accordion-icon_youtube {
-                display: none;
-            }
         }
 
         &::before {
@@ -1257,6 +1289,27 @@ article p {
         }
     }
 
+
+    .swiper-arrows {
+        height: 50px;
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            svg {
+                display: none;
+            }
+
+            &:after {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 50px;
+                top: -17px;
+            }
+        }
+    }
+
     &.image-slider {
         width: 100%;
         background-color: white;
@@ -1360,7 +1413,7 @@ article p {
 
                     font-weight: 300;
                     font-size: 30px;
-                    color: black;
+                    color: #737373;
 
                     &:hover {
                         font-weight: 800;
