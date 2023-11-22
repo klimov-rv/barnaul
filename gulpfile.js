@@ -23,7 +23,7 @@ let paths = {
     scripts: {
         src: [
             baseDir + '/js/app.js',
-            baseDir + '/js/animation.js',
+            baseDir + '/js/animation.js', 
         ],
         dest: buildDir + '/js',
     },
@@ -52,8 +52,7 @@ let paths = {
             'node_modules/gsap/dist/gsap.min.js',
             'node_modules/gsap/dist/ScrollTrigger.min.js',
             'node_modules/gsap/dist/ScrollToPlugin.min.js',
-            'node_modules/gsap/dist/ScrollToPlugin.min.js',
-            // 'node_modules/mmenu-js/dist/mmenu.js', 
+            'node_modules/gsap/dist/ScrollToPlugin.min.js', 
             'node_modules/mmenu-light/dist/mmenu-light.js', 
         ],
         dest: buildDir + '/js',

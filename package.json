@@ -44,9 +44,7 @@
 		"swiper": "^9.2.4",
 		"tippy.js": "^6.3.7",
 		"underscore": "^1.13.6",
-		"vivus": "^0.4.6"
-	},
-	"dependencies": {
+		"vivus": "^0.4.6", 
 		"mmenu-light": "^3.2.2"
 	}
 }
