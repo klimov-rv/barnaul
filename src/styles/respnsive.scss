@@ -404,6 +404,16 @@
 }
 
 @media screen and (max-width:640px) {
+    .swiper.image-slider .swiper-controls .swiper-fractions {
+        padding-left: 15px;
+    }
+    .swiper.image-slider .swiper-controls .swiper-arrows {
+        padding-right: 0;
+    }
+
+    .swiper.image-slider {
+        padding: 20px;
+    }
 
     .swiper.gallery-slider .swiper-controls {
         width: 100%;
