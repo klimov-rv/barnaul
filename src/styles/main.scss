@@ -9,6 +9,10 @@
     --delay-gap: .11s;
 }
 
+header {
+    z-index: 50;
+}
+
 .is-container-fix .container {
     padding: 0;
 }
@@ -24,6 +28,23 @@
     padding-bottom: 0;
     padding-left: 0;
     padding-right: 0;
+}
+
+.history-obj>.container {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    max-width: unset;
+}
+
+.history-obj>.container>.x3-breadcrumb,
+.history-obj>.container>.page-title {
+    display: none;
+}
+
+.history-obj .audio-player-playlist {
+    display: none;
 }
 
 .container_relative {
@@ -262,13 +283,13 @@ article p {
     position: absolute;
 }
 
-.is-page-historical-object .hero-bg {
+.hero-bg {
     position: absolute;
     bottom: 0;
     right: 0;
     width: 100%;
     height: 100%;
-    background: url('/img/page_bg/univermag.png') no-repeat right bottom / auto;
+    background: url('') no-repeat right bottom / auto;
 }
 
 
@@ -278,7 +299,7 @@ article p {
 }
 
 .hero__headline_btn {
-    max-width: 250px;
+    max-width: 270px;
     height: 19px;
     position: absolute;
     top: 0;
@@ -1051,6 +1072,7 @@ article p {
     height: 125px;
 }
 
+.site-content.audio-ekskurs,
 .is-page-audio-tours .site-content {
 
     background-color: #F2F2F2;
@@ -1289,6 +1311,14 @@ article p {
         }
     }
 
+    .swiper-scrollbar {
+        height: 2px;
+        width: 100%;
+
+        &-holder {
+            height: 2px;
+        }
+    }
 
     .swiper-arrows {
         height: 50px;
@@ -1424,10 +1454,15 @@ article p {
     }
 
     &.gallery-slider {
+        position: relative;
+        left: -1em;
+
         .swiper-slide {
             width: auto;
             max-width: 75%;
             justify-content: flex-start;
+            border-radius: 20px;
+            overflow: hidden;
         }
 
         .swiper-controls {
@@ -1530,4 +1565,141 @@ article p {
 }
 
 
-.hero-gallery__popup {}
+.bubble_card {
+    display: flex;
+    position: fixed;
+    top: 185px;
+    right: -100%;
+    z-index: 99;
+    background: #FFFFFF;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 20px 0px 0px 20px;
+    padding-right: 50px;
+    transition: right 300ms;
+
+    &.is-scrolled {
+        right: 0;
+    }
+
+    &.is-closed {
+        right: -100%;
+    }
+
+    &__wrap {
+        padding: 20px;
+    }
+
+    &__card {
+        position: relative;
+        border-radius: 20px;
+        margin-left: -50px;
+        transition: all 300ms;
+        box-shadow: none;
+        top: 0;
+        left: 0;
+
+        &:hover {
+            top: -10px;
+            left: -15px;
+            box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    &__right {
+        margin: 25px 0px 20px 0;
+        max-width: 170px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    &__question {
+        font-family: 'PT Serif';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 32px;
+        color: #333333;
+    }
+
+    &__btn {
+        display: inline-block;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        height: 59px;
+        padding: 0 15px;
+        font: normal 16px "Roboto", Arial, Helvetica, sans-serif;
+        line-height: 59px;
+        text-decoration: none;
+        text-align: center;
+        border: none;
+        border-radius: var(--border-radius-standart);
+        cursor: pointer;
+        background: #e08f40;
+
+        a {
+
+            color: #fff;
+        }
+
+        &:hover {
+            box-shadow: 0 20px 38px rgba(0, 0, 0, .16);
+        }
+    }
+
+    &__close {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0px;
+        width: 39px;
+        height: 39px;
+        border-radius: 5px;
+        border: solid 0px;
+        background: transparent;
+        cursor: pointer;
+        transition: transform 0.2s;
+        font-size: 0;
+        stroke: #E08F40;
+    }
+}
+
+.objects-list {
+    &__name {
+        position: relative;
+
+    }
+
+    &__historical_point {
+
+        position: absolute;
+        bottom: 15px;
+        right: 0;
+        width: auto;
+        background-color: #df5d40;
+        display: flex;
+        padding: 10px;
+        border-radius: 20px 0 0 20px;
+
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__historical_star {
+        flex: 0 0 17px;
+        width: 17px;
+        height: 17px;
+        padding: 10px;
+    }
+
+    &__historical_text {
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 1.3em;
+        letter-spacing: .01em;
+        text-transform: uppercase;
+        color: #fff;
+    }
+}
