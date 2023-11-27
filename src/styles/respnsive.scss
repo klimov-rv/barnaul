@@ -27,12 +27,10 @@
 
     .hero__headline_btn span {
         display: none;
-        white-space: nowrap;
     }
 
     .hero__headline_btn:hover span {
         display: inline;
-        white-space: nowrap;
     }
 }
 
@@ -353,6 +351,34 @@
 }
 
 @media screen and (max-width:769px) {
+    .bubble_card {
+        flex-direction: column;
+        padding: 10px 10px 10px 25px;
+    }
+
+    .bubble_card__wrap {
+        padding: 10px 0 0 0;
+    }
+
+    .bubble_card__card {
+        margin: 0 auto 0 0;
+        width: 115px;
+    }
+
+    .bubble_card__right {
+        margin-top: 20px;
+    }
+
+    .bubble_card__question {
+        font-size: 16px;
+        margin-bottom: 19px;
+    }
+
+    .bubble_card__close {
+        top: 10px;
+        right: 5px;
+    }
+
     .objects-list__partner {
         top: -0.5px;
     }
@@ -407,6 +433,7 @@
     .swiper.image-slider .swiper-controls .swiper-fractions {
         padding-left: 15px;
     }
+
     .swiper.image-slider .swiper-controls .swiper-arrows {
         padding-right: 0;
     }
