@@ -234,6 +234,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    if ($('.bubble_card').length > 0) {
+
+        document.querySelector('.bubble_card__close').addEventListener('click', e => {
+            e.target.closest('.bubble_card').classList.add('is-closed');
+        })
+
+        window.addEventListener('scroll', () => {
+            document.querySelector('.bubble_card').classList.toggle('is-scrolled', window.scrollY > 300);
+        })
+
+    }
+
     // magnificPopup 
     $('.popup-with-zoom-anim').magnificPopup({
         type: 'inline',
@@ -253,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Табы 
-
     if ($('.js-tabs-controls').length > 0) {
         var closeTabs = document.querySelectorAll('.tabs-close-btn');
         closeTabs.forEach((item, idx) => {
@@ -381,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    // Слайдеры
+    // Слайдеры (раскидать по компонентам)
 
     if ($('.image-slider').length > 0) {
 
