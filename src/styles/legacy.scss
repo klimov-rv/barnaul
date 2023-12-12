@@ -522,7 +522,7 @@ body {
     box-sizing: border-box;
     width: 100%;
     max-width: 1460px;
-    padding: 0 20px;
+    padding: 0;
     margin: 0 auto;
 }
 
@@ -1511,9 +1511,6 @@ header {
     position: absolute;
     top: 0;
     left: 0;
-
-    width: 27%;
-    height: 42%;
 }
 
 .objects-list__stars {
@@ -1605,7 +1602,7 @@ header {
         width: 80px;
         height: 77px;
         position: absolute;
-        top: -0.5px;
+        top: -4.5px;
         left: 0;
     }
 

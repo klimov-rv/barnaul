@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'PT Serif';
-    src: url('/fonts/PT-Serif/PTSerif-Bold.woff2') format('woff2'),
-        url('/fonts/PT-Serif/PTSerif-Bold.woff') format('woff');
+    src: url('/local/templates/main/fonts/PT-Serif/PTSerif-Bold.woff2') format('woff2'),
+        url('/local/templates/main/fonts/PT-Serif/PTSerif-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -9,8 +9,8 @@
 
 @font-face {
     font-family: 'PT Serif';
-    src: url('/fonts/PT-Serif/PTSerif-Italic.woff2') format('woff2'),
-        url('/fonts/PT-Serif/PTSerif-Italic.woff') format('woff');
+    src: url('/local/templates/main/fonts/PT-Serif/PTSerif-Italic.woff2') format('woff2'),
+        url('/local/templates/main/fonts/PT-Serif/PTSerif-Italic.woff') format('woff');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -18,8 +18,8 @@
 
 @font-face {
     font-family: 'PT Serif';
-    src: url('/fonts/PT-Serif/PTSerif-Regular.woff2') format('woff2'),
-        url('/fonts/PT-Serif/PTSerif-Regular.woff') format('woff');
+    src: url('/local/templates/main/fonts/PT-Serif/PTSerif-Regular.woff2') format('woff2'),
+        url('/local/templates/main/fonts/PT-Serif/PTSerif-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -27,8 +27,8 @@
 
 @font-face {
     font-family: 'PT Serif';
-    src: url('/fonts/PT-Serif/PTSerif-BoldItalic.woff2') format('woff2'),
-        url('/fonts/PT-Serif/PTSerif-BoldItalic.woff') format('woff');
+    src: url('/local/templates/main/fonts/PT-Serif/PTSerif-BoldItalic.woff2') format('woff2'),
+        url('/local/templates/main/fonts/PT-Serif/PTSerif-BoldItalic.woff') format('woff');
     font-weight: bold;
     font-style: italic;
     font-display: swap;
@@ -36,16 +36,16 @@
 
 @font-face {
     font-family: "Roboto";
-    src: url("/fonts/Roboto/Roboto-Bold.eot");
-    src: local("Roboto Bold"), local("Roboto-Bold"), url("/fonts/Roboto/Roboto-Bold.eot?#iefix") format("embedded-opentype"), url("/fonts/Roboto/Roboto-Bold.woff") format("woff"), url("/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
+    src: url("/local/templates/main/fonts/Roboto/Roboto-Bold.eot");
+    src: local("Roboto Bold"), local("Roboto-Bold"), url("/local/templates/main/fonts/Roboto/Roboto-Bold.eot?#iefix") format("embedded-opentype"), url("/local/templates/main/fonts/Roboto/Roboto-Bold.woff") format("woff"), url("/local/templates/main/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Roboto";
-    src: url("/fonts/Roboto/Roboto-Regular.eot");
-    src: local("Roboto"), local("Roboto-Regular"), url("/fonts/Roboto/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("/fonts/Roboto/Roboto-Regular.woff") format("woff"), url("/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+    src: url("/local/templates/main/fonts/Roboto/Roboto-Regular.eot");
+    src: local("Roboto"), local("Roboto-Regular"), url("/local/templates/main/fonts/Roboto/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("/local/templates/main/fonts/Roboto/Roboto-Regular.woff") format("woff"), url("/local/templates/main/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }

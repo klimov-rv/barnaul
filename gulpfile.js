@@ -23,7 +23,7 @@ let paths = {
     scripts: {
         src: [
             baseDir + '/js/app.js',
-            baseDir + '/js/animation.js', 
+            baseDir + '/js/animation.js',
         ],
         dest: buildDir + '/js',
     },
@@ -37,8 +37,6 @@ let paths = {
             'node_modules/jcf/dist/js/jcf.range.js',
 
             'node_modules/howler/dist/howler.core.min.js',
-            baseDir + '/js/_vendor/howler/player.js',
-            baseDir + '/js/_vendor/dataTabs/dist/dataTabs.js',
 
             'node_modules/magnific-popup/dist/jquery.magnific-popup.min.js',
             'node_modules/underscore/underscore-umd-min.js',
@@ -52,8 +50,10 @@ let paths = {
             'node_modules/gsap/dist/gsap.min.js',
             'node_modules/gsap/dist/ScrollTrigger.min.js',
             'node_modules/gsap/dist/ScrollToPlugin.min.js',
-            'node_modules/gsap/dist/ScrollToPlugin.min.js', 
-            'node_modules/mmenu-light/dist/mmenu-light.js', 
+            'node_modules/gsap/dist/ScrollToPlugin.min.js',
+            'node_modules/mmenu-light/dist/mmenu-light.js',
+            baseDir + '/js/_vendor/howler/player.js',
+            baseDir + '/js/_vendor/dataTabs/dist/dataTabs.js',
         ],
         dest: buildDir + '/js',
     },

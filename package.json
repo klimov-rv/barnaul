@@ -8,6 +8,19 @@
 	},
 	"author": "Klimov Roman <klimov.rv@ya.ru>",
 	"license": "ISC",
+    "dependencies": {
+		"mmenu-light": "^3.2.2",
+		"simplebar": "^6.2.5",
+		"slim-select": "^1.27.1",
+		"jcf": "^1.2.3",
+		"magnific-popup": "^1.1.0", 
+		"gsap": "^3.12.2",
+		"howler": "^2.2.4",
+		"isotope-layout": "^3.0.6",
+		"swiper": "^9.2.4",
+		"tippy.js": "^6.3.7",
+		"vivus": "^0.4.6"
+    },
 	"devDependencies": {
 		"@babel/core": "^7.18.2",
 		"@babel/preset-env": "^7.18.2",
@@ -19,7 +32,6 @@
 		"dragscroll": "^0.0.8",
 		"express": "^4.18.1",
 		"flatpickr": "^4.6.13",
-		"gsap": "^3.12.2",
 		"gulp": "^4.0.2",
 		"gulp-autoprefixer": "^8.0.0",
 		"gulp-babel": "^8.0.0",
@@ -33,18 +45,7 @@
 		"gulp-sass-glob": "^1.1.0",
 		"gulp-svg-sprite": "^1.5.0",
 		"gulp-uglify-es": "^3.0.0",
-		"howler": "^2.2.4",
-		"isotope-layout": "^3.0.6",
-		"jcf": "^1.2.3",
-		"magnific-popup": "^1.1.0",
-		"mmenu-js": "^9.3.0",
 		"sass": "^1.52.3",
-		"simplebar": "^6.2.5",
-		"slim-select": "^1.27.1",
-		"swiper": "^9.2.4",
-		"tippy.js": "^6.3.7",
-		"underscore": "^1.13.6",
-		"vivus": "^0.4.6", 
-		"mmenu-light": "^3.2.2"
+		"underscore": "^1.13.6"
 	}
 }

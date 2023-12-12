@@ -35,7 +35,7 @@
 }
 
 @media (max-width: 1610px) {
-    .is-page-historical-object .hero-bg {
+    .history-obj .hero-bg {
         background-size: 59%;
     }
 
@@ -53,8 +53,7 @@
         font-size: 14px;
     }
 
-    .is-container-fix .site-content>.container {
-
+    .site-content.is-container-fix>.container {
         padding: 0 30px;
     }
 
@@ -62,7 +61,7 @@
         padding: 0 30px;
     }
 
-    .is-page-historical-object .hero-bg {
+    .history-obj .hero-bg {
         background-size: 50%;
     }
 
@@ -141,25 +140,76 @@
 }
 
 @media (max-width: 920px) {
+
+    .x3-slider__wrap .x3-slide__data .container {
+        padding-top: 7%;
+    }
+
+    .x3-slider__wrap .x3-slider__item img {
+        max-width: unset;
+        width: 100%;
+        height: unset;
+        margin-left: auto;
+    }
+
+    .x3-slide__data .container {
+        padding-top: 7%;
+        padding-bottom: 5%;
+    }
+
+    .x3-slider__wrap .x3-slide__btn {
+        min-width: 0;
+        width: auto;
+        margin-top: 25px;
+        font-size: 15px;
+        line-height: 1.3em;
+        border-radius: 5px;
+        height: auto;
+        padding: 10px 30px;
+    }
+
+    .x3-slider__wrap .x3-slider__wrap .x3-slide__name {
+        font-size: 21px;
+        line-height: 1.3em;
+    }
+
+    .header-main {
+        height: auto;
+    }
+
+    .x3-slide__name {
+        height: 50px;
+        margin-top: 26px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 25px;
+        font-size: 18px;
+        line-height: 1.3em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .x3-slide__btn {
+        width: auto;
+        height: 50px;
+        margin-top: 20px;
+        font-size: 15px;
+        line-height: 54px;
+        border-radius: 5px;
+    }
+
+    .x3-slide__data {
+        height: 100%;
+    }
+
     .mm-spn.mm-spn--navbar .mm-filter__target ul:before {
         border-top: 0px solid;
     }
 
     .mm-filter__target {
         padding-bottom: 10px;
-
-        .jcf-range {
-            width: 100%;
-
-            span {
-                padding: 0;
-
-                .jcf-range-wrapper {
-                    width: 100%;
-                }
-            }
-
-        }
+        display: none;
 
         .range-slider-input {
             padding: 0 15px;
@@ -208,6 +258,15 @@
             justify-content: flex-start;
             align-items: center;
             flex-wrap: wrap;
+            position: relative;
+        }
+
+        .irs--flat {
+            width: 100%;
+        }
+
+        .irs span {
+            padding: 0;
         }
     }
 
@@ -362,7 +421,8 @@
 
     .bubble_card__card {
         margin: 0 auto 0 0;
-        width: 115px;
+        display: block;
+        width: 135px;
     }
 
     .bubble_card__right {
@@ -370,7 +430,7 @@
     }
 
     .bubble_card__question {
-        font-size: 16px;
+        font-size: 22px;
         margin-bottom: 19px;
     }
 
@@ -430,6 +490,28 @@
 }
 
 @media screen and (max-width:640px) {
+    .x3-slider__wrap .x3-slide__btn {
+        margin-top: 15px;
+        padding: 10px 20px;
+    }
+
+    .x3-slider__wrap .x3-slide__name {
+        font-size: 16px;
+        margin-top: 0;
+        line-height: 1.3em;
+    }
+
+    .x3-slider__wrap .x3-slide__data .container {
+        padding-top: 7%;
+    }
+
+    .audio-link {
+        height: 51px;
+        position: relative;
+        top: 0;
+        margin-bottom: 15px;
+    }
+
     .swiper.image-slider .swiper-controls .swiper-fractions {
         padding-left: 15px;
     }
@@ -519,7 +601,7 @@
         font-size: 14px;
     }
 
-    .is-page-historical-object .hero-bg {
+    .history-obj .hero-bg {
         background-size: 100%;
     }
 
@@ -534,6 +616,24 @@
 }
 
 @media screen and (max-width:480px) {
+    .x3-slider__wrap .x3-slide__name {
+        font-size: 13px;
+    }
+
+    .x3-slider__wrap .x3-slide__btn {
+        margin-top: 0px;
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+
+    .bubble_card__card {
+        width: 115px;
+    }
+
+    .bubble_card__question {
+        font-size: 16px;
+    }
+
     .event-item__date_wrap {
         width: 75%;
         padding: 13px 20px;

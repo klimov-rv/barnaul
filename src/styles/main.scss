@@ -17,13 +17,13 @@ header {
     padding: 0;
 }
 
-.is-container-fix .site-content {
+.is-container-fix.site-content {
     padding-top: 27px;
     overflow: hidden;
     box-sizing: border-box;
 }
 
-.is-container-fix .site-content>.container {
+.is-container-fix.site-content>.container {
     padding-top: 0;
     padding-bottom: 0;
     padding-left: 0;
@@ -133,6 +133,15 @@ header {
 .site-wrap.is-page-historical-object {
     background-image: none;
 }
+
+.x3-object__img-in {
+    overflow: hidden;
+
+    .x3-objects__partner {
+        top: -9px;
+    }
+}
+
 
 article {
     font-family: var(--font-family_1);
@@ -385,6 +394,7 @@ article p {
 
 .page-hero-fastfacts {
     padding: 30px 0;
+    min-height: 29vh;
 }
 
 .fastfacts__item_wrap {
@@ -433,6 +443,10 @@ article p {
     max-width: 73%;
     margin: 45px 0;
     box-sizing: border-box;
+}
+
+.page-hero-block.hidden {
+    visibility: hidden;
 }
 
 .page-hero-block__legend-title {
@@ -501,11 +515,9 @@ article p {
     color: #333333;
 }
 
-
 .event-holidays .event-item__date_wrap::after {
     background: #64E7C7;
 }
-
 
 .event-competitions .event-item__date_wrap::after {
     background: #FF9C9C;
@@ -527,11 +539,9 @@ article p {
     background: #D9D348;
 }
 
-
 .event-sport .event-item__date_wrap::after {
     background: #648BEE;
 }
-
 
 
 // widget 
@@ -550,6 +560,8 @@ article p {
 
 .widget__img {
     position: relative;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
 .widget__img_text {
@@ -697,10 +709,6 @@ article p {
     filter: grayscale(0);
 }
 
-.event-list__item:first-child {
-    padding-top: 0;
-}
-
 .event-item__date_wrap {
     display: flex;
     flex-direction: column;
@@ -813,6 +821,34 @@ article p {
     font-weight: 400;
     font-size: 14px;
     text-transform: uppercase;
+
+    &.event-holidays {
+        background: #64E7C7;
+    }
+
+    &.event-competitions {
+        background: #FF9C9C;
+    }
+
+    &.event-performances {
+        background: #8B7DDE;
+    }
+
+    &.event-exhibitions {
+        background: #6DE0E8;
+    }
+
+    &.event-excursions {
+        background: #8F81E5;
+    }
+
+    &.event-concerts {
+        background: #D9D348;
+    }
+
+    &.event-sport {
+        background: #648BEE;
+    }
 }
 
 .event-dialog__header {
@@ -831,6 +867,8 @@ article p {
 
 .event-dialog__img {
     margin-bottom: 30px;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 .event-dialog__ticket {
@@ -1070,6 +1108,17 @@ article p {
 
 .audio-list-cell .point__img {
     height: 125px;
+    top: 0px;
+    position: relative;
+    transition: top .3s;
+
+    &:hover {
+        top: -5px;
+    }
+}
+
+.audio-list-cell .point__img {
+    height: 125px;
 }
 
 .site-content.audio-ekskurs,
@@ -1096,6 +1145,7 @@ article p {
 
         .accordion-title {
             flex: 1 1 80%;
+            padding: 15px 5px;
         }
 
         .accordion-icon {
@@ -1123,45 +1173,45 @@ article p {
             }
         }
 
-        &.is-youtube-tab {
-            .tabs-trigger {
-                .accordion-icon_rutube {
-                    display: none;
-                }
+        // &.is-youtube-tab {
+        //     .tabs-trigger {
+        //         .accordion-icon_rutube {
+        //             display: none;
+        //         }
 
-                .accordion-icon_youtube {
-                    display: block;
-                }
+        //         .accordion-icon_youtube {
+        //             display: block;
+        //         }
 
-                .accordion-icon_pause {
-                    display: none;
-                }
+        //         .accordion-icon_pause {
+        //             display: none;
+        //         }
 
-                .accordion-icon_play {
-                    display: none;
-                }
-            }
-        }
+        //         .accordion-icon_play {
+        //             display: none;
+        //         }
+        //     }
+        // }
 
-        &.is-rutube-tab {
-            .tabs-trigger {
-                .accordion-icon_rutube {
-                    display: block;
-                }
+        // &.is-rutube-tab {
+        //     .tabs-trigger {
+        //         .accordion-icon_rutube {
+        //             display: block;
+        //         }
 
-                .accordion-icon_youtube {
-                    display: none;
-                }
+        //         .accordion-icon_youtube {
+        //             display: none;
+        //         }
 
-                .accordion-icon_pause {
-                    display: none;
-                }
+        //         .accordion-icon_pause {
+        //             display: none;
+        //         }
 
-                .accordion-icon_play {
-                    display: none;
-                }
-            }
-        }
+        //         .accordion-icon_play {
+        //             display: none;
+        //         }
+        //     }
+        // }
     }
 
     &-trigger {
@@ -1188,13 +1238,13 @@ article p {
             display: block;
         }
 
-        .accordion-icon_youtube {
-            display: none;
-        }
+        // .accordion-icon_youtube {
+        //     display: none;
+        // }
 
-        .accordion-icon_rutube {
-            display: none;
-        }
+        // .accordion-icon_rutube {
+        //     display: none;
+        // }
 
         &.is-button-active {
             .accordion-icon_pause {
@@ -1281,6 +1331,10 @@ article p {
 
 .slider__block {
     margin-bottom: 50px;
+}
+
+.slider-fix {
+    height: 100%;
 }
 
 .swiper {
@@ -1702,4 +1756,34 @@ article p {
         text-transform: uppercase;
         color: #fff;
     }
+}
+
+.audio-link {
+    background-color: #e08f40;
+    border-radius: var(--border-radius-standart);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 59px;
+    min-width: 115px;
+    position: absolute;
+    padding: 0 10px 0 30px;
+    top: -100px;
+    right: 0;
+
+    &__wrap {
+        width: 100%;
+        display: block;
+        position: relative;
+    }
+}
+
+.site-header.header-main {
+    background-color: white;
+}
+
+.site-content.site-content--main {
+    margin-top: 0;
 }

@@ -33,6 +33,7 @@ if ($('#js-historical__line').length > 0) {
         innerElem.classList.add('duplicate_point');
         copyElem.classList.add('duplicate_point_wrapp');
         copyElem.setAttribute("place_name", elemToCopy.getAttribute("place_name"));
+        copyElem.setAttribute("place_url", elemToCopy.getAttribute("place_url"));
         copyForTippy.classList.add('duplicate_point_el', 'historical_line_point', attrAdd);
         copyForTippy.setAttribute('data-point-id', elemToCopy.getAttribute("place_number"));
 
@@ -138,7 +139,7 @@ if ($('#js-historical__line').length > 0) {
                             interactive: true,
                             allowHTML: true,
                             maxWidth: '',
-                            content: (reference) => '<a href="#"><span class="ttip-text">' + reference.getAttribute('place_name') + '</span><svg aria-hidden="true" width="20" height="16"> <use xlink:href="#arrow-right4"></use> </svg></a>',
+                            content: (reference) => '<a href="/objects/where_visit/Monuments' + reference.getAttribute('place_url') + '"><span class="ttip-text">' + reference.getAttribute('place_name') + '</span><svg aria-hidden="true" width="20" height="16"> <use xlink:href="#arrow-right4"></use> </svg></a>',
                         });
                     }
                 },
@@ -152,7 +153,6 @@ if ($('#js-historical__line').length > 0) {
                 scrollTrigger.clearScrollMemory();
                 window.history.scrollRestoration = "manual";
             });
-
 
             // запуск анимации по скроллу
 
@@ -191,7 +191,17 @@ if ($('#js-historical__line').length > 0) {
 
                 }
                 point.point.addEventListener('click', (e) => {
-                    console.log(point.point.getAttribute("data-point-id"));
+                    var btnId = point.point.getAttribute('data-point-id');
+                    var audioBtns = document.querySelectorAll('.point__audio');
+                    audioBtns.forEach((item, idx) => {
+                        var el = item.closest('.audio-list-cell');
+                        var audioID = el.getAttribute('data-audio-id');
+                        if (audioID === btnId) {
+                            el.querySelector('.point__audio').click();
+                        };
+                    })
+
+
                     // const topY = $('[data-audio-id="' + point.point.getAttribute("data-point-id") + '"]').offset().top;
                     // if (topY > 0) {
                     //     gsap.to(window, 1, {
